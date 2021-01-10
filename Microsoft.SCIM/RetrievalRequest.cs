@@ -6,7 +6,7 @@ namespace Microsoft.SCIM
     using System.Net.Http;
 
     public sealed class RetrievalRequest :
-        SystemForCrossDomainIdentityManagementRequest<IResourceRetrievalParameters>
+        ScimRequest<IResourceRetrievalParameters>
     {
         public RetrievalRequest(
             HttpRequestMessage request,

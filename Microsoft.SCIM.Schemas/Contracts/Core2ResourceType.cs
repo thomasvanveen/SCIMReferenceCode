@@ -23,7 +23,7 @@ namespace Microsoft.SCIM
         }
 
         [DataMember(Name = AttributeNames.Name)]
-        private string name;
+        internal string name;
 
         public Core2ResourceType()
         {

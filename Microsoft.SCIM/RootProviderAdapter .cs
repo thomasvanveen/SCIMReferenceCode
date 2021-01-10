@@ -22,12 +22,26 @@ namespace Microsoft.SCIM
             Resource resource,
             string correlationIdentifier)
         {
-            throw new HttpResponseException(HttpStatusCode.NotImplemented);
+            Resource user = new User
+            {
+                ExternalIdentifier = resource.ExternalIdentifier,
+                Identifier = resource.Identifier,
+                UserName = "Dummy"
+            };
+
+            return Task.FromResult(user);
         }
 
-        public override IResourceIdentifier CreateResourceIdentifier(string identifier)
+        public override IResourceIdentifier CreateResourceIdentifier(
+            string identifier)
         {
-            throw new HttpResponseException(HttpStatusCode.NotImplemented);
+            var resourceIdentifier = new ResourceIdentifier
+            {
+                Identifier = identifier,
+                SchemaIdentifier = SchemaIdentifier,
+            };
+
+            return resourceIdentifier;
         }
 
         public override Task Delete(
@@ -43,7 +57,7 @@ namespace Microsoft.SCIM
             Resource resource, string
             correlationIdentifier)
         {
-            throw new HttpResponseException(HttpStatusCode.NotImplemented);
+            return Task.FromResult(resource);
         }
 
         public override Task<Resource> Retrieve(
@@ -53,7 +67,14 @@ namespace Microsoft.SCIM
             IReadOnlyCollection<string> excludedAttributePaths,
             string correlationIdentifier)
         {
-            throw new HttpResponseException(HttpStatusCode.NotImplemented);
+            Resource user = new User
+            {
+                ExternalIdentifier = null,
+                Identifier = identifier,
+                UserName = "DummyUser"
+            };
+
+            return Task.FromResult(user);
         }
 
         public override Task Update(
@@ -62,7 +83,7 @@ namespace Microsoft.SCIM
             PatchRequestBase patchRequest,
             string correlationIdentifier)
         {
-            throw new HttpResponseException(HttpStatusCode.NotImplemented);
+            return Task.CompletedTask;
         }
     }
 }

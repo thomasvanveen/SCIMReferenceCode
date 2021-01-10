@@ -6,7 +6,7 @@ namespace Microsoft.SCIM
     using System.Net.Http;
 
     public sealed class DeletionRequest :
-        SystemForCrossDomainIdentityManagementRequest<IResourceIdentifier>
+        ScimRequest<IResourceIdentifier>
     {
         public DeletionRequest(
             HttpRequestMessage request,

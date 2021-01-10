@@ -14,7 +14,7 @@ namespace Microsoft.SCIM
         private ErrorType errorType;
 
         [DataMember(Name = ProtocolAttributeNames.ErrorType)]
-        private string errorTypeValue;
+        internal string errorTypeValue;
 
         private Response response;
 

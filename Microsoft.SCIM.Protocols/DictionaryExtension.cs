@@ -20,8 +20,7 @@ namespace Microsoft.SCIM
                     dictionary.Remove(key);
                 }
 
-                IDictionary<string, object> dictionaryValue = value as IDictionary<string, object>;
-                if (dictionaryValue != null)
+                if (value is IDictionary<string, object> dictionaryValue)
                 {
                     dictionaryValue.Trim();
                     if (dictionaryValue.Count <= 0)

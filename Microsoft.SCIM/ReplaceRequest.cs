@@ -5,7 +5,7 @@ namespace Microsoft.SCIM
     using System.Collections.Generic;
     using System.Net.Http;
 
-    public sealed class ReplaceRequest : SystemForCrossDomainIdentityManagementRequest<Resource>
+    public sealed class ReplaceRequest : ScimRequest<Resource>
     {
         public ReplaceRequest(
             HttpRequestMessage request,

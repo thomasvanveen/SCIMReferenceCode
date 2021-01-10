@@ -57,7 +57,7 @@ namespace Microsoft.SCIM
             FilterExpression.PatternGroupRight +
             @">(.)*))?";
 
-        private const string RegularExpressionOperatorOr = "|";
+        private const char RegularExpressionOperatorOr = '|';
         private const char Space = ' ';
         private const string Template = "{0} {1} {2}";
 
@@ -563,7 +563,7 @@ namespace Microsoft.SCIM
             {
                 return;
             }
-            string remainder = right.Value.Substring(indexRemainder);
+            string remainder = right.Value[indexRemainder..];
             int indexAnd = remainder.IndexOf(FilterExpression.LogicalOperatorAnd.Value, StringComparison.Ordinal);
             int indexOr = remainder.IndexOf(FilterExpression.LogicalOperatorOr.Value, StringComparison.Ordinal);
             int indexNextFilter;
@@ -598,7 +598,7 @@ namespace Microsoft.SCIM
                 }
             }
 
-            string nextExpression = remainder.Substring(indexNextFilter);
+            string nextExpression = remainder[indexNextFilter..];
             int indexClosingBracket = remainder.IndexOf(FilterExpression.BracketClose, StringComparison.InvariantCulture);
             int nextExpressionLevel;
             int nextExpressionGroup;
@@ -626,7 +626,7 @@ namespace Microsoft.SCIM
             {
                 if (buffer.Length > 0)
                 {
-                    buffer.Append(FilterExpression.RegularExpressionOperatorOr);
+                    buffer.Append(RegularExpressionOperatorOr);
                 }
                 buffer.Append(value);
             }
@@ -733,7 +733,7 @@ namespace Microsoft.SCIM
 
                     break;
                 }
-                buffer = input.Substring(1, index - 1);
+                buffer = input[1..index];
             }
             else
             {

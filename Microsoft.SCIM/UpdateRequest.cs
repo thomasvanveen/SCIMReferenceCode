@@ -6,7 +6,7 @@ namespace Microsoft.SCIM
     using System.Net.Http;
 
     public sealed class UpdateRequest :
-        SystemForCrossDomainIdentityManagementRequest<IPatch>
+        ScimRequest<IPatch>
     {
         public UpdateRequest(
             HttpRequestMessage request,
