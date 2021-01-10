@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
-namespace Microsoft.SCIM
-{
-    using System;
+using System;
 
+namespace Microsoft.SCIM.Controllers
+{
     public sealed class RootController : ControllerTemplate<Resource>
     {
         public RootController(IProvider provider, IMonitor monitor)

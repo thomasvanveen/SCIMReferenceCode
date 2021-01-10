@@ -1,18 +1,18 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
-namespace Microsoft.SCIM
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Http;
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.WebApiCompatShim;
+
+namespace Microsoft.SCIM.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-    using System.Web.Http;
-
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.WebApiCompatShim;
-
     public abstract class ControllerTemplate : ControllerBase
     {
         internal const string AttributeValueIdentifier = "{identifier}";
@@ -21,6 +21,7 @@ namespace Microsoft.SCIM
 
         internal readonly IMonitor monitor;
         internal readonly IProvider provider;
+        
         internal ControllerTemplate(IProvider provider, IMonitor monitor)
         {
             this.monitor = monitor;
@@ -37,17 +38,17 @@ namespace Microsoft.SCIM
                 return;
             }
 
-            if (!Response.Headers.ContainsKey(ControllerTemplate.HeaderKeyContentType))
+            if (!Response.Headers.ContainsKey(HeaderKeyContentType))
             {
-                Response.Headers.Add(ControllerTemplate.HeaderKeyContentType, ProtocolConstants.ContentType);
+                Response.Headers.Add(HeaderKeyContentType, ProtocolConstants.ContentType);
             }
 
             Uri baseResourceIdentifier = ConvertRequest().GetBaseResourceIdentifier();
             Uri resourceIdentifier = resource.GetResourceIdentifier(baseResourceIdentifier);
             string resourceLocation = resourceIdentifier.AbsoluteUri;
-            if (!Response.Headers.ContainsKey(ControllerTemplate.HeaderKeyLocation))
+            if (!Response.Headers.ContainsKey(HeaderKeyLocation))
             {
-                Response.Headers.Add(ControllerTemplate.HeaderKeyLocation, resourceLocation);
+                Response.Headers.Add(HeaderKeyLocation, resourceLocation);
             }
         }
 
@@ -86,7 +87,7 @@ namespace Microsoft.SCIM
         }
 
 
-        [HttpDelete(ControllerTemplate.AttributeValueIdentifier)]
+        [HttpDelete(AttributeValueIdentifier)]
         public virtual async Task<IActionResult> Delete(string identifier)
         {
             string correlationIdentifier = null;
@@ -277,7 +278,7 @@ namespace Microsoft.SCIM
             }
         }
 
-        [HttpGet(ControllerTemplate.AttributeValueIdentifier)]
+        [HttpGet(AttributeValueIdentifier)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get", Justification = "The names of the methods of a controller must correspond to the names of hypertext markup verbs")]
         public virtual async Task<IActionResult> Get([FromUri] string identifier)
         {
@@ -436,7 +437,7 @@ namespace Microsoft.SCIM
             }
         }
 
-        [HttpPatch(ControllerTemplate.AttributeValueIdentifier)]
+        [HttpPatch(AttributeValueIdentifier)]
         public virtual async Task<IActionResult> Patch(string identifier, [FromBody] PatchRequest2 patchRequest)
         {
             string correlationIdentifier = null;
@@ -656,7 +657,7 @@ namespace Microsoft.SCIM
             }
         }
 
-        [HttpPut(ControllerTemplate.AttributeValueIdentifier)]
+        [HttpPut(AttributeValueIdentifier)]
         public virtual async Task<ActionResult<Resource>> Put([FromBody] T resource, string identifier)
         {
             string correlationIdentifier = null;

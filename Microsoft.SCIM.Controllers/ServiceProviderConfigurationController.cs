@@ -1,14 +1,14 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
-namespace Microsoft.SCIM
+using System;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+
+using Microsoft.AspNetCore.Mvc;
+
+namespace Microsoft.SCIM.Controllers
 {
-    using System;
-    using System.Net;
-    using System.Net.Http;
-    using System.Web.Http;
-
-    using Microsoft.AspNetCore.Mvc;
-
     [Route(ServiceConstants.RouteServiceConfiguration)]
     [ApiController]
     public sealed class ServiceProviderConfigurationController : ControllerTemplate

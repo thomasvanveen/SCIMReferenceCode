@@ -1,15 +1,15 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
-namespace Microsoft.SCIM
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+
+using Microsoft.AspNetCore.Mvc;
+
+namespace Microsoft.SCIM.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Net;
-    using System.Net.Http;
-    using System.Web.Http;
-
-    using Microsoft.AspNetCore.Mvc;
-
     [Route(ServiceConstants.RouteResourceTypes)]
     [ApiController]
     public sealed class ResourceTypesController : ControllerTemplate

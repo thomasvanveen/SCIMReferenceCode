@@ -1,12 +1,12 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
-namespace Microsoft.SCIM
+using System;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Microsoft.SCIM.Controllers
 {
-    using System;
-
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-
     [Route(ServiceConstants.RouteUsers)]
     [Authorize]
     [ApiController]
