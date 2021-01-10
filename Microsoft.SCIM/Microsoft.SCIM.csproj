@@ -15,12 +15,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Microsoft.SCIM.Monitoring\Microsoft.SCIM.Monitoring.csproj" />
     <ProjectReference Include="..\Microsoft.SCIM.Protocols\Microsoft.SCIM.Protocols.csproj" />
     <ProjectReference Include="..\Microsoft.SCIM.Schemas\Microsoft.SCIM.Schemas.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Service\ServiceResources.Designer.cs">
+    <Compile Update="ServiceResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ServiceResources.resx</DependentUpon>
@@ -28,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Service\ServiceResources.resx">
+    <EmbeddedResource Update="ServiceResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ServiceResources.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

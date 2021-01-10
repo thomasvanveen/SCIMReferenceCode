@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.SCIM.Schemas", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.SCIM.Protocols", "Microsoft.SCIM.Protocols\Microsoft.SCIM.Protocols.csproj", "{637DEAFD-5F5A-43D6-9CAD-90517A9E8DBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.SCIM.Monitoring", "Microsoft.SCIM.Monitoring\Microsoft.SCIM.Monitoring.csproj", "{28FA603D-53CA-494B-82B5-45C6AEC59750}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{637DEAFD-5F5A-43D6-9CAD-90517A9E8DBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{637DEAFD-5F5A-43D6-9CAD-90517A9E8DBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{637DEAFD-5F5A-43D6-9CAD-90517A9E8DBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28FA603D-53CA-494B-82B5-45C6AEC59750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28FA603D-53CA-494B-82B5-45C6AEC59750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28FA603D-53CA-494B-82B5-45C6AEC59750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28FA603D-53CA-494B-82B5-45C6AEC59750}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

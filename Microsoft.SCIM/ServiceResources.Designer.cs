@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Microsoft.SCIM.Service {
+namespace Microsoft.SCIM {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Microsoft.SCIM.Service {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Microsoft.SCIM.Service.ServiceResources", typeof(ServiceResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Microsoft.SCIM.ServiceResources", typeof(ServiceResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -294,42 +294,6 @@ namespace Microsoft.SCIM.Service {
         internal static string MessageTemplate {
             get {
                 return ResourceManager.GetString("MessageTemplate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die {0}@ ähnelt.
-        /// </summary>
-        internal static string MonitorCorrelationIdentifierPrefixTemplate {
-            get {
-                return ResourceManager.GetString("MonitorCorrelationIdentifierPrefixTemplate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die {0}: {1} (Critical? {2}) ähnelt.
-        /// </summary>
-        internal static string MonitorOutputExceptionTemplate {
-            get {
-                return ResourceManager.GetString("MonitorOutputExceptionTemplate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die {0}: {1} (Verbose? {2}) ähnelt.
-        /// </summary>
-        internal static string MonitorOutputInformationTemplate {
-            get {
-                return ResourceManager.GetString("MonitorOutputInformationTemplate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die {0}: {1} ähnelt.
-        /// </summary>
-        internal static string MonitorOutputTemplate {
-            get {
-                return ResourceManager.GetString("MonitorOutputTemplate", resourceCulture);
             }
         }
         

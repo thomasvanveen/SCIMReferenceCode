@@ -11,8 +11,6 @@ namespace Microsoft.SCIM
     using System.Threading.Tasks;
     using System.Web.Http;
 
-    using Microsoft.SCIM.Service;
-
     using Newtonsoft.Json;
 
     public sealed class SampleProvider : ProviderBase, ISampleProvider

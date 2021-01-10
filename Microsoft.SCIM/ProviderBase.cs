@@ -7,8 +7,6 @@ namespace Microsoft.SCIM
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.SCIM.Service;
-
     public abstract class ProviderBase : IProvider
     {
         private static readonly Lazy<BulkRequestsFeature> BulkFeatureSupport =

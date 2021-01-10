@@ -7,8 +7,6 @@ namespace Microsoft.SCIM
     using System.Linq;
     using System.Net.Http;
 
-    using Microsoft.SCIM.Service;
-
     public static class RequestExtensions
     {
         private const string SegmentInterface =

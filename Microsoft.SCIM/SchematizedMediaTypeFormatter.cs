@@ -14,8 +14,6 @@ namespace Microsoft.SCIM
     using System.Threading.Tasks;
     using System.Web.Http;
 
-    using Microsoft.SCIM.Service;
-
     public sealed class SchematizedMediaTypeFormatter : MediaTypeFormatter
     {
         private static readonly Encoding Encoding = Encoding.UTF8;

@@ -117,87 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ExceptionFilterAttributePathNotSupportedTemplate" xml:space="preserve">
-    <value>Filtering by this attribute is not supported: {0}.</value>
-  </data>
-  <data name="ExceptionFilterCount" xml:space="preserve">
-    <value>Only a query with exactly one filter is supported.</value>
-  </data>
-  <data name="ExceptionFilterNotSupported" xml:space="preserve">
-    <value>The filter is not supported.</value>
-  </data>
-  <data name="ExceptionFilterOperatorNotSupportedTemplate" xml:space="preserve">
-    <value>This filter operator is not supported: {0}.</value>
-  </data>
-  <data name="ExceptionInvalidBatch" xml:space="preserve">
-    <value>A batch is invalid.</value>
-  </data>
-  <data name="ExceptionInvalidContext" xml:space="preserve">
-    <value>The context is invalid.</value>
-  </data>
-  <data name="ExceptionInvalidIdentifier" xml:space="preserve">
-    <value>An identifier is invalid.</value>
-  </data>
-  <data name="ExceptionInvalidOperation" xml:space="preserve">
-    <value>An operation is invalid.</value>
-  </data>
-  <data name="ExceptionInvalidOperationTemplate" xml:space="preserve">
-    <value>The operation with this identifier is not valid: {0}.</value>
-  </data>
-  <data name="ExceptionInvalidParameters" xml:space="preserve">
-    <value>The parameters are invalid.</value>
-  </data>
-  <data name="ExceptionInvalidRequest" xml:space="preserve">
-    <value>The request is invalid.</value>
-  </data>
-  <data name="ExceptionInvalidResource" xml:space="preserve">
-    <value>The resource is invalid.</value>
-  </data>
-  <data name="ExceptionInvalidResponse" xml:space="preserve">
-    <value>The response is invalid.</value>
-  </data>
-  <data name="ExceptionInvalidState" xml:space="preserve">
-    <value>The state is invalid.</value>
-  </data>
-  <data name="ExceptionInvalidStateTransition" xml:space="preserve">
-    <value>The requested state transition is invalid.</value>
-  </data>
-  <data name="ExceptionMethodNotSupportedTemplate" xml:space="preserve">
-    <value>This method is not supported: {0}.</value>
-  </data>
-  <data name="ExceptionNotInitializedMonitoringBehavior" xml:space="preserve">
-    <value>The monitoring behavior has not been properly initialized.</value>
-  </data>
-  <data name="ExceptionNotInitializedProviderBehavior" xml:space="preserve">
-    <value>The provider behavior has not been properly initialized.</value>
-  </data>
-  <data name="ExceptionPaginationIsNotSupportedTemplate" xml:space="preserve">
-    <value>Pagination is not supported for this type of resource: {0}</value>
-  </data>
-  <data name="ExceptionQueryNotSupported" xml:space="preserve">
-    <value>The query is not supported.</value>
-  </data>
-  <data name="HeaderTemplate" xml:space="preserve">
-    <value>{0}: {1}</value>
-  </data>
-  <data name="InformationRead" xml:space="preserve">
-    <value>Data has been read.</value>
-  </data>
-  <data name="InformationRequestProcessedTemplate" xml:space="preserve">
-    <value>Processing of this request was completed: {0}.  
-
-The status code of the response was {1}</value>
-  </data>
-  <data name="InformationRequestReceivedTemplate" xml:space="preserve">
-    <value>This request was received: {0}.</value>
-  </data>
-  <data name="InformationWrote" xml:space="preserve">
-    <value>Data has been written.</value>
-  </data>
-  <data name="MessageTemplate" xml:space="preserve">
-    <value>{0} {1}
-{2}</value>
-  </data>
   <data name="MonitorCorrelationIdentifierPrefixTemplate" xml:space="preserve">
     <value>{0}@</value>
   </data>
@@ -209,15 +128,5 @@ The status code of the response was {1}</value>
   </data>
   <data name="MonitorOutputTemplate" xml:space="preserve">
     <value>{0}: {1}</value>
-  </data>
-  <data name="SeparatorHeaderValues" xml:space="preserve">
-    <value>,</value>
-  </data>
-  <data name="WarningUnexpectedWatermarkTemplate" xml:space="preserve">
-    <value>The supplied watermark did not match the expected watermark: 
-Supplied: 
-{0}
-Received: 
-{1}</value>
   </data>
 </root>
