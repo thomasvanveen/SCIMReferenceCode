@@ -15,6 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="C:\Users\ThomasvanVeen\source\repos\Microsoft.SCIM.Schemas\Microsoft.SCIM.Schemas.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Service\ServiceResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -24,11 +28,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ProtocolResources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Schemas\SchemasResources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>SchemasResources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -41,11 +40,6 @@
     <EmbeddedResource Update="Protocol\ProtocolResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ProtocolResources.Designer.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Schemas\SchemasResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SchemasResources.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
