@@ -15,6 +15,7 @@ namespace Microsoft.SCIM
         public const string PathGroups = "Groups";
         public const string PathUsers = "Users";
         public const string PathWebBatchInterface = SchemaConstants.PathInterface + "/batch";
+        public const string SeparatorSegments = "/";
 
         public static readonly Lazy<JsonSerializerSettings> JsonSettings =
             new Lazy<JsonSerializerSettings>(() => ProtocolConstants.InitializeSettings());

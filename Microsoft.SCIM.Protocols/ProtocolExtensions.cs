@@ -16,7 +16,7 @@ namespace Microsoft.SCIM
     using System.Threading.Tasks;
     using System.Web;
 
-    using Microsoft.SCIM.Protocol;
+    using Microsoft.SCIM.Protocols;
 
     using Newtonsoft.Json;
 
@@ -809,9 +809,9 @@ namespace Microsoft.SCIM
             string baseResourceIdentifierValue = baseResourceIdentifier.ToString();
             string resultValue =
                 baseResourceIdentifierValue +
-                ServiceConstants.SeparatorSegments +
+                ProtocolConstants.SeparatorSegments +
                 SchemaConstants.PathInterface +
-                ServiceConstants.SeparatorSegments +
+                ProtocolConstants.SeparatorSegments +
                 path;
 
             Uri result = new Uri(resultValue);
@@ -886,7 +886,7 @@ namespace Microsoft.SCIM
             string escapedIdentifier = Uri.EscapeDataString(resource.Identifier);
             string resultValue =
                 baseResourceIdentifier.ToString() +
-                ServiceConstants.SeparatorSegments +
+                ProtocolConstants.SeparatorSegments +
                 escapedIdentifier;
             result = new Uri(resultValue);
             return result;
@@ -1242,7 +1242,7 @@ namespace Microsoft.SCIM
             string escapedIdentifier = Uri.EscapeDataString(resource.Identifier);
             string resultValue =
                 typeResource.ToString() +
-                ServiceConstants.SeparatorSegments +
+                ProtocolConstants.SeparatorSegments +
                 escapedIdentifier;
 
             Uri result = new Uri(resultValue);

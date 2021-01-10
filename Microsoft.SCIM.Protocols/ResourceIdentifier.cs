@@ -7,7 +7,7 @@ namespace Microsoft.SCIM
     using System;
     using System.Globalization;
 
-    using Microsoft.SCIM.Protocol;
+    using Microsoft.SCIM.Protocols;
 
     public sealed class ResourceIdentifier : IResourceIdentifier
     {

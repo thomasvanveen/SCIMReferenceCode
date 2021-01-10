@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -15,23 +15,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.SCIM.Protocols\Microsoft.SCIM.Protocols.csproj" />
     <ProjectReference Include="..\Microsoft.SCIM.Schemas\Microsoft.SCIM.Schemas.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Service\ServiceResources.Designer.cs">
+    <Compile Update="ProtocolResources.Designer.cs">
+      <DependentUpon>ProtocolResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ServiceResources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Service\ServiceResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ServiceResources.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="ProtocolResources.resx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <LastGenOutput>ProtocolResources.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>
 

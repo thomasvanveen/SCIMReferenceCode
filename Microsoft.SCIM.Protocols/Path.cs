@@ -9,7 +9,7 @@ namespace Microsoft.SCIM
     using System.Globalization;
     using System.Text.RegularExpressions;
 
-    using Microsoft.SCIM.Protocol;
+    using Microsoft.SCIM.Protocols;
 
     public sealed class Path : IPath
     {

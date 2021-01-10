@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Microsoft.SCIM.Protocol {
+namespace Microsoft.SCIM.Protocols {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Microsoft.SCIM.Protocol {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Microsoft.SCIM.Protocol.ProtocolResources", typeof(ProtocolResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Microsoft.SCIM.Protocols.ProtocolResources", typeof(ProtocolResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

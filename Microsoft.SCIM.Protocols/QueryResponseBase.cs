@@ -9,7 +9,7 @@ namespace Microsoft.SCIM
     using System.Linq;
     using System.Runtime.Serialization;
 
-    using Microsoft.SCIM.Protocol;
+    using Microsoft.SCIM.Protocols;
 
     [DataContract]
     public abstract class QueryResponseBase : Schematized

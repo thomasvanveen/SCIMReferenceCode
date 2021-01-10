@@ -10,7 +10,7 @@ namespace Microsoft.SCIM
     using System.Linq;
     using System.Web;
 
-    using Microsoft.SCIM.Protocol;
+    using Microsoft.SCIM.Protocols;
 
     public sealed class Filter : IFilter
     {

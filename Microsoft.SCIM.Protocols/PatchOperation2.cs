@@ -9,7 +9,7 @@ namespace Microsoft.SCIM
     using System.Globalization;
     using System.Runtime.Serialization;
 
-    using Microsoft.SCIM.Protocol;
+    using Microsoft.SCIM.Protocols;
 
     [DataContract]
     public sealed class PatchOperation2 : PatchOperation2Base

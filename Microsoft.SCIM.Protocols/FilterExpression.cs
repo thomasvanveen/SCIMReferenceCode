@@ -11,7 +11,7 @@ namespace Microsoft.SCIM
     using System.Text;
     using System.Text.RegularExpressions;
 
-    using Microsoft.SCIM.Protocol;
+    using Microsoft.SCIM.Protocols;
 
     // Parses filter expressions into a doubly-linked list.
     // A collection of IFilter objects can be obtained from the fully-parsed expression.
