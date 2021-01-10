@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="C:\Users\ThomasvanVeen\source\repos\Microsoft.SCIM.Schemas\Microsoft.SCIM.Schemas.csproj" />
+    <ProjectReference Include="..\Microsoft.SCIM.Schemas\Microsoft.SCIM.Schemas.csproj" />
   </ItemGroup>
 
   <ItemGroup>

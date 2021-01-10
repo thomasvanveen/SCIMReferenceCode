@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.SCIM.WebHostSampl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.SCIM", "Microsoft.SCIM\Microsoft.SCIM.csproj", "{9066B8E5-8F61-4141-B780-8362AF789E3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.SCIM.Controllers", "Microsoft.SCIM.Controllers\Microsoft.SCIM.Controllers.csproj", "{659220BF-73A6-4762-8D63-66E7001372DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.SCIM.Controllers", "Microsoft.SCIM.Controllers\Microsoft.SCIM.Controllers.csproj", "{659220BF-73A6-4762-8D63-66E7001372DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.SCIM.Providers.InMemoryProvider", "C:\Users\ThomasvanVeen\source\repos\Microsoft.SCIM.Providers.InMemoryProvider\Microsoft.SCIM.Providers.InMemoryProvider.csproj", "{57315BB9-EC3A-44A7-B0FB-AC0F13929233}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.SCIM.Providers.InMemoryProvider", "Microsoft.SCIM.Providers.InMemoryProvider\Microsoft.SCIM.Providers.InMemoryProvider.csproj", "{06969E8B-9A94-4D70-B8D9-8CA2496A5A18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.SCIM.Schemas", "C:\Users\ThomasvanVeen\source\repos\Microsoft.SCIM.Schemas\Microsoft.SCIM.Schemas.csproj", "{118D8291-51B0-4E60-A769-6AFC25366B7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.SCIM.Schemas", "Microsoft.SCIM.Schemas\Microsoft.SCIM.Schemas.csproj", "{9EFBBCAC-4BA9-43EF-AE8E-96C3FC082321}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +31,14 @@ Global
 		{659220BF-73A6-4762-8D63-66E7001372DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{659220BF-73A6-4762-8D63-66E7001372DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{659220BF-73A6-4762-8D63-66E7001372DE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{57315BB9-EC3A-44A7-B0FB-AC0F13929233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57315BB9-EC3A-44A7-B0FB-AC0F13929233}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57315BB9-EC3A-44A7-B0FB-AC0F13929233}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57315BB9-EC3A-44A7-B0FB-AC0F13929233}.Release|Any CPU.Build.0 = Release|Any CPU
-		{118D8291-51B0-4E60-A769-6AFC25366B7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{118D8291-51B0-4E60-A769-6AFC25366B7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{118D8291-51B0-4E60-A769-6AFC25366B7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{118D8291-51B0-4E60-A769-6AFC25366B7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06969E8B-9A94-4D70-B8D9-8CA2496A5A18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06969E8B-9A94-4D70-B8D9-8CA2496A5A18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06969E8B-9A94-4D70-B8D9-8CA2496A5A18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06969E8B-9A94-4D70-B8D9-8CA2496A5A18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EFBBCAC-4BA9-43EF-AE8E-96C3FC082321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EFBBCAC-4BA9-43EF-AE8E-96C3FC082321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EFBBCAC-4BA9-43EF-AE8E-96C3FC082321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EFBBCAC-4BA9-43EF-AE8E-96C3FC082321}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
