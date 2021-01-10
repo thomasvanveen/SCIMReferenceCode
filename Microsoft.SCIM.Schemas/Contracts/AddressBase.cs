@@ -11,7 +11,6 @@ namespace Microsoft.SCIM
     {
         public const string Home = "home";
         public const string Other = "other";
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Untyped", Justification = "False analysis")]
         public const string Untyped = "untyped";
         public const string Work = "work";
 

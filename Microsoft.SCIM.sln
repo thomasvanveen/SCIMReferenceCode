@@ -7,15 +7,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.SCIM.WebHostSampl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.SCIM", "Microsoft.SCIM\Microsoft.SCIM.csproj", "{9066B8E5-8F61-4141-B780-8362AF789E3E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.SCIM.Controllers", "Microsoft.SCIM.Controllers\Microsoft.SCIM.Controllers.csproj", "{659220BF-73A6-4762-8D63-66E7001372DE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.SCIM.Providers.InMemoryProvider", "Microsoft.SCIM.Providers.InMemoryProvider\Microsoft.SCIM.Providers.InMemoryProvider.csproj", "{06969E8B-9A94-4D70-B8D9-8CA2496A5A18}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.SCIM.Schemas", "Microsoft.SCIM.Schemas\Microsoft.SCIM.Schemas.csproj", "{9EFBBCAC-4BA9-43EF-AE8E-96C3FC082321}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.SCIM.Protocols", "Microsoft.SCIM.Protocols\Microsoft.SCIM.Protocols.csproj", "{637DEAFD-5F5A-43D6-9CAD-90517A9E8DBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.SCIM.Protocols", "Microsoft.SCIM.Protocols\Microsoft.SCIM.Protocols.csproj", "{637DEAFD-5F5A-43D6-9CAD-90517A9E8DBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.SCIM.Monitoring", "Microsoft.SCIM.Monitoring\Microsoft.SCIM.Monitoring.csproj", "{28FA603D-53CA-494B-82B5-45C6AEC59750}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.SCIM.Monitoring", "Microsoft.SCIM.Monitoring\Microsoft.SCIM.Monitoring.csproj", "{28FA603D-53CA-494B-82B5-45C6AEC59750}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Base", "Base", "{C4DEBE51-E873-4C00-81BA-7CCDB173A67F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Providers", "Providers", "{A08BC164-4930-407A-BB4B-7E8936869B7D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Monitoring", "Monitoring", "{6BCAAED8-2D99-4308-B7FA-B65C3BB7556C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +35,6 @@ Global
 		{9066B8E5-8F61-4141-B780-8362AF789E3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9066B8E5-8F61-4141-B780-8362AF789E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9066B8E5-8F61-4141-B780-8362AF789E3E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{659220BF-73A6-4762-8D63-66E7001372DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{659220BF-73A6-4762-8D63-66E7001372DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{659220BF-73A6-4762-8D63-66E7001372DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{659220BF-73A6-4762-8D63-66E7001372DE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{06969E8B-9A94-4D70-B8D9-8CA2496A5A18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{06969E8B-9A94-4D70-B8D9-8CA2496A5A18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06969E8B-9A94-4D70-B8D9-8CA2496A5A18}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -54,6 +54,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9066B8E5-8F61-4141-B780-8362AF789E3E} = {C4DEBE51-E873-4C00-81BA-7CCDB173A67F}
+		{06969E8B-9A94-4D70-B8D9-8CA2496A5A18} = {A08BC164-4930-407A-BB4B-7E8936869B7D}
+		{9EFBBCAC-4BA9-43EF-AE8E-96C3FC082321} = {C4DEBE51-E873-4C00-81BA-7CCDB173A67F}
+		{637DEAFD-5F5A-43D6-9CAD-90517A9E8DBC} = {C4DEBE51-E873-4C00-81BA-7CCDB173A67F}
+		{28FA603D-53CA-494B-82B5-45C6AEC59750} = {6BCAAED8-2D99-4308-B7FA-B65C3BB7556C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BA30FD0D-DDC6-474D-ACE3-FD6AC5924BC5}

@@ -20,7 +20,6 @@ namespace Microsoft.SCIM
                 () =>
                     SegmentSeparator.ToArray());
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "False analysis of the 'this' parameter of an extension method")]
         public static Uri GetBaseResourceIdentifier(this HttpRequestMessage request)
         {
             if (null == request.RequestUri)

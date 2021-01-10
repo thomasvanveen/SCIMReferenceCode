@@ -29,15 +29,12 @@ namespace Microsoft.SCIM
                 () =>
                     new Version(2, 0, 1));
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Oh", Justification = "Not an abbreviation")]
         public static Version VersionOneOh => SpecificationVersion.VersionOneOhValue.Value;
 
         public static Version VersionOneOne => SpecificationVersion.VersionOneOneValue.Value;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Oh", Justification = "Not an abbreviation")]
         public static Version VersionTwoOhOne => SpecificationVersion.VersionTwoOhOneValue.Value;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Oh", Justification = "Not an abbreviation")]
         public static Version VersionTwoOh => SpecificationVersion.VersionTwoOhValue.Value;
     }
 }

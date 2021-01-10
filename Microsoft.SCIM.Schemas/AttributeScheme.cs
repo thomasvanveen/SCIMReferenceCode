@@ -56,7 +56,6 @@ namespace Microsoft.SCIM
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called upon serialization")]
         [DataMember(Name = AttributeNames.Type)]
 #pragma warning disable IDE0051 // Remove unused private members
         private string DataTypeValue
@@ -89,7 +88,6 @@ namespace Microsoft.SCIM
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called upon serialization")]
         [DataMember(Name = AttributeNames.Mutability)]
 #pragma warning disable IDE0051 // Remove unused private members
         private string MutabilityValue
@@ -136,7 +134,6 @@ namespace Microsoft.SCIM
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called upon serialization")]
         [DataMember(Name = AttributeNames.Returned)]
 #pragma warning disable IDE0051 // Remove unused private members
         private string ReturnedValue
@@ -162,7 +159,6 @@ namespace Microsoft.SCIM
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called upon serialization")]
         [DataMember(Name = AttributeNames.Uniqueness)]
 #pragma warning disable IDE0051 // Remove unused private members
         private string UniquenessValue

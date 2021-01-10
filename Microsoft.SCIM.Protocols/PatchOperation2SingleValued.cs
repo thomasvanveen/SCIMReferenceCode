@@ -12,8 +12,6 @@ namespace Microsoft.SCIM
     public sealed class PatchOperation2SingleValued : PatchOperation2Base
     {
         private const string Template = "{0}: [{1}]";
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Justification = "The serialized value is consumed.")]
         [DataMember(Name = AttributeNames.Value, Order = 2)]
         private string valueValue;
 

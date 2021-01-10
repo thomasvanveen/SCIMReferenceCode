@@ -112,7 +112,6 @@ namespace Microsoft.SCIM
                 if (reader != null)
                 {
                     reader.Close();
-                    reader = null;
                 }
             }
         }
@@ -181,12 +180,10 @@ namespace Microsoft.SCIM
             {
                 return new HttpResponseException(HttpStatusCode.BadRequest);
             }
-#pragma warning disable CA1031 // Do not catch general exception types
             catch
             {
                 return new HttpResponseException(HttpStatusCode.BadRequest);
             }
-#pragma warning restore CA1031 // Do not catch general exception types
         }
 
         public override Task<object> ReadFromStreamAsync(

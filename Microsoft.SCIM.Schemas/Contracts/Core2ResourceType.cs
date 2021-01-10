@@ -22,7 +22,6 @@ namespace Microsoft.SCIM
             set;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Justification = "Serialized")]
         [DataMember(Name = AttributeNames.Name)]
         private string name;
 

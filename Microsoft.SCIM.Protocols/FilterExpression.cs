@@ -226,9 +226,7 @@ namespace Microsoft.SCIM
                            CultureInfo.InvariantCulture,
                            ProtocolResources.ExceptionInvalidFilterTemplate,
                            Text);
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
                     throw new ArgumentOutOfRangeException(message, nameof(Group));
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
                 }
                 groupValue = value;
             }
@@ -247,9 +245,7 @@ namespace Microsoft.SCIM
                            CultureInfo.InvariantCulture,
                            ProtocolResources.ExceptionInvalidFilterTemplate,
                            Text);
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
                     throw new ArgumentOutOfRangeException(message, nameof(Level));
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
                 }
                 levelValue = value;
             }

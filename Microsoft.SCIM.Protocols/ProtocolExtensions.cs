@@ -231,7 +231,6 @@ namespace Microsoft.SCIM
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "False analysis of 'this' parameter of an extension method")]
         public static HttpRequestMessage ComposeGetRequest(
             this Schematized schematized,
             Uri baseResourceIdentifier,
@@ -287,7 +286,6 @@ namespace Microsoft.SCIM
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "False analysis of 'this' parameter of an extension method")]
         public static HttpRequestMessage ComposeGetRequest(
             this Schematized schematized,
             Uri baseResourceIdentifier,
@@ -322,7 +320,6 @@ namespace Microsoft.SCIM
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "False analysis of 'this' parameter of an extension method")]
         public static HttpRequestMessage ComposeGetRequest(
             this Resource resource,
             Uri baseResourceIdentifier,
@@ -398,7 +395,6 @@ namespace Microsoft.SCIM
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "The parameter must be a patch for the operation to produce a semantically valid result")]
         public static HttpRequestMessage ComposePatchRequest(
             this Resource resource,
             Uri baseResourceIdentifier,
@@ -462,7 +458,6 @@ namespace Microsoft.SCIM
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "False analysis of 'this' parameter of an extension method")]
         public static HttpRequestMessage ComposePatchRequest(
             this Resource patch,
             Uri baseResourceIdentifier)
@@ -519,8 +514,6 @@ namespace Microsoft.SCIM
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "False analysis of extension method")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Performing the operation on the base type would be invalid")]
         public static HttpRequestMessage ComposePutRequest(this Resource resource, Uri baseResourceIdentifier)
         {
             if (null == baseResourceIdentifier)
@@ -577,8 +570,6 @@ namespace Microsoft.SCIM
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "False analysis of extension method")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Performing the operation on the base type would be invalid")]
         public static HttpRequestMessage ComposePostRequest(this Resource resource, Uri baseResourceIdentifier)
         {
             if (null == baseResourceIdentifier)
@@ -635,7 +626,6 @@ namespace Microsoft.SCIM
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "False analysis of 'this' parameter of an extension method")]
         public static UriBuilder ComposeResourceIdentifier(this Resource resource, Uri baseResourceIdentifier)
         {
             if (null == baseResourceIdentifier)
@@ -653,7 +643,6 @@ namespace Microsoft.SCIM
             return result;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "False analysis of 'this' parameter of an extension method")]
         public static Uri ComposeResourceIdentifier(
             this Resource resource,
             Uri baseResourceIdentifier,
@@ -723,7 +712,6 @@ namespace Microsoft.SCIM
             return result;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "False analysis of an extension method")]
         public static Uri ComposeResourceIdentifier(
             this Schematized schematized,
             Uri baseResourceIdentifier,
@@ -776,7 +764,6 @@ namespace Microsoft.SCIM
             return result;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "False analysis of an extension method")]
         public static Uri ComposeResourceIdentifier(
             this Schematized schematized,
             Uri baseResourceIdentifier,
@@ -818,7 +805,6 @@ namespace Microsoft.SCIM
             return result;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "False analysis of 'this' parameter of an extension method")]
         public static IResourceIdentifier GetIdentifier(this Resource resource)
         {
             if (!resource.TryGetSchemaIdentifier(out string schemaIdentifier))
@@ -864,7 +850,6 @@ namespace Microsoft.SCIM
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "False analysis of 'this' parameter of an extension method")]
         public static Uri GetResourceIdentifier(this Resource resource, Uri baseResourceIdentifier)
         {
             if (null == baseResourceIdentifier)
@@ -920,7 +905,6 @@ namespace Microsoft.SCIM
             throw new NotSupportedException(schemas);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "False analysis of 'this' parameter of an extension method")]
         public static string GetSchemaIdentifier(this Schematized schematized)
         {
             if (!schematized.TryGetSchemaIdentifier(out string result))
@@ -930,7 +914,6 @@ namespace Microsoft.SCIM
             return result;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "False analysis of 'this' parameter of an extension method")]
         public static Uri GetTypeIdentifier(this Schematized schematized, Uri baseResourceIdentifier)
         {
             if (null == baseResourceIdentifier)
@@ -950,7 +933,6 @@ namespace Microsoft.SCIM
             return result;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "False analysis of 'this' parameter of an extension method")]
         public static bool Matches(this IExtension extension, string schemaIdentifier)
         {
             bool result = string.Equals(schemaIdentifier, extension.SchemaIdentifier, StringComparison.OrdinalIgnoreCase);
@@ -1222,8 +1204,6 @@ namespace Microsoft.SCIM
             return result;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "resourceIdentifier", Justification = "False analysis of extension method")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "False analysis of 'this' parameter of an extension method")]
 #pragma warning disable IDE0060 // Remove unused parameter
         public static Uri Serialize(this IResourceIdentifier resourceIdentifier, Resource resource, Uri baseResourceIdentifier)
 #pragma warning restore IDE0060 // Remove unused parameter
@@ -1260,11 +1240,7 @@ namespace Microsoft.SCIM
             TextWriter textWriter = null;
             try
             {
-
-#pragma warning disable CA2000 // Dispose objects before losing scope
                 textWriter = new StringWriter(buffer);
-#pragma warning restore CA2000 // Dispose objects before losing scope
-
                 IHttpRequestMessageWriter requestWriter = null;
                 try
                 {
