@@ -21,7 +21,7 @@ namespace Microsoft.SCIM.Controllers
 
         internal readonly IMonitor monitor;
         internal readonly IProvider provider;
-        
+
         internal ControllerTemplate(IProvider provider, IMonitor monitor)
         {
             this.monitor = monitor;

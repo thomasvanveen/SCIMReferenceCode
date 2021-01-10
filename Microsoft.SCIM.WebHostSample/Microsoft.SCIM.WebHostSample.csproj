@@ -20,21 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.SCIM.Controllers\Microsoft.SCIM.Controllers.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Resources\SampleServiceResources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>SampleServiceResources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\SampleServiceResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SampleServiceResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <ProjectReference Include="C:\Users\ThomasvanVeen\source\repos\Microsoft.SCIM.Providers.InMemoryProvider\Microsoft.SCIM.Providers.InMemoryProvider.csproj" />
   </ItemGroup>
 
 </Project>

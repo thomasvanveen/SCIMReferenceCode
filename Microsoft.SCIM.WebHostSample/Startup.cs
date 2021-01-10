@@ -12,7 +12,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.SCIM.WebHostSample.Provider;
 
 namespace Microsoft.SCIM.WebHostSample
 {
@@ -30,7 +29,7 @@ namespace Microsoft.SCIM.WebHostSample
             _configuration = configuration;
             _environment = environment;
             _monitoringBehavior = new ConsoleMonitor();
-            _providerBehavior = new InMemoryProvider();
+            _providerBehavior = new ScimInMemoryProvider();
         }
 
         public void Configure(IApplicationBuilder app)

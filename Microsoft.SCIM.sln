@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.SCIM", "Microsoft
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.SCIM.Controllers", "Microsoft.SCIM.Controllers\Microsoft.SCIM.Controllers.csproj", "{659220BF-73A6-4762-8D63-66E7001372DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.SCIM.Providers.InMemoryProvider", "C:\Users\ThomasvanVeen\source\repos\Microsoft.SCIM.Providers.InMemoryProvider\Microsoft.SCIM.Providers.InMemoryProvider.csproj", "{57315BB9-EC3A-44A7-B0FB-AC0F13929233}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{659220BF-73A6-4762-8D63-66E7001372DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{659220BF-73A6-4762-8D63-66E7001372DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{659220BF-73A6-4762-8D63-66E7001372DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57315BB9-EC3A-44A7-B0FB-AC0F13929233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57315BB9-EC3A-44A7-B0FB-AC0F13929233}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57315BB9-EC3A-44A7-B0FB-AC0F13929233}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57315BB9-EC3A-44A7-B0FB-AC0F13929233}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
