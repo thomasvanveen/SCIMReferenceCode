@@ -9,7 +9,7 @@ namespace Microsoft.SCIM
         public ExceptionNotification(Exception payload, bool critical)
             : base(payload)
         {
-            this.Critical = critical;
+            Critical = critical;
         }
 
         public ExceptionNotification(Exception payload)
@@ -20,19 +20,19 @@ namespace Microsoft.SCIM
         public ExceptionNotification(Exception payload, long identifier)
             : base(payload, identifier)
         {
-            this.Critical = false;
+            Critical = false;
         }
 
         public ExceptionNotification(Exception payload, bool critical, long identifier)
             : base(payload, identifier)
         {
-            this.Critical = critical;
+            Critical = critical;
         }
 
         public ExceptionNotification(Exception payload, bool critical, string correlationIdentifier)
             : base(payload, correlationIdentifier)
         {
-            this.Critical = critical;
+            Critical = critical;
         }
 
         public ExceptionNotification(Exception payload, string correlationIdentifier)
@@ -43,7 +43,7 @@ namespace Microsoft.SCIM
         public ExceptionNotification(Exception payload, bool critical, string correlationIdentifier, long identifier)
             : base(payload, correlationIdentifier, identifier)
         {
-            this.Critical = critical;
+            Critical = critical;
         }
 
         public ExceptionNotification(Exception payload, string correlationIdentifier, long identifier)

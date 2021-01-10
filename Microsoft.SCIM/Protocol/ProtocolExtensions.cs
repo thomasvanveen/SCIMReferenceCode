@@ -15,6 +15,7 @@ namespace Microsoft.SCIM
     using System.Text;
     using System.Threading.Tasks;
     using System.Web;
+
     using Newtonsoft.Json;
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "None")]
@@ -34,13 +35,7 @@ namespace Microsoft.SCIM
             Task WriteAsync();
         }
 
-        public static HttpMethod PatchMethod
-        {
-            get
-            {
-                return ProtocolExtensions.MethodPatch.Value;
-            }
-        }
+        public static HttpMethod PatchMethod => ProtocolExtensions.MethodPatch.Value;
 
         public static void Apply(this Core2Group group, PatchRequest2 patch)
         {
@@ -92,7 +87,7 @@ namespace Microsoft.SCIM
                 }
                 else
                 {
-                    foreach(OperationValue value in values)
+                    foreach (OperationValue value in values)
                     {
                         operationInternal.AddValue(value);
                     }
@@ -435,8 +430,10 @@ namespace Microsoft.SCIM
                             json,
                             contentFormatter,
                             contentType);
-                    result = new HttpRequestMessage(ProtocolExtensions.PatchMethod, resourceIdentifier);
-                    result.Content = requestContent;
+                    result = new HttpRequestMessage(ProtocolExtensions.PatchMethod, resourceIdentifier)
+                    {
+                        Content = requestContent
+                    };
                     requestContent = null;
                     return result;
                 }
@@ -490,8 +487,10 @@ namespace Microsoft.SCIM
                             json,
                             contentFormatter,
                             MediaTypes.Json);
-                    result = new HttpRequestMessage(ProtocolExtensions.PatchMethod, resourceIdentifier);
-                    result.Content = requestContent;
+                    result = new HttpRequestMessage(ProtocolExtensions.PatchMethod, resourceIdentifier)
+                    {
+                        Content = requestContent
+                    };
                     requestContent = null;
                     return result;
                 }
@@ -546,8 +545,10 @@ namespace Microsoft.SCIM
                             json,
                             contentFormatter,
                             contentType);
-                    result = new HttpRequestMessage(HttpMethod.Put, resourceIdentifier);
-                    result.Content = requestContent;
+                    result = new HttpRequestMessage(HttpMethod.Put, resourceIdentifier)
+                    {
+                        Content = requestContent
+                    };
                     requestContent = null;
                     return result;
                 }
@@ -602,8 +603,10 @@ namespace Microsoft.SCIM
                             json,
                             contentFormatter,
                             contentType);
-                    result = new HttpRequestMessage(HttpMethod.Post, typeResourceIdentifier);
-                    result.Content = requestContent;
+                    result = new HttpRequestMessage(HttpMethod.Post, typeResourceIdentifier)
+                    {
+                        Content = requestContent
+                    };
                     requestContent = null;
                     return result;
                 }
@@ -710,8 +713,10 @@ namespace Microsoft.SCIM
             }
 
             Uri typeIdentifier = schematized.GetTypeIdentifier(baseResourceIdentifier);
-            UriBuilder resourceIdentifier = new UriBuilder(typeIdentifier);
-            resourceIdentifier.Query = parameters.ToString();
+            UriBuilder resourceIdentifier = new UriBuilder(typeIdentifier)
+            {
+                Query = parameters.ToString()
+            };
             Uri result = resourceIdentifier.Uri;
             return result;
         }
@@ -761,8 +766,10 @@ namespace Microsoft.SCIM
                     path,
                     filters,
                     requestedAttributePaths,
-                    excludedAttributePaths);
-            queryParameters.PaginationParameters = paginationParameters;
+                    excludedAttributePaths)
+                {
+                    PaginationParameters = paginationParameters
+                };
             Uri result = schematized.ComposeResourceIdentifier(baseResourceIdentifier, queryParameters);
             return result;
         }
@@ -1411,9 +1418,9 @@ namespace Microsoft.SCIM
 
             public HttpRequestMessageWriter(HttpRequestMessage message, TextWriter writer, bool acceptLargeObjects)
             {
-                this.Message = message ?? throw new ArgumentNullException(nameof(message));
-                this.innerWriter = writer ?? throw new ArgumentNullException(nameof(writer));
-                this.AcceptLargeObjects = acceptLargeObjects;
+                Message = message ?? throw new ArgumentNullException(nameof(message));
+                innerWriter = writer ?? throw new ArgumentNullException(nameof(writer));
+                AcceptLargeObjects = acceptLargeObjects;
             }
 
             private bool AcceptLargeObjects
@@ -1429,20 +1436,20 @@ namespace Microsoft.SCIM
 
             public void Close()
             {
-                this.innerWriter.Flush();
-                this.innerWriter.Close();
+                innerWriter.Flush();
+                innerWriter.Close();
             }
 
             public void Dispose()
             {
-                if (this.innerWriter != null)
+                if (innerWriter != null)
                 {
-                    lock (this.thisLock)
+                    lock (thisLock)
                     {
-                        if (this.innerWriter != null)
+                        if (innerWriter != null)
                         {
-                            this.Close();
-                            this.innerWriter = null;
+                            Close();
+                            innerWriter = null;
                         }
                     }
                 }
@@ -1450,20 +1457,20 @@ namespace Microsoft.SCIM
 
             public async Task FlushAsync()
             {
-                await this.innerWriter.FlushAsync().ConfigureAwait(false);
+                await innerWriter.FlushAsync().ConfigureAwait(false);
             }
 
             public async Task WriteAsync()
             {
-                if (this.Message.RequestUri != null)
+                if (Message.RequestUri != null)
                 {
-                    string line = HttpUtility.UrlDecode(this.Message.RequestUri.AbsoluteUri);
-                    await this.innerWriter.WriteLineAsync(line).ConfigureAwait(false);
+                    string line = HttpUtility.UrlDecode(Message.RequestUri.AbsoluteUri);
+                    await innerWriter.WriteLineAsync(line).ConfigureAwait(false);
                 }
 
-                if (this.Message.Headers != null)
+                if (Message.Headers != null)
                 {
-                    foreach (KeyValuePair<string, IEnumerable<string>> header in this.Message.Headers)
+                    foreach (KeyValuePair<string, IEnumerable<string>> header in Message.Headers)
                     {
                         if (!header.Value.Any())
                         {
@@ -1478,7 +1485,7 @@ namespace Microsoft.SCIM
                         else
                         {
                             string[] values = header.Value.ToArray();
-                            value = JsonFactory.Instance.Create(values, this.AcceptLargeObjects);
+                            value = JsonFactory.Instance.Create(values, AcceptLargeObjects);
                         }
 
                         string line =
@@ -1487,14 +1494,14 @@ namespace Microsoft.SCIM
                                 HttpRequestMessageWriter.TemplateHeader,
                                 header.Key,
                                 value);
-                        await this.innerWriter.WriteLineAsync(line).ConfigureAwait(false);
+                        await innerWriter.WriteLineAsync(line).ConfigureAwait(false);
                     }
                 }
 
-                if (this.Message.Content != null)
+                if (Message.Content != null)
                 {
-                    string line = await this.Message.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    await this.innerWriter.WriteLineAsync(line).ConfigureAwait(false);
+                    string line = await Message.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    await innerWriter.WriteLineAsync(line).ConfigureAwait(false);
                 }
             }
         }

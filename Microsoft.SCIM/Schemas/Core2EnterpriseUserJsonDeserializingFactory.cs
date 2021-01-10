@@ -24,7 +24,7 @@ namespace Microsoft.SCIM
             }
 
             Manager manager;
-            IReadOnlyDictionary<string, object> normalizedJson = this.Normalize(json);
+            IReadOnlyDictionary<string, object> normalizedJson = Normalize(json);
             IReadOnlyDictionary<string, object> safeJson;
             if (normalizedJson.TryGetValue(AttributeNames.Manager, out object managerData)
                 && managerData != null)

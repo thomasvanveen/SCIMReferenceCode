@@ -17,7 +17,7 @@ namespace Microsoft.SCIM
 
         protected QueryResponseBase()
         {
-            this.AddSchema(ProtocolSchemaIdentifiers.Version2ListResponse);
+            AddSchema(ProtocolSchemaIdentifiers.Version2ListResponse);
         }
 
         protected QueryResponseBase(IReadOnlyCollection<Resource> resources)
@@ -51,10 +51,7 @@ namespace Microsoft.SCIM
 
         public IEnumerable<Resource> Resources
         {
-            get
-            {
-                return this.resources;
-            }
+            get => resources;
 
             set
             {
@@ -63,7 +60,7 @@ namespace Microsoft.SCIM
                     throw new InvalidOperationException(SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidValue);
                 }
 
-                this.resources = value.ToArray();
+                resources = value.ToArray();
             }
         }
 
@@ -95,8 +92,8 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(schemaIdentifier));
             }
 
-            this.AddSchema(schemaIdentifier);
-            this.OnInitialization();
+            AddSchema(schemaIdentifier);
+            OnInitialization();
         }
 
         protected QueryResponseBase(string schemaIdentifier, IReadOnlyCollection<TResource> resources)
@@ -130,10 +127,7 @@ namespace Microsoft.SCIM
 
         public IEnumerable<TResource> Resources
         {
-            get
-            {
-                return this.resources;
-            }
+            get => resources;
 
             set
             {
@@ -141,7 +135,7 @@ namespace Microsoft.SCIM
                 {
                     throw new InvalidOperationException(SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidValue);
                 }
-                this.resources = value.ToArray();
+                resources = value.ToArray();
             }
         }
 
@@ -162,12 +156,12 @@ namespace Microsoft.SCIM
         [OnDeserializing]
         private void OnDeserializing(StreamingContext context)
         {
-            this.OnInitialization();
+            OnInitialization();
         }
 
         private void OnInitialization()
         {
-            this.resources = Array.Empty<TResource>();
+            resources = Array.Empty<TResource>();
         }
     }
 }

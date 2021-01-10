@@ -6,7 +6,6 @@ namespace Microsoft.SCIM
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using System.Web.Http;
 
     public abstract class ProviderBase : IProvider
     {
@@ -36,13 +35,7 @@ namespace Microsoft.SCIM
             set;
         }
 
-        public virtual ServiceConfigurationBase Configuration
-        {
-            get
-            {
-                return ProviderBase.ServiceConfiguration.Value;
-            }
-        }
+        public virtual ServiceConfigurationBase Configuration => ProviderBase.ServiceConfiguration.Value;
 
         //public virtual IEventTokenHandler EventHandler
         //{
@@ -50,45 +43,15 @@ namespace Microsoft.SCIM
         //    set;
         //}
 
-        public virtual IReadOnlyCollection<IExtension> Extensions
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public virtual IReadOnlyCollection<IExtension> Extensions => null;
 
-        public virtual IResourceJsonDeserializingFactory<GroupBase> GroupDeserializationBehavior
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public virtual IResourceJsonDeserializingFactory<GroupBase> GroupDeserializationBehavior => null;
 
-        public virtual ISchematizedJsonDeserializingFactory<PatchRequest2> PatchRequestDeserializationBehavior
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public virtual ISchematizedJsonDeserializingFactory<PatchRequest2> PatchRequestDeserializationBehavior => null;
 
-        public virtual IReadOnlyCollection<Core2ResourceType> ResourceTypes
-        {
-            get
-            {
-                return ProviderBase.Types.Value;
-            }
-        }
+        public virtual IReadOnlyCollection<Core2ResourceType> ResourceTypes => ProviderBase.Types.Value;
 
-        public virtual IReadOnlyCollection<TypeScheme> Schema
-        {
-            get
-            {
-                return ProviderBase.TypeSchema.Value;
-            }
-        }
+        public virtual IReadOnlyCollection<TypeScheme> Schema => ProviderBase.TypeSchema.Value;
 
         //public virtual Action<IAppBuilder, HttpConfiguration> StartupBehavior
         //{
@@ -98,13 +61,7 @@ namespace Microsoft.SCIM
         //    }
         //}
 
-        public virtual IResourceJsonDeserializingFactory<Core2UserBase> UserDeserializationBehavior
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public virtual IResourceJsonDeserializingFactory<Core2UserBase> UserDeserializationBehavior => null;
 
         public abstract Task<Resource> CreateAsync(Resource resource, string correlationIdentifier);
 
@@ -125,7 +82,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
             }
 
-            Resource result = await this.CreateAsync(request.Payload, request.CorrelationIdentifier).ConfigureAwait(false);
+            Resource result = await CreateAsync(request.Payload, request.CorrelationIdentifier).ConfigureAwait(false);
             return result;
         }
 
@@ -148,7 +105,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
             }
 
-            await this.DeleteAsync(request.Payload, request.CorrelationIdentifier).ConfigureAwait(false);
+            await DeleteAsync(request.Payload, request.CorrelationIdentifier).ConfigureAwait(false);
         }
 
         public virtual async Task<QueryResponseBase> PaginateQueryAsync(IRequest<IQueryParameters> request)
@@ -158,7 +115,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(request));
             }
 
-            IReadOnlyCollection<Resource> resources = await this.QueryAsync(request).ConfigureAwait(false);
+            IReadOnlyCollection<Resource> resources = await QueryAsync(request).ConfigureAwait(false);
             QueryResponseBase result = new QueryResponse(resources);
             result.TotalResults =
                 result.ItemsPerPage =
@@ -189,7 +146,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
             }
 
-            Resource[] result = await this.QueryAsync(request.Payload, request.CorrelationIdentifier).ConfigureAwait(false);
+            Resource[] result = await QueryAsync(request.Payload, request.CorrelationIdentifier).ConfigureAwait(false);
             return result;
         }
 
@@ -215,7 +172,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
             }
 
-            Resource result = await this.ReplaceAsync(request.Payload, request.CorrelationIdentifier).ConfigureAwait(false);
+            Resource result = await ReplaceAsync(request.Payload, request.CorrelationIdentifier).ConfigureAwait(false);
             return result;
         }
 
@@ -238,7 +195,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
             }
 
-            Resource result = await this.RetrieveAsync(request.Payload, request.CorrelationIdentifier).ConfigureAwait(false);
+            Resource result = await RetrieveAsync(request.Payload, request.CorrelationIdentifier).ConfigureAwait(false);
             return result;
         }
 
@@ -261,7 +218,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
             }
 
-            await this.UpdateAsync(request.Payload, request.CorrelationIdentifier).ConfigureAwait(false);
+            await UpdateAsync(request.Payload, request.CorrelationIdentifier).ConfigureAwait(false);
         }
     }
 }

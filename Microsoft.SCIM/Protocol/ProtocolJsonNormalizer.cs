@@ -20,7 +20,7 @@ namespace Microsoft.SCIM
             {
                 IReadOnlyCollection<string> result =
                     LazyInitializer.EnsureInitialized<IReadOnlyCollection<string>>(
-                        ref this.attributeNames,
+                        ref attributeNames,
                         ProtocolJsonNormalizer.CollectAttributeNames);
                 return result;
             }

@@ -22,11 +22,11 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(resourceIdentifier));
             }
 
-            this.ResourceIdentifier =
+            ResourceIdentifier =
                 new ResourceIdentifier()
                 {
                     Identifier = resourceIdentifier,
-                    SchemaIdentifier = this.SchemaIdentifier
+                    SchemaIdentifier = SchemaIdentifier
                 };
         }
 
@@ -41,11 +41,11 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(resourceIdentifier));
             }
 
-            this.ResourceIdentifier =
+            ResourceIdentifier =
                 new ResourceIdentifier()
                 {
                     Identifier = resourceIdentifier,
-                    SchemaIdentifier = this.SchemaIdentifier
+                    SchemaIdentifier = SchemaIdentifier
                 };
         }
 

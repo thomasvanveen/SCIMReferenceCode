@@ -15,13 +15,7 @@ namespace Microsoft.SCIM
         {
         }
 
-        public static NotificationFactory<Exception, IExceptionNotification> Instance
-        {
-            get
-            {
-                return ExceptionNotificationFactory.Singleton.Value;
-            }
-        }
+        public static NotificationFactory<Exception, IExceptionNotification> Instance => ExceptionNotificationFactory.Singleton.Value;
 
         public override IExceptionNotification CreateNotification(
             Exception payload,

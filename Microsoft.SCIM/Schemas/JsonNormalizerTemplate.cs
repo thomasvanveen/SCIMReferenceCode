@@ -32,8 +32,8 @@ namespace Microsoft.SCIM
                 key = element.Key;
                 object value = element.Value;
                 string attributeName =
-                    this
-                    .AttributeNames
+
+                    AttributeNames
                     .SingleOrDefault(
                         (string item) =>
                             string.Equals(item, key, StringComparison.OrdinalIgnoreCase));
@@ -47,7 +47,7 @@ namespace Microsoft.SCIM
                     switch (value)
                     {
                         case IEnumerable<KeyValuePair<string, object>> jsonValue:
-                            value = this.Normalize(jsonValue);
+                            value = Normalize(jsonValue);
                             break;
                         case ArrayList jsonCollectionValue:
                             ArrayList jsonCollectionNormalized = new ArrayList();
@@ -57,7 +57,7 @@ namespace Microsoft.SCIM
                                     innerValue as IEnumerable<KeyValuePair<string, object>>;
                                 if (innerObject != null)
                                 {
-                                    IEnumerable<KeyValuePair<string, object>> normalizedInnerObject = this.Normalize(innerObject);
+                                    IEnumerable<KeyValuePair<string, object>> normalizedInnerObject = Normalize(innerObject);
                                     jsonCollectionNormalized.Add(normalizedInnerObject);
                                 }
                                 else
@@ -87,7 +87,7 @@ namespace Microsoft.SCIM
             }
 
             IReadOnlyCollection<KeyValuePair<string, object>> materializedJson = json.ToArray();
-            IEnumerable<KeyValuePair<string, object>> result = this.Normalize(materializedJson);
+            IEnumerable<KeyValuePair<string, object>> result = Normalize(materializedJson);
             return result;
         }
 
@@ -99,10 +99,10 @@ namespace Microsoft.SCIM
             }
 
             IReadOnlyCollection<KeyValuePair<string, object>> keyedPairs =
-               (IReadOnlyCollection<KeyValuePair<string, object>>)json;
+               json;
             Dictionary<string, object> normalizedJson =
-                this
-                .Normalize(keyedPairs)
+
+                Normalize(keyedPairs)
                 .ToDictionary(
                     (KeyValuePair<string, object> item) =>
                         item.Key,

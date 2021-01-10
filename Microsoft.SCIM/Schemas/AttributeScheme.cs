@@ -30,12 +30,12 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(name));
             }
 
-            this.Name = name;
-            this.DataType = type;
-            this.Plural = plural;
-            this.Mutability = Mutability.readWrite;
-            this.Returned = Returned.@default;
-            this.Uniqueness = Uniqueness.none;
+            Name = name;
+            DataType = type;
+            Plural = plural;
+            Mutability = Mutability.readWrite;
+            Returned = Returned.@default;
+            Uniqueness = Uniqueness.none;
         }
 
         [DataMember(Name = AttributeNames.CaseExact)]
@@ -47,15 +47,12 @@ namespace Microsoft.SCIM
 
         public AttributeDataType DataType
         {
-            get
-            {
-                return this.dataType;
-            }
+            get => dataType;
 
             set
             {
-                this.dataTypeValue = Enum.GetName(typeof(AttributeDataType), value);
-                this.dataType = value;
+                dataTypeValue = Enum.GetName(typeof(AttributeDataType), value);
+                dataType = value;
             }
         }
 
@@ -65,15 +62,12 @@ namespace Microsoft.SCIM
         private string DataTypeValue
 #pragma warning restore IDE0051 // Remove unused private members
         {
-            get
-            {
-                return this.dataTypeValue;
-            }
+            get => dataTypeValue;
 
             set
             {
-                this.dataType = (AttributeDataType)Enum.Parse(typeof(AttributeDataType), value);
-                this.dataTypeValue = value;
+                dataType = (AttributeDataType)Enum.Parse(typeof(AttributeDataType), value);
+                dataTypeValue = value;
             }
         }
 
@@ -86,15 +80,12 @@ namespace Microsoft.SCIM
 
         public Mutability Mutability
         {
-            get
-            {
-                return this.mutability;
-            }
+            get => mutability;
 
             set
             {
-                this.mutabilityValue = Enum.GetName(typeof(Mutability), value);
-                this.mutability = value;
+                mutabilityValue = Enum.GetName(typeof(Mutability), value);
+                mutability = value;
             }
         }
 
@@ -104,15 +95,12 @@ namespace Microsoft.SCIM
         private string MutabilityValue
 #pragma warning restore IDE0051 // Remove unused private members
         {
-            get
-            {
-                return this.mutabilityValue;
-            }
+            get => mutabilityValue;
 
             set
             {
-                this.mutability = (Mutability)Enum.Parse(typeof(Mutability), value);
-                this.mutabilityValue = value;
+                mutability = (Mutability)Enum.Parse(typeof(Mutability), value);
+                mutabilityValue = value;
             }
         }
 
@@ -139,15 +127,12 @@ namespace Microsoft.SCIM
 
         public Returned Returned
         {
-            get
-            {
-                return this.returned;
-            }
+            get => returned;
 
             set
             {
-                this.returnedValue = Enum.GetName(typeof(Returned), value);
-                this.returned = value;
+                returnedValue = Enum.GetName(typeof(Returned), value);
+                returned = value;
             }
         }
 
@@ -157,29 +142,23 @@ namespace Microsoft.SCIM
         private string ReturnedValue
 #pragma warning restore IDE0051 // Remove unused private members
         {
-            get
-            {
-                return this.returnedValue;
-            }
+            get => returnedValue;
 
             set
             {
-                this.returned = (Returned)Enum.Parse(typeof(Returned), value);
-                this.returnedValue = value;
+                returned = (Returned)Enum.Parse(typeof(Returned), value);
+                returnedValue = value;
             }
         }
 
         public Uniqueness Uniqueness
         {
-            get
-            {
-                return this.uniqueness;
-            }
+            get => uniqueness;
 
             set
             {
-                this.uniquenessValue = Enum.GetName(typeof(Uniqueness), value);
-                this.uniqueness = value;
+                uniquenessValue = Enum.GetName(typeof(Uniqueness), value);
+                uniqueness = value;
             }
         }
 
@@ -189,15 +168,12 @@ namespace Microsoft.SCIM
         private string UniquenessValue
 #pragma warning restore IDE0051 // Remove unused private members
         {
-            get
-            {
-                return this.uniquenessValue;
-            }
+            get => uniquenessValue;
 
             set
             {
-                this.uniqueness = (Uniqueness)Enum.Parse(typeof(Uniqueness), value);
-                this.uniquenessValue = value;
+                uniqueness = (Uniqueness)Enum.Parse(typeof(Uniqueness), value);
+                uniquenessValue = value;
             }
         }
     }

@@ -16,13 +16,13 @@ namespace Microsoft.SCIM
 
         protected Core2UserBase()
         {
-            this.AddSchema(SchemaIdentifiers.Core2User);
-            this.Metadata =
+            AddSchema(SchemaIdentifiers.Core2User);
+            Metadata =
                 new Core2Metadata()
                 {
                     ResourceType = Types.User
                 };
-            this.OnInitialization();
+            OnInitialization();
         }
 
         [DataMember(Name = AttributeNames.Active)]
@@ -39,13 +39,7 @@ namespace Microsoft.SCIM
             set;
         }
 
-        public virtual IReadOnlyDictionary<string, IDictionary<string, object>> CustomExtension
-        {
-            get
-            {
-                return new ReadOnlyDictionary<string, IDictionary<string, object>>(this.customExtension);
-            }
-        }
+        public virtual IReadOnlyDictionary<string, IDictionary<string, object>> CustomExtension => new ReadOnlyDictionary<string, IDictionary<string, object>>(customExtension);
 
         [DataMember(Name = AttributeNames.DisplayName, IsRequired = false, EmitDefaultValue = false)]
         public virtual string DisplayName
@@ -148,26 +142,26 @@ namespace Microsoft.SCIM
                 && value is Dictionary<string, object> nestedObject
             )
             {
-                this.customExtension.Add(key, nestedObject);
+                customExtension.Add(key, nestedObject);
             }
         }
 
         [OnDeserializing]
         private void OnDeserializing(StreamingContext context)
         {
-            this.OnInitialization();
+            OnInitialization();
         }
 
         private void OnInitialization()
         {
-            this.customExtension = new Dictionary<string, IDictionary<string, object>>();
+            customExtension = new Dictionary<string, IDictionary<string, object>>();
         }
 
         public override Dictionary<string, object> ToJson()
         {
             Dictionary<string, object> result = base.ToJson();
 
-            foreach (KeyValuePair<string, IDictionary<string, object>> entry in this.CustomExtension)
+            foreach (KeyValuePair<string, IDictionary<string, object>> entry in CustomExtension)
             {
                 result.Add(entry.Key, entry.Value);
             }

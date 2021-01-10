@@ -17,8 +17,8 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(issuer));
             }
 
-            this.Issuer = issuer;
-            this.Header = header ?? throw new ArgumentNullException(nameof(header));
+            Issuer = issuer;
+            Header = header ?? throw new ArgumentNullException(nameof(header));
         }
 
         public JwtHeader Header

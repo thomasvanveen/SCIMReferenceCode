@@ -42,7 +42,7 @@ namespace Microsoft.SCIM
             {
                 IJsonNormalizationBehavior result =
                     LazyInitializer.EnsureInitialized<IJsonNormalizationBehavior>(
-                        ref this.jsonNormalizer,
+                        ref jsonNormalizer,
                         () =>
                             new JsonNormalizer());
                 return result;
@@ -56,8 +56,8 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(json));
             }
 
-            IReadOnlyDictionary<string, object> normalizedJson = this.Normalize(json);
-            string serialized = JsonFactory.Instance.Create(normalizedJson, this.AcceptLargeObjects);
+            IReadOnlyDictionary<string, object> normalizedJson = Normalize(json);
+            string serialized = JsonFactory.Instance.Create(normalizedJson, AcceptLargeObjects);
 
             MemoryStream stream = null;
             try
@@ -106,8 +106,8 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(json));
             }
 
-            IReadOnlyDictionary<string, object> keyedValues = JsonFactory.Instance.Create(json, this.AcceptLargeObjects);
-            TDataContract result = this.Create(keyedValues);
+            IReadOnlyDictionary<string, object> keyedValues = JsonFactory.Instance.Create(json, AcceptLargeObjects);
+            TDataContract result = Create(keyedValues);
             return result;
         }
 
@@ -118,7 +118,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(json));
             }
 
-            IReadOnlyDictionary<string, object> result = this.JsonNormalizer.Normalize(json);
+            IReadOnlyDictionary<string, object> result = JsonNormalizer.Normalize(json);
             return result;
         }
 

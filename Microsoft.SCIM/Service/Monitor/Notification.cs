@@ -17,7 +17,7 @@ namespace Microsoft.SCIM
 
         protected Notification(TPayload payload)
         {
-            this.Message = payload ?? throw new ArgumentNullException(nameof(payload));
+            Message = payload ?? throw new ArgumentNullException(nameof(payload));
         }
 
         protected Notification(TPayload payload, long identifier)
@@ -28,7 +28,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(payload));
             }
 
-            this.Identifier = identifier;
+            Identifier = identifier;
         }
 
         protected Notification(TPayload payload, string correlationIdentifier)
@@ -44,7 +44,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(correlationIdentifier));
             }
 
-            this.CorrelationIdentifier = correlationIdentifier;
+            CorrelationIdentifier = correlationIdentifier;
         }
 
         protected Notification(TPayload payload, string correlationIdentifier, long identifier)
@@ -60,7 +60,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(correlationIdentifier));
             }
 
-            this.Identifier = identifier;
+            Identifier = identifier;
         }
 
         public string CorrelationIdentifier
@@ -68,17 +68,14 @@ namespace Microsoft.SCIM
             get
             {
                 string result =
-                    string.IsNullOrWhiteSpace(this.correlationIdentifierValue) ?
-                        Notification<TPayload>.correlationIdentifierDefault : this.correlationIdentifierValue;
+                    string.IsNullOrWhiteSpace(correlationIdentifierValue) ?
+                        Notification<TPayload>.correlationIdentifierDefault : correlationIdentifierValue;
                 return result;
             }
 
-            private set
-            {
-                Notification<TPayload>.correlationIdentifierDefault =
-                    this.correlationIdentifierValue =
+            private set => Notification<TPayload>.correlationIdentifierDefault =
+                    correlationIdentifierValue =
                         value;
-            }
         }
 
         public long? Identifier
@@ -100,9 +97,9 @@ namespace Microsoft.SCIM
                     CultureInfo.InvariantCulture,
                     Notification<TPayload>.Template,
                     DateTime.UtcNow,
-                    this.CorrelationIdentifier,
-                    this.Identifier,
-                    this.Message);
+                    CorrelationIdentifier,
+                    Identifier,
+                    Message);
             return result;
 
         }

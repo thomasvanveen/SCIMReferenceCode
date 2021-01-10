@@ -12,7 +12,7 @@ namespace Microsoft.SCIM
     {
         protected EventTokenDecorator(IEventToken innerToken)
         {
-            this.InnerToken = innerToken ?? throw new ArgumentNullException(nameof(innerToken));
+            InnerToken = innerToken ?? throw new ArgumentNullException(nameof(innerToken));
         }
 
         protected EventTokenDecorator(string serialized)
@@ -24,21 +24,18 @@ namespace Microsoft.SCIM
         {
             get
             {
-                IReadOnlyCollection<string> result = this.InnerToken.Audience;
+                IReadOnlyCollection<string> result = InnerToken.Audience;
                 return result;
             }
 
-            set
-            {
-                this.InnerToken.Audience = value;
-            }
+            set => InnerToken.Audience = value;
         }
 
         public IDictionary<string, object> Events
         {
             get
             {
-                IDictionary<string, object> results = this.InnerToken.Events;
+                IDictionary<string, object> results = InnerToken.Events;
                 return results;
             }
         }
@@ -47,21 +44,18 @@ namespace Microsoft.SCIM
         {
             get
             {
-                DateTime? result = this.InnerToken.Expiration;
+                DateTime? result = InnerToken.Expiration;
                 return result;
             }
 
-            set
-            {
-                this.InnerToken.Expiration = value;
-            }
+            set => InnerToken.Expiration = value;
         }
 
         public JwtHeader Header
         {
             get
             {
-                JwtHeader result = this.InnerToken.Header;
+                JwtHeader result = InnerToken.Header;
                 return result;
             }
         }
@@ -70,7 +64,7 @@ namespace Microsoft.SCIM
         {
             get
             {
-                string result = this.InnerToken.Identifier;
+                string result = InnerToken.Identifier;
                 return result;
             }
         }
@@ -85,7 +79,7 @@ namespace Microsoft.SCIM
         {
             get
             {
-                DateTime result = this.InnerToken.IssuedAt;
+                DateTime result = InnerToken.IssuedAt;
                 return result;
             }
         }
@@ -94,7 +88,7 @@ namespace Microsoft.SCIM
         {
             get
             {
-                string result = this.InnerToken.Issuer;
+                string result = InnerToken.Issuer;
                 return result;
             }
         }
@@ -103,7 +97,7 @@ namespace Microsoft.SCIM
         {
             get
             {
-                DateTime? result = this.InnerToken.NotBefore;
+                DateTime? result = InnerToken.NotBefore;
                 return result;
             }
         }
@@ -112,28 +106,22 @@ namespace Microsoft.SCIM
         {
             get
             {
-                string result = this.InnerToken.Subject;
+                string result = InnerToken.Subject;
                 return result;
             }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
+            set => throw new NotImplementedException();
         }
 
         public string Transaction
         {
             get
             {
-                string result = this.InnerToken.Transaction;
+                string result = InnerToken.Transaction;
                 return result;
             }
 
-            set
-            {
-                this.InnerToken.Transaction = value;
-            }
+            set => InnerToken.Transaction = value;
         }
     }
 }

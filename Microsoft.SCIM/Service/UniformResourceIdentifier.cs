@@ -35,9 +35,9 @@ namespace Microsoft.SCIM
 
         private UniformResourceIdentifier(IResourceIdentifier identifier, IResourceQuery query)
         {
-            this.Identifier = identifier ?? throw new ArgumentNullException(UniformResourceIdentifier.ArgumentNameIdentifier);
-            this.Query = query ?? throw new ArgumentNullException(UniformResourceIdentifier.ArgumentNameQuery);
-            this.IsQuery = null == this.Identifier || string.IsNullOrWhiteSpace(this.Identifier.Identifier);
+            Identifier = identifier ?? throw new ArgumentNullException(UniformResourceIdentifier.ArgumentNameIdentifier);
+            Query = query ?? throw new ArgumentNullException(UniformResourceIdentifier.ArgumentNameQuery);
+            IsQuery = null == Identifier || string.IsNullOrWhiteSpace(Identifier.Identifier);
         }
 
         public IResourceIdentifier Identifier
@@ -129,8 +129,10 @@ namespace Microsoft.SCIM
                     break;
             }
 
-            IResourceIdentifier resourceIdentifier = new ResourceIdentifier();
-            resourceIdentifier.SchemaIdentifier = schemaIdentifier;
+            IResourceIdentifier resourceIdentifier = new ResourceIdentifier
+            {
+                SchemaIdentifier = schemaIdentifier
+            };
 
             string resourceIdentifierValue = expressionMatch.Groups[UniformResourceIdentifier.ExpressionGroupNameIdentifier].Value;
             if (!string.IsNullOrWhiteSpace(resourceIdentifierValue))

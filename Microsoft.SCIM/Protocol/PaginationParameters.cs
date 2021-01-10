@@ -6,42 +6,36 @@ namespace Microsoft.SCIM
 {
     public class PaginationParameters : IPaginationParameters
     {
-        int? count;
-        int? startIndex;
+        private int? count;
+        private int? startIndex;
 
         public int? Count
         {
-            get
-            {
-                return this.count;
-            }
+            get => count;
 
             set
             {
                 if (value.HasValue && value.Value < 0)
                 {
-                    this.count = 0;
+                    count = 0;
                     return;
                 }
-                this.count = value;
+                count = value;
             }
         }
 
         public int? StartIndex
         {
-            get
-            {
-                return this.startIndex;
-            }
+            get => startIndex;
 
             set
             {
                 if (value.HasValue && value.Value < 1)
                 {
-                    this.startIndex = 1;
+                    startIndex = 1;
                     return;
                 }
-                this.startIndex = value;
+                startIndex = value;
             }
         }
     }

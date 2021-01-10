@@ -18,7 +18,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(sectionName));
             }
 
-            this.SectionName = sectionName;
+            SectionName = sectionName;
         }
 
         private string SectionName
@@ -41,7 +41,7 @@ namespace Microsoft.SCIM
             TConfiguration result = null;
             try
             {
-                result = (TConfiguration)ConfigurationManager.GetSection(this.SectionName);
+                result = (TConfiguration)ConfigurationManager.GetSection(SectionName);
             }
             catch (ConfigurationErrorsException exception)
             {

@@ -22,8 +22,10 @@ namespace Microsoft.SCIM
 
         private static JwtHeader ComposeHeader()
         {
-            JwtHeader result = new JwtHeader();
-            result.Add(EventToken.HeaderKeyAlgorithm, EventToken.JwtAlgorithmNone);
+            JwtHeader result = new JwtHeader
+            {
+                { EventToken.HeaderKeyAlgorithm, EventToken.JwtAlgorithmNone }
+            };
             return result;
         }
     }

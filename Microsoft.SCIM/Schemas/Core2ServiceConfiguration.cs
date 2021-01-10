@@ -17,19 +17,19 @@ namespace Microsoft.SCIM
             bool supportsPatching,
             bool supportsSorting)
         {
-            this.AddSchema(SchemaIdentifiers.Core2ServiceConfiguration);
-            this.Metadata =
+            AddSchema(SchemaIdentifiers.Core2ServiceConfiguration);
+            Metadata =
                 new Core2Metadata()
                 {
                     ResourceType = Types.ServiceProviderConfiguration
                 };
 
-            this.BulkRequests = bulkRequestsSupport;
-            this.EntityTags = new Feature(supportsEntityTags);
-            this.Filtering = new Feature(supportsFiltering);
-            this.PasswordChange = new Feature(supportsPasswordChange);
-            this.Patching = new Feature(supportsPatching);
-            this.Sorting = new Feature(supportsSorting);
+            BulkRequests = bulkRequestsSupport;
+            EntityTags = new Feature(supportsEntityTags);
+            Filtering = new Feature(supportsFiltering);
+            PasswordChange = new Feature(supportsPasswordChange);
+            Patching = new Feature(supportsPatching);
+            Sorting = new Feature(supportsSorting);
         }
 
         [DataMember(Name = AttributeNames.Metadata)]

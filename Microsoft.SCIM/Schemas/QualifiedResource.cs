@@ -18,7 +18,7 @@ namespace Microsoft.SCIM
 
         protected QualifiedResource(string schemaIdentifier, string resourceSchemaPrefix)
         {
-            this.OnInitialized(schemaIdentifier, resourceSchemaPrefix);
+            OnInitialized(schemaIdentifier, resourceSchemaPrefix);
         }
 
         private string ResourceSchemaPrefix
@@ -29,9 +29,9 @@ namespace Microsoft.SCIM
 
         public virtual void AddResourceSchemaIdentifier(string resourceTypeName)
         {
-            if (this.TryGetResourceTypeName(out string value))
+            if (TryGetResourceTypeName(out string value))
             {
-                string typeName = this.GetType().Name;
+                string typeName = GetType().Name;
                 string errorMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
@@ -42,24 +42,24 @@ namespace Microsoft.SCIM
             string schemaIdentifier =
                 string.Format(
                     CultureInfo.InvariantCulture,
-                    this.resourceSchemaIdentifierTemplate,
+                    resourceSchemaIdentifierTemplate,
                     resourceTypeName);
-            this.AddSchema(schemaIdentifier);
+            AddSchema(schemaIdentifier);
         }
 
         public void OnDeserialized(string schemaIdentifier, string resourceSchemaPrefix)
         {
-            this.OnInitialized(schemaIdentifier, resourceSchemaPrefix);
+            OnInitialized(schemaIdentifier, resourceSchemaPrefix);
             int countResourceSchemaIdentifiers =
-                this
-                .Schemas
+
+                Schemas
                 .Where(
                     (string item) =>
-                        item.StartsWith(this.ResourceSchemaPrefix, StringComparison.Ordinal))
+                        item.StartsWith(ResourceSchemaPrefix, StringComparison.Ordinal))
                 .Count();
             if (countResourceSchemaIdentifiers > 1)
             {
-                string typeName = this.GetType().Name;
+                string typeName = GetType().Name;
                 string errorMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
@@ -81,9 +81,9 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(resourceSchemaPrefix));
             }
 
-            this.ResourceSchemaPrefix = resourceSchemaPrefix;
-            this.resourceSchemaIdentifierTemplate =
-                this.ResourceSchemaPrefix + QualifiedResource.ResourceSchemaIdentifierTemplateSuffix;
+            ResourceSchemaPrefix = resourceSchemaPrefix;
+            resourceSchemaIdentifierTemplate =
+                ResourceSchemaPrefix + QualifiedResource.ResourceSchemaIdentifierTemplateSuffix;
         }
 
         public virtual bool TryGetResourceTypeName(out string resourceTypeName)
@@ -91,16 +91,16 @@ namespace Microsoft.SCIM
             resourceTypeName = null;
 
             string resourceSchemaIdentifier =
-                this
-                .Schemas
+
+                Schemas
                 .SingleOrDefault(
                     (string item) =>
-                        item.StartsWith(this.ResourceSchemaPrefix, StringComparison.Ordinal));
+                        item.StartsWith(ResourceSchemaPrefix, StringComparison.Ordinal));
             if (string.IsNullOrWhiteSpace(resourceSchemaIdentifier))
             {
                 return false;
             }
-            string buffer = resourceSchemaIdentifier.Substring(this.ResourceSchemaPrefix.Length);
+            string buffer = resourceSchemaIdentifier.Substring(ResourceSchemaPrefix.Length);
             if (buffer.Length <= 0)
             {
                 return false;

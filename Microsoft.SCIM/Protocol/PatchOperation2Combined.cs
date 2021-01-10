@@ -5,10 +5,10 @@
 namespace Microsoft.SCIM
 {
     using System;
-    using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Runtime.Serialization;
+
     using Newtonsoft.Json;
 
     [DataContract]
@@ -33,44 +33,41 @@ namespace Microsoft.SCIM
         {
             get
             {
-                if (this.values == null)
+                if (values == null)
                 {
                     return null;
                 }
 
-                string result = JsonConvert.SerializeObject(this.values);
+                string result = JsonConvert.SerializeObject(values);
                 return result;
             }
 
-            set
-            {
-                this.values = value;
-            }
+            set => values = value;
         }
 
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            if (this.Value == null)
+            if (Value == null)
             {
-                if 
+                if
                 (
                     this?.Path?.AttributePath != null &&
-                    this.Path.AttributePath.Contains(AttributeNames.Members, StringComparison.OrdinalIgnoreCase) &&
-                    this.Name == SCIM.OperationName.Remove &&
-                    this.Path?.SubAttributes?.Count == 1
+                    Path.AttributePath.Contains(AttributeNames.Members, StringComparison.OrdinalIgnoreCase) &&
+                    Name == SCIM.OperationName.Remove &&
+                    Path?.SubAttributes?.Count == 1
                 )
                 {
-                    this.Value = this.Path.SubAttributes.First().ComparisonValue;
+                    Value = Path.SubAttributes.First().ComparisonValue;
                     IPath path = SCIM.Path.Create(AttributeNames.Members);
-                    this.Path = path;
+                    Path = path;
                 }
             }
         }
 
         public override string ToString()
         {
-            string allValues = string.Join(Environment.NewLine, this.Value);
+            string allValues = string.Join(Environment.NewLine, Value);
             string operation = base.ToString();
             string result =
                 string.Format(

@@ -20,17 +20,11 @@ namespace Microsoft.SCIM
 
         protected ServiceConfigurationBase()
         {
-            this.OnInitialization();
-            this.OnInitialized();
+            OnInitialization();
+            OnInitialized();
         }
 
-        public IReadOnlyCollection<AuthenticationScheme> AuthenticationSchemes
-        {
-            get
-            {
-                return this.authenticationSchemesWrapper;
-            }
-        }
+        public IReadOnlyCollection<AuthenticationScheme> AuthenticationSchemes => authenticationSchemesWrapper;
 
         [DataMember(Name = AttributeNames.Bulk)]
         public BulkRequestsFeature BulkRequests
@@ -97,8 +91,8 @@ namespace Microsoft.SCIM
             Func<bool> containsFunction =
                 new Func<bool>(
                         () =>
-                            this
-                            .authenticationSchemes
+
+                            authenticationSchemes
                             .Any(
                                 (AuthenticationScheme item) =>
                                     string.Equals(item.Name, authenticationScheme.Name, StringComparison.OrdinalIgnoreCase)));
@@ -106,11 +100,11 @@ namespace Microsoft.SCIM
 
             if (!containsFunction())
             {
-                lock (this.thisLock)
+                lock (thisLock)
                 {
                     if (!containsFunction())
                     {
-                        this.authenticationSchemes.Add(authenticationScheme);
+                        authenticationSchemes.Add(authenticationScheme);
                     }
                 }
             }
@@ -119,24 +113,24 @@ namespace Microsoft.SCIM
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            this.OnInitialized();
+            OnInitialized();
         }
 
         [OnDeserializing]
         private void OnDeserializing(StreamingContext context)
         {
-            this.OnInitialization();
+            OnInitialization();
         }
 
         private void OnInitialization()
         {
-            this.thisLock = new object();
-            this.authenticationSchemes = new List<AuthenticationScheme>();
+            thisLock = new object();
+            authenticationSchemes = new List<AuthenticationScheme>();
         }
 
         private void OnInitialized()
         {
-            this.authenticationSchemesWrapper = this.authenticationSchemes.AsReadOnly();
+            authenticationSchemesWrapper = authenticationSchemes.AsReadOnly();
         }
     }
 }

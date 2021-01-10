@@ -15,13 +15,7 @@ namespace Microsoft.SCIM
         {
         }
 
-        public override string SchemaIdentifier
-        {
-            get
-            {
-                return SchemaIdentifiers.None;
-            }
-        }
+        public override string SchemaIdentifier => SchemaIdentifiers.None;
 
         public override Task<Resource> Create(
             HttpRequestMessage request,

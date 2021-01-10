@@ -16,22 +16,16 @@ namespace Microsoft.SCIM
 
         protected Core2GroupBase()
         {
-            this.AddSchema(SchemaIdentifiers.Core2Group);
-            this.Metadata =
+            AddSchema(SchemaIdentifiers.Core2Group);
+            Metadata =
                 new Core2Metadata()
                 {
                     ResourceType = Types.Group
                 };
-            this.OnInitialization();
+            OnInitialization();
         }
 
-        public virtual IReadOnlyDictionary<string, IDictionary<string, object>> CustomExtension
-        {
-            get
-            {
-                return new ReadOnlyDictionary<string, IDictionary<string, object>>(this.customExtension);
-            }
-        }
+        public virtual IReadOnlyDictionary<string, IDictionary<string, object>> CustomExtension => new ReadOnlyDictionary<string, IDictionary<string, object>>(customExtension);
 
         [DataMember(Name = AttributeNames.Metadata)]
         public Core2Metadata Metadata
@@ -49,26 +43,26 @@ namespace Microsoft.SCIM
                 && value is Dictionary<string, object> nestedObject
             )
             {
-                this.customExtension.Add(key, nestedObject);
+                customExtension.Add(key, nestedObject);
             }
         }
 
         [OnDeserializing]
         private void OnDeserializing(StreamingContext context)
         {
-            this.OnInitialization();
+            OnInitialization();
         }
 
         private void OnInitialization()
         {
-            this.customExtension = new Dictionary<string, IDictionary<string, object>>();
+            customExtension = new Dictionary<string, IDictionary<string, object>>();
         }
 
         public override Dictionary<string, object> ToJson()
         {
             Dictionary<string, object> result = base.ToJson();
 
-            foreach (KeyValuePair<string, IDictionary<string, object>> entry in this.CustomExtension)
+            foreach (KeyValuePair<string, IDictionary<string, object>> entry in CustomExtension)
             {
                 result.Add(entry.Key, entry.Value);
             }

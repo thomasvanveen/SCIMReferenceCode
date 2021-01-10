@@ -2,12 +2,6 @@
 
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.IdentityModel.Tokens.Jwt;
-    using System.Text;
-    using System.Web.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.IdentityModel.Tokens;
 
     //// Controller for generating a bearer token for authorization during testing.
     //// This is not meant to replace proper Oauth for authentication purposes.

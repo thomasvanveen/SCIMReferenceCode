@@ -47,7 +47,7 @@ namespace Microsoft.SCIM
 
         public string Compose()
         {
-            string result = this.ToString();
+            string result = ToString();
             return result;
         }
 
@@ -67,28 +67,28 @@ namespace Microsoft.SCIM
         {
             NameValueCollection parameters = HttpUtility.ParseQueryString(string.Empty);
 
-            if (true == this.RequestedAttributePaths?.Any())
+            if (true == RequestedAttributePaths?.Any())
             {
-                IReadOnlyCollection<string> encodedPaths = this.RequestedAttributePaths.Encode();
+                IReadOnlyCollection<string> encodedPaths = RequestedAttributePaths.Encode();
                 string requestedAttributes =
                     string.Join(Query.AttributeNameSeparator, encodedPaths);
                 parameters.Add(QueryKeys.Attributes, requestedAttributes);
             }
 
-            if (true == this.ExcludedAttributePaths?.Any())
+            if (true == ExcludedAttributePaths?.Any())
             {
-                IReadOnlyCollection<string> encodedPaths = this.ExcludedAttributePaths.Encode();
+                IReadOnlyCollection<string> encodedPaths = ExcludedAttributePaths.Encode();
                 string excludedAttributes =
                     string.Join(Query.AttributeNameSeparator, encodedPaths);
                 parameters.Add(QueryKeys.ExcludedAttributes, excludedAttributes);
             }
 
             Dictionary<string, string> placeHolders;
-            if (true == this.AlternateFilters?.Any())
+            if (true == AlternateFilters?.Any())
             {
-                placeHolders = new Dictionary<string, string>(this.AlternateFilters.Count);
+                placeHolders = new Dictionary<string, string>(AlternateFilters.Count);
                 IReadOnlyCollection<IFilter> clones =
-                    this.AlternateFilters
+                    AlternateFilters
                     .Select(
                         (IFilter item) =>
                             Query.Clone(item, placeHolders))
@@ -105,24 +105,24 @@ namespace Microsoft.SCIM
                 placeHolders = new Dictionary<string, string>();
             }
 
-            if (this.PaginationParameters != null)
+            if (PaginationParameters != null)
             {
-                if (this.PaginationParameters.StartIndex.HasValue)
+                if (PaginationParameters.StartIndex.HasValue)
                 {
                     string startIndex =
-                        this
-                        .PaginationParameters
+
+                        PaginationParameters
                         .StartIndex
                         .Value
                         .ToString(CultureInfo.InvariantCulture);
                     parameters.Add(QueryKeys.StartIndex, startIndex);
                 }
 
-                if (this.PaginationParameters.Count.HasValue)
+                if (PaginationParameters.Count.HasValue)
                 {
                     string count =
-                        this
-                        .PaginationParameters
+
+                        PaginationParameters
                         .Count
                         .Value
                         .ToString(CultureInfo.InvariantCulture);

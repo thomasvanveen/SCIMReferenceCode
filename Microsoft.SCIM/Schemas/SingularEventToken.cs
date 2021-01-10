@@ -14,14 +14,14 @@ namespace Microsoft.SCIM
         protected SingularEventToken(IEventToken innerToken)
             : base(innerToken)
         {
-            if (this.InnerToken.Events.Count != 1)
+            if (InnerToken.Events.Count != 1)
             {
                 throw new ArgumentException(SystemForCrossDomainIdentityManagementSchemasResources.ExceptionSingleEventExpected);
             }
 
-            KeyValuePair<string, object> singleEvent = this.InnerToken.Events.Single();
-            this.SchemaIdentifier = singleEvent.Key;
-            this.Event = new ReadOnlyDictionary<string, object>((IDictionary<string, object>)singleEvent.Value);
+            KeyValuePair<string, object> singleEvent = InnerToken.Events.Single();
+            SchemaIdentifier = singleEvent.Key;
+            Event = new ReadOnlyDictionary<string, object>((IDictionary<string, object>)singleEvent.Value);
         }
 
         protected SingularEventToken(string serialized)

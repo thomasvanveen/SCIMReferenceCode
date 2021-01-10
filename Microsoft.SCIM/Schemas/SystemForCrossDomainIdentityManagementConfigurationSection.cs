@@ -39,19 +39,13 @@ namespace Microsoft.SCIM
         {
         }
 
-        public static ISystemForCrossDomainIdentityManagementConfiguration Instance
-        {
-            get
-            {
-                return SystemForCrossDomainIdentityManagementConfigurationSection.Singleton.Value;
-            }
-        }
+        public static ISystemForCrossDomainIdentityManagementConfiguration Instance => SystemForCrossDomainIdentityManagementConfigurationSection.Singleton.Value;
 
         public bool AcceptLargeObjects
         {
             get
             {
-                if (!bool.TryParse(this.AcceptLargeObjectsValue, out bool result))
+                if (!bool.TryParse(AcceptLargeObjectsValue, out bool result))
                 {
                     result = SystemForCrossDomainIdentityManagementConfigurationSection.DefaultAcceptLargeObjects;
                 }
@@ -64,13 +58,7 @@ namespace Microsoft.SCIM
             SystemForCrossDomainIdentityManagementConfigurationSection.PropertyNameAcceptLargeObjects,
             DefaultValue = SystemForCrossDomainIdentityManagementConfigurationSection.DefaultValueAcceptLargeObjects,
             IsRequired = false)]
-        private string AcceptLargeObjectsValue
-        {
-            get
-            {
-                return (string)base[SystemForCrossDomainIdentityManagementConfigurationSection.PropertyNameAcceptLargeObjects];
-            }
-        }
+        private string AcceptLargeObjectsValue => (string)base[SystemForCrossDomainIdentityManagementConfigurationSection.PropertyNameAcceptLargeObjects];
 
         private static ISystemForCrossDomainIdentityManagementConfiguration Initialize()
         {

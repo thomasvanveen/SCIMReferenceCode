@@ -49,7 +49,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(Path.ArgumentNamePathExpression);
             }
 
-            this.Expression = pathExpression;
+            Expression = pathExpression;
         }
 
         public string AttributePath
@@ -195,7 +195,7 @@ namespace Microsoft.SCIM
 
         public override string ToString()
         {
-            return this.Expression;
+            return Expression;
         }
     }
 }

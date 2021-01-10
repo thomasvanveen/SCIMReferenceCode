@@ -9,12 +9,6 @@ namespace Microsoft.SCIM
         {
         }
 
-        public override string SchemaIdentifier
-        {
-            get
-            {
-                return SchemaIdentifiers.Core2Group;
-            }
-        }
+        public override string SchemaIdentifier => SchemaIdentifiers.Core2Group;
     }
 }

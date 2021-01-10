@@ -24,20 +24,20 @@ namespace Microsoft.SCIM
 
         public JsonSerializer(object dataContract)
         {
-            this.dataContractValue = dataContract ??
+            dataContractValue = dataContract ??
                 throw new ArgumentNullException(nameof(dataContract));
         }
 
         public string Serialize()
         {
-            IDictionary<string, object> json = this.ToJson();
+            IDictionary<string, object> json = ToJson();
             string result = JsonFactory.Instance.Create(json, true);
             return result;
         }
 
         public Dictionary<string, object> ToJson()
         {
-            Type type = this.dataContractValue.GetType();
+            Type type = dataContractValue.GetType();
             DataContractJsonSerializer serializer =
                 new DataContractJsonSerializer(type, JsonSerializer.SerializerSettings.Value);
 
@@ -46,7 +46,7 @@ namespace Microsoft.SCIM
             try
             {
                 stream = new MemoryStream();
-                serializer.WriteObject(stream, this.dataContractValue);
+                serializer.WriteObject(stream, dataContractValue);
                 stream.Position = 0;
                 StreamReader streamReader = null;
                 try

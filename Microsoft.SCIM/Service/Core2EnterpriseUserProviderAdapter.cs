@@ -9,12 +9,6 @@ namespace Microsoft.SCIM
         {
         }
 
-        public override string SchemaIdentifier
-        {
-            get
-            {
-                return SchemaIdentifiers.Core2EnterpriseUser;
-            }
-        }
+        public override string SchemaIdentifier => SchemaIdentifiers.Core2EnterpriseUser;
     }
 }

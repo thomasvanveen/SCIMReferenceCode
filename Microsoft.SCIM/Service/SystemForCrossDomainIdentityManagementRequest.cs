@@ -25,11 +25,11 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(extensions));
             }
 
-            this.BaseResourceIdentifier = request.GetBaseResourceIdentifier();
-            this.Request = request;
-            this.Payload = payload ?? throw new ArgumentNullException(nameof(payload));
-            this.CorrelationIdentifier = correlationIdentifier;
-            this.Extensions = extensions;
+            BaseResourceIdentifier = request.GetBaseResourceIdentifier();
+            Request = request;
+            Payload = payload ?? throw new ArgumentNullException(nameof(payload));
+            CorrelationIdentifier = correlationIdentifier;
+            Extensions = extensions;
         }
 
         public Uri BaseResourceIdentifier

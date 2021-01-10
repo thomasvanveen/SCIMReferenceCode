@@ -37,11 +37,11 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(Extension.ArgumentNamePath);
             }
 
-            this.SchemaIdentifier = schemaIdentifier;
-            this.TypeName = typeName;
-            this.Path = path;
-            this.Controller = controller ?? throw new ArgumentNullException(Extension.ArgumentNameController);
-            this.JsonDeserializingFactory = jsonDeserializingFactory ?? throw new ArgumentNullException(Extension.ArgumentNameJsonDeserializingFactory);
+            SchemaIdentifier = schemaIdentifier;
+            TypeName = typeName;
+            Path = path;
+            Controller = controller ?? throw new ArgumentNullException(Extension.ArgumentNameController);
+            JsonDeserializingFactory = jsonDeserializingFactory ?? throw new ArgumentNullException(Extension.ArgumentNameJsonDeserializingFactory);
         }
 
         public Type Controller
@@ -83,7 +83,7 @@ namespace Microsoft.SCIM
 
             bool result =
                 request.RequestUri?.AbsolutePath?.EndsWith(
-                       this.Path,
+                       Path,
                        StringComparison.OrdinalIgnoreCase) == true;
 
             return result;

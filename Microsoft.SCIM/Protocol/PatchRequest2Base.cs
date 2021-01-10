@@ -18,24 +18,18 @@ namespace Microsoft.SCIM
 
         protected PatchRequest2Base()
         {
-            this.OnInitialization();
-            this.OnInitialized();
-            this.AddSchema(ProtocolSchemaIdentifiers.Version2PatchOperation);
+            OnInitialization();
+            OnInitialized();
+            AddSchema(ProtocolSchemaIdentifiers.Version2PatchOperation);
         }
 
         protected PatchRequest2Base(IReadOnlyCollection<TOperation> operations)
             : this()
         {
-            this.operationsValue.AddRange(operations);
+            operationsValue.AddRange(operations);
         }
 
-        public IReadOnlyCollection<TOperation> Operations
-        {
-            get
-            {
-                return this.operationsWrapper;
-            }
-        }
+        public IReadOnlyCollection<TOperation> Operations => operationsWrapper;
 
         public void AddOperation(TOperation operation)
         {
@@ -44,29 +38,29 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(operation));
             }
 
-            this.operationsValue.Add(operation);
+            operationsValue.Add(operation);
         }
 
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            this.OnInitialized();
+            OnInitialized();
         }
 
         [OnDeserializing]
         private void OnDeserializing(StreamingContext context)
         {
-            this.OnInitialization();
+            OnInitialization();
         }
 
         private void OnInitialization()
         {
-            this.operationsValue = new List<TOperation>();
+            operationsValue = new List<TOperation>();
         }
 
         private void OnInitialized()
         {
-            this.operationsWrapper = this.operationsValue.AsReadOnly();
+            operationsWrapper = operationsValue.AsReadOnly();
         }
     }
 }

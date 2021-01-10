@@ -4,6 +4,7 @@ namespace Microsoft.SCIM.WebHostSample.Provider
 {
     using System;
     using System.Collections.Generic;
+
     using Microsoft.SCIM;
 
     public class InMemoryStorage
@@ -13,8 +14,8 @@ namespace Microsoft.SCIM.WebHostSample.Provider
 
         private InMemoryStorage()
         {
-            this.Groups = new Dictionary<string, Core2Group>();
-            this.Users = new Dictionary<string, Core2EnterpriseUser>();
+            Groups = new Dictionary<string, Core2Group>();
+            Users = new Dictionary<string, Core2EnterpriseUser>();
         }
 
         private static readonly Lazy<InMemoryStorage> InstanceValue =
@@ -22,12 +23,6 @@ namespace Microsoft.SCIM.WebHostSample.Provider
                                         () =>
                                             new InMemoryStorage());
 
-        public static InMemoryStorage Instance
-        {
-            get
-            {
-                return InMemoryStorage.InstanceValue.Value;
-            }
-        }
+        public static InMemoryStorage Instance => InMemoryStorage.InstanceValue.Value;
     }
 }

@@ -31,15 +31,12 @@ namespace Microsoft.SCIM
             {
                 ISchematizedJsonDeserializingFactory<PatchRequest2> result =
                     LazyInitializer.EnsureInitialized<ISchematizedJsonDeserializingFactory<PatchRequest2>>(
-                        ref this.patchSerializer,
+                        ref patchSerializer,
                         SchematizedJsonDeserializingFactory.InitializePatchSerializer);
                 return result;
             }
 
-            set
-            {
-                this.patchSerializer = value;
-            }
+            set => patchSerializer = value;
         }
 
         public override IResourceJsonDeserializingFactory<Core2UserBase> UserDeserializationBehavior
@@ -62,9 +59,9 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(json));
             }
 
-            if (this.GroupDeserializationBehavior != null)
+            if (GroupDeserializationBehavior != null)
             {
-                Resource group = this.GroupDeserializationBehavior.Create(json);
+                Resource group = GroupDeserializationBehavior.Create(json);
                 return group;
             }
 
@@ -84,7 +81,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(json));
             }
 
-            if (this.TryCreatePatchRequest2Legacy(json, out Schematized result))
+            if (TryCreatePatchRequest2Legacy(json, out Schematized result))
             {
                 return result;
             }
@@ -112,9 +109,9 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(json));
             }
 
-            if (this.UserDeserializationBehavior != null)
+            if (UserDeserializationBehavior != null)
             {
-                Resource result = this.UserDeserializationBehavior.Create(json);
+                Resource result = UserDeserializationBehavior.Create(json);
                 return result;
             }
 
@@ -150,7 +147,7 @@ namespace Microsoft.SCIM
                 return null;
             }
 
-            IReadOnlyDictionary<string, object> normalizedJson = this.Normalize(json);
+            IReadOnlyDictionary<string, object> normalizedJson = Normalize(json);
             if (!normalizedJson.TryGetValue(AttributeNames.Schemas, out object value))
             {
                 throw new ArgumentException(SystemForCrossDomainIdentityManagementProtocolResources.ExceptionUnidentifiableSchema);
@@ -171,17 +168,17 @@ namespace Microsoft.SCIM
 #pragma warning disable IDE0018 // Inline variable declaration
             Schematized result;
 #pragma warning restore IDE0018 // Inline variable declaration
-            if (this.TryCreateResourceFrom(normalizedJson, schemaIdentifiers, out result))
+            if (TryCreateResourceFrom(normalizedJson, schemaIdentifiers, out result))
             {
                 return result;
             }
 
-            if (this.TryCreateProtocolObjectFrom(normalizedJson, schemaIdentifiers, out result))
+            if (TryCreateProtocolObjectFrom(normalizedJson, schemaIdentifiers, out result))
             {
                 return result;
             }
 
-            if (this.TryCreateExtensionObjectFrom(normalizedJson, schemaIdentifiers, out result))
+            if (TryCreateExtensionObjectFrom(normalizedJson, schemaIdentifiers, out result))
             {
                 return result;
             }
@@ -213,12 +210,12 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(schemaIdentifiers));
             }
 
-            if (null == this.Extensions)
+            if (null == Extensions)
             {
                 return false;
             }
 
-            if (this.Extensions.TryMatch(schemaIdentifiers, out IExtension matchingExtension))
+            if (Extensions.TryMatch(schemaIdentifiers, out IExtension matchingExtension))
             {
                 schematized = matchingExtension.JsonDeserializingFactory(json);
                 return true;
@@ -272,7 +269,7 @@ namespace Microsoft.SCIM
             try
             {
                 ISchematizedJsonDeserializingFactory<PatchRequest2> deserializer =
-                    this.PatchRequest2DeserializationBehavior ?? new PatchRequest2JsonDeserializingFactory();
+                    PatchRequest2DeserializationBehavior ?? new PatchRequest2JsonDeserializingFactory();
                 schematized = deserializer.Create(json);
             }
             catch (OutOfMemoryException)
@@ -333,7 +330,7 @@ namespace Microsoft.SCIM
                             StringComparison.OrdinalIgnoreCase)) != null
             )
             {
-                schematized = this.CreatePatchRequest(json);
+                schematized = CreatePatchRequest(json);
                 return true;
             }
 
@@ -381,7 +378,7 @@ namespace Microsoft.SCIM
                             StringComparison.OrdinalIgnoreCase)) != null
             )
             {
-                schematized = this.CreateUser(schemaIdentifiers, json);
+                schematized = CreateUser(schemaIdentifiers, json);
                 return true;
             }
 
@@ -395,7 +392,7 @@ namespace Microsoft.SCIM
                             StringComparison.OrdinalIgnoreCase)) != null
             )
             {
-                schematized = this.CreateGroup(schemaIdentifiers, json);
+                schematized = CreateGroup(schemaIdentifiers, json);
                 return true;
             }
 

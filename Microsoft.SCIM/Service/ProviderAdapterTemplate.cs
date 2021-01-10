@@ -11,7 +11,7 @@ namespace Microsoft.SCIM
     {
         protected ProviderAdapterTemplate(IProvider provider)
         {
-            this.Provider = provider ?? throw new ArgumentNullException(nameof(provider));
+            Provider = provider ?? throw new ArgumentNullException(nameof(provider));
         }
 
         public IProvider Provider
@@ -39,9 +39,9 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(correlationIdentifier));
             }
 
-            IReadOnlyCollection<IExtension> extensions = this.ReadExtensions();
+            IReadOnlyCollection<IExtension> extensions = ReadExtensions();
             IRequest<Resource> creationRequest = new CreationRequest(request, resource, correlationIdentifier, extensions);
-            Resource result = await this.Provider.CreateAsync(creationRequest).ConfigureAwait(false);
+            Resource result = await Provider.CreateAsync(creationRequest).ConfigureAwait(false);
             return result;
         }
 
@@ -56,7 +56,7 @@ namespace Microsoft.SCIM
                 new ResourceIdentifier()
                 {
                     Identifier = identifier,
-                    SchemaIdentifier = this.SchemaIdentifier
+                    SchemaIdentifier = SchemaIdentifier
                 };
             return result;
         }
@@ -78,22 +78,22 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(correlationIdentifier));
             }
 
-            IReadOnlyCollection<IExtension> extensions = this.ReadExtensions();
-            IResourceIdentifier resourceIdentifier = this.CreateResourceIdentifier(identifier);
+            IReadOnlyCollection<IExtension> extensions = ReadExtensions();
+            IResourceIdentifier resourceIdentifier = CreateResourceIdentifier(identifier);
             IRequest<IResourceIdentifier> deletionRequest =
                 new DeletionRequest(request, resourceIdentifier, correlationIdentifier, extensions);
-            await this.Provider.DeleteAsync(deletionRequest).ConfigureAwait(false);
+            await Provider.DeleteAsync(deletionRequest).ConfigureAwait(false);
         }
 
         public virtual string GetPath(HttpRequestMessage request)
         {
-            IReadOnlyCollection<IExtension> extensions = this.ReadExtensions();
-            if (extensions != null && extensions.TryGetPath(this.SchemaIdentifier, out string result))
+            IReadOnlyCollection<IExtension> extensions = ReadExtensions();
+            if (extensions != null && extensions.TryGetPath(SchemaIdentifier, out string result))
             {
                 return result;
             }
 
-            result = new SchemaIdentifier(this.SchemaIdentifier).FindPath();
+            result = new SchemaIdentifier(SchemaIdentifier).FindPath();
             return result;
         }
 
@@ -125,14 +125,16 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(correlationIdentifier));
             }
 
-            string path = this.GetPath(request);
+            string path = GetPath(request);
             IQueryParameters queryParameters =
-                new QueryParameters(this.SchemaIdentifier, path, filters, requestedAttributePaths, excludedAttributePaths);
-            queryParameters.PaginationParameters = paginationParameters;
-            IReadOnlyCollection<IExtension> extensions = this.ReadExtensions();
+                new QueryParameters(SchemaIdentifier, path, filters, requestedAttributePaths, excludedAttributePaths)
+                {
+                    PaginationParameters = paginationParameters
+                };
+            IReadOnlyCollection<IExtension> extensions = ReadExtensions();
             IRequest<IQueryParameters> queryRequest =
                 new QueryRequest(request, queryParameters, correlationIdentifier, extensions);
-            QueryResponseBase result = await this.Provider.PaginateQueryAsync(queryRequest).ConfigureAwait(false);
+            QueryResponseBase result = await Provider.PaginateQueryAsync(queryRequest).ConfigureAwait(false);
 
             return result;
         }
@@ -142,7 +144,7 @@ namespace Microsoft.SCIM
             IReadOnlyCollection<IExtension> result;
             try
             {
-                result = this.Provider.Extensions;
+                result = Provider.Extensions;
             }
             catch (NotImplementedException)
             {
@@ -171,9 +173,9 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(correlationIdentifier));
             }
 
-            IReadOnlyCollection<IExtension> extensions = this.ReadExtensions();
+            IReadOnlyCollection<IExtension> extensions = ReadExtensions();
             IRequest<Resource> replaceRequest = new ReplaceRequest(request, resource, correlationIdentifier, extensions);
-            Resource result = await this.Provider.ReplaceAsync(replaceRequest).ConfigureAwait(false);
+            Resource result = await Provider.ReplaceAsync(replaceRequest).ConfigureAwait(false);
             return result;
         }
 
@@ -204,18 +206,18 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(correlationIdentifier));
             }
 
-            string path = this.GetPath(request);
+            string path = GetPath(request);
             IResourceRetrievalParameters retrievalParameters =
                 new ResourceRetrievalParameters(
-                        this.SchemaIdentifier,
+                        SchemaIdentifier,
                         path,
                         identifier,
                         requestedAttributePaths,
                         excludedAttributePaths);
-            IReadOnlyCollection<IExtension> extensions = this.ReadExtensions();
+            IReadOnlyCollection<IExtension> extensions = ReadExtensions();
             IRequest<IResourceRetrievalParameters> retrievalRequest =
                 new RetrievalRequest(request, retrievalParameters, correlationIdentifier, extensions);
-            Resource result = await this.Provider.RetrieveAsync(retrievalRequest).ConfigureAwait(false);
+            Resource result = await Provider.RetrieveAsync(retrievalRequest).ConfigureAwait(false);
             return result;
         }
 
@@ -235,16 +237,16 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(correlationIdentifier));
             }
 
-            IResourceIdentifier resourceIdentifier = this.CreateResourceIdentifier(identifier);
+            IResourceIdentifier resourceIdentifier = CreateResourceIdentifier(identifier);
             IPatch patch =
                 new Patch
                 {
                     ResourceIdentifier = resourceIdentifier,
                     PatchRequest = patchRequest
                 };
-            IReadOnlyCollection<IExtension> extensions = this.ReadExtensions();
+            IReadOnlyCollection<IExtension> extensions = ReadExtensions();
             IRequest<IPatch> updateRequest = new UpdateRequest(request, patch, correlationIdentifier, extensions);
-            await this.Provider.UpdateAsync(updateRequest).ConfigureAwait(false);
+            await Provider.UpdateAsync(updateRequest).ConfigureAwait(false);
         }
     }
 }

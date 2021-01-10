@@ -21,7 +21,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(events));
             }
 
-            IEventToken result = new EventToken(this.Issuer, this.Header, events);
+            IEventToken result = new EventToken(Issuer, Header, events);
             return result;
         }
     }

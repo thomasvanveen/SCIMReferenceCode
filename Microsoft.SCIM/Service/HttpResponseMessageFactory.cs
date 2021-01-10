@@ -14,12 +14,14 @@ namespace Microsoft.SCIM
             HttpContent messageContent = null;
             try
             {
-                messageContent = this.ProvideContent(content);
+                messageContent = ProvideContent(content);
                 HttpResponseMessage result = null;
                 try
                 {
-                    result = new HttpResponseMessage(statusCode);
-                    result.Content = messageContent;
+                    result = new HttpResponseMessage(statusCode)
+                    {
+                        Content = messageContent
+                    };
                     messageContent = null;
                     return result;
                 }

@@ -32,8 +32,8 @@ namespace Microsoft.SCIM
                 string.Format(
                     CultureInfo.InvariantCulture,
                     OperationValue.Template,
-                    this.Value,
-                    this.Reference)
+                    Value,
+                    Reference)
                 .Trim();
             return result;
         }

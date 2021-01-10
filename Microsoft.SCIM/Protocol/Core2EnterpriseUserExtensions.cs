@@ -7,6 +7,7 @@ namespace Microsoft.SCIM
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using Newtonsoft.Json;
 
     public static class Core2EnterpriseUserExtensions
@@ -707,8 +708,10 @@ namespace Microsoft.SCIM
             }
             else
             {
-                extension.Manager = new Manager();
-                extension.Manager.Value = value.Value;
+                extension.Manager = new Manager
+                {
+                    Value = value.Value
+                };
             }
         }
 

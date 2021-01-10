@@ -6,6 +6,7 @@ namespace Microsoft.SCIM.WebHostSample
 {
     using System.Text;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -26,18 +27,18 @@ namespace Microsoft.SCIM.WebHostSample
 
         public Startup(IWebHostEnvironment env, IConfiguration configuration)
         {
-            this.environment = env;
+            environment = env;
             this.configuration = configuration;
 
-            this.MonitoringBehavior = new ConsoleMonitor();
-            this.ProviderBehavior = new InMemoryProvider();
+            MonitoringBehavior = new ConsoleMonitor();
+            ProviderBehavior = new InMemoryProvider();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            if (this.environment.IsDevelopment())
+            if (environment.IsDevelopment())
             {
                 // Development environment code
                 // Validation for bearer token for authorization used during testing.
@@ -58,9 +59,9 @@ namespace Microsoft.SCIM.WebHostSample
                             ValidateAudience = false,
                             ValidateLifetime = false,
                             ValidateIssuerSigningKey = false,
-                            ValidIssuer = this.configuration["Token:TokenIssuer"],
-                            ValidAudience = this.configuration["Token:TokenAudience"],
-                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.configuration["Token:IssuerSigningKey"]))
+                            ValidIssuer = configuration["Token:TokenIssuer"],
+                            ValidAudience = configuration["Token:TokenAudience"],
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Token:IssuerSigningKey"]))
                         };
                 });
             }
@@ -79,8 +80,8 @@ namespace Microsoft.SCIM.WebHostSample
                 })
                 .AddJwtBearer(options =>
                 {
-                    options.Authority = this.configuration["Token:TokenIssuer"];
-                    options.Audience = this.configuration["Token:TokenAudience"];
+                    options.Authority = configuration["Token:TokenIssuer"];
+                    options.Audience = configuration["Token:TokenAudience"];
                     options.Events = new JwtBearerEvents
                     {
                         OnTokenValidated = context =>
@@ -95,14 +96,14 @@ namespace Microsoft.SCIM.WebHostSample
             }
 
             services.AddControllers().AddNewtonsoftJson();
-            services.AddSingleton(typeof(IProvider), this.ProviderBehavior);
-            services.AddSingleton(typeof(IMonitor), this.MonitoringBehavior);
+            services.AddSingleton(typeof(IProvider), ProviderBehavior);
+            services.AddSingleton(typeof(IMonitor), MonitoringBehavior);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
-            if (this.environment.IsDevelopment())
+            if (environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -128,7 +129,7 @@ namespace Microsoft.SCIM.WebHostSample
 
             arg.Response.ContentLength = authenticationExceptionMessage.Length;
             arg.Response.Body.WriteAsync(
-                Encoding.UTF8.GetBytes(authenticationExceptionMessage), 
+                Encoding.UTF8.GetBytes(authenticationExceptionMessage),
                 0,
                 authenticationExceptionMessage.Length);
 

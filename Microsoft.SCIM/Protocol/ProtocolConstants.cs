@@ -5,6 +5,7 @@
 namespace Microsoft.SCIM
 {
     using System;
+
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
 
@@ -15,13 +16,15 @@ namespace Microsoft.SCIM
         public const string PathUsers = "Users";
         public const string PathWebBatchInterface = SchemaConstants.PathInterface + "/batch";
 
-        public readonly static Lazy<JsonSerializerSettings> JsonSettings =
+        public static readonly Lazy<JsonSerializerSettings> JsonSettings =
             new Lazy<JsonSerializerSettings>(() => ProtocolConstants.InitializeSettings());
 
         private static JsonSerializerSettings InitializeSettings()
         {
-            JsonSerializerSettings result = new JsonSerializerSettings();
-            result.Error = delegate (object sender, ErrorEventArgs args) { args.ErrorContext.Handled = true; };
+            JsonSerializerSettings result = new JsonSerializerSettings
+            {
+                Error = delegate (object sender, ErrorEventArgs args) { args.ErrorContext.Handled = true; }
+            };
             return result;
         }
     }

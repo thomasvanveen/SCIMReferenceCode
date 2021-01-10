@@ -25,8 +25,8 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(resourceIdentifier));
             }
 
-            this.SchemaIdentifier = schemaIdentifier;
-            this.Identifier = resourceIdentifier;
+            SchemaIdentifier = schemaIdentifier;
+            Identifier = resourceIdentifier;
         }
 
         public string Identifier
@@ -54,12 +54,12 @@ namespace Microsoft.SCIM
                 return false;
             }
 
-            if (!string.Equals(this.SchemaIdentifier, otherIdentifier.SchemaIdentifier, StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(SchemaIdentifier, otherIdentifier.SchemaIdentifier, StringComparison.OrdinalIgnoreCase))
             {
                 return false;
             }
 
-            if (!string.Equals(this.Identifier, otherIdentifier.Identifier, StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(Identifier, otherIdentifier.Identifier, StringComparison.OrdinalIgnoreCase))
             {
                 return false;
             }
@@ -69,8 +69,8 @@ namespace Microsoft.SCIM
 
         public override int GetHashCode()
         {
-            int identifierCode = string.IsNullOrWhiteSpace(this.Identifier) ? 0 : this.Identifier.GetHashCode(StringComparison.InvariantCulture);
-            int schemaIdentifierCode = string.IsNullOrWhiteSpace(this.SchemaIdentifier) ? 0 : this.SchemaIdentifier.GetHashCode(StringComparison.InvariantCulture);
+            int identifierCode = string.IsNullOrWhiteSpace(Identifier) ? 0 : Identifier.GetHashCode(StringComparison.InvariantCulture);
+            int schemaIdentifierCode = string.IsNullOrWhiteSpace(SchemaIdentifier) ? 0 : SchemaIdentifier.GetHashCode(StringComparison.InvariantCulture);
             int result = identifierCode ^ schemaIdentifierCode;
             return result;
         }
@@ -81,8 +81,8 @@ namespace Microsoft.SCIM
                 string.Format(
                     CultureInfo.InvariantCulture,
                     SystemForCrossDomainIdentityManagementProtocolResources.ResourceIdentifierTemplate,
-                    this.SchemaIdentifier,
-                    this.Identifier);
+                    SchemaIdentifier,
+                    Identifier);
             return result;
         }
     }

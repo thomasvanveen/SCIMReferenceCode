@@ -24,7 +24,7 @@ namespace Microsoft.SCIM
             }
 
             string payload = string.Format(CultureInfo.InvariantCulture, template, arguments);
-            TNotification result = this.CreateNotification(payload, correlationIdentifier, identifier);
+            TNotification result = CreateNotification(payload, correlationIdentifier, identifier);
             return result;
         }
 
@@ -40,7 +40,7 @@ namespace Microsoft.SCIM
             }
 
             string correlationIdentifierValue = correlationIdentifier.ToString();
-            TNotification result = this.FormatNotification(template, correlationIdentifierValue, identifier, arguments);
+            TNotification result = FormatNotification(template, correlationIdentifierValue, identifier, arguments);
             return result;
         }
     }

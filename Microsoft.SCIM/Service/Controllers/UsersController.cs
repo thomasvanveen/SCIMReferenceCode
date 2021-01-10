@@ -3,6 +3,7 @@
 namespace Microsoft.SCIM
 {
     using System;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

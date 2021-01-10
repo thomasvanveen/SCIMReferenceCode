@@ -20,24 +20,18 @@ namespace Microsoft.SCIM
 
         public PatchOperation2()
         {
-            this.OnInitialization();
-            this.OnInitialized();
+            OnInitialization();
+            OnInitialized();
         }
 
         public PatchOperation2(OperationName operationName, string pathExpression)
             : base(operationName, pathExpression)
         {
-            this.OnInitialization();
-            this.OnInitialized();
+            OnInitialization();
+            OnInitialized();
         }
 
-        public IReadOnlyCollection<OperationValue> Value
-        {
-            get
-            {
-                return this.valuesWrapper;
-            }
-        }
+        public IReadOnlyCollection<OperationValue> Value => valuesWrapper;
 
         public void AddValue(OperationValue value)
         {
@@ -46,7 +40,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(value));
             }
 
-            this.values.Add(value);
+            values.Add(value);
         }
 
         public static PatchOperation2 Create(OperationName operationName, string pathExpression, string value)
@@ -61,8 +55,10 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(value));
             }
 
-            OperationValue operationValue = new OperationValue();
-            operationValue.Value = value;
+            OperationValue operationValue = new OperationValue
+            {
+                Value = value
+            };
 
             PatchOperation2 result = new PatchOperation2(operationName, pathExpression);
             result.AddValue(operationValue);
@@ -73,26 +69,26 @@ namespace Microsoft.SCIM
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            this.OnInitialized();
+            OnInitialized();
         }
 
         [OnDeserializing]
         private void OnDeserializing(StreamingContext context)
         {
-            this.OnInitialization();
+            OnInitialization();
         }
 
         private void OnInitialization()
         {
-            this.values = new List<OperationValue>();
+            values = new List<OperationValue>();
         }
 
         private void OnInitialized()
         {
-            switch (this.values)
+            switch (values)
             {
                 case List<OperationValue> valueList:
-                    this.valuesWrapper = valueList.AsReadOnly();
+                    valuesWrapper = valueList.AsReadOnly();
                     break;
                 default:
                     throw new NotSupportedException(SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidValue);
@@ -101,7 +97,7 @@ namespace Microsoft.SCIM
 
         public override string ToString()
         {
-            string allValues = string.Join(Environment.NewLine, this.Value);
+            string allValues = string.Join(Environment.NewLine, Value);
             string operation = base.ToString();
             string result =
                 string.Format(

@@ -20,7 +20,7 @@ namespace Microsoft.SCIM
             {
                 IJsonNormalizationBehavior result =
                     LazyInitializer.EnsureInitialized<IJsonNormalizationBehavior>(
-                        ref this.jsonNormalizer,
+                        ref jsonNormalizer,
                         () =>
                             new ProtocolJsonNormalizer());
                 return result;

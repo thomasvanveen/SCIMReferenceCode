@@ -15,13 +15,7 @@ namespace Microsoft.SCIM
         {
         }
 
-        public static NotificationFactoryBase<IInformationNotification> Instance
-        {
-            get
-            {
-                return VerboseInformationNotificationFactory.Singleton.Value;
-            }
-        }
+        public static NotificationFactoryBase<IInformationNotification> Instance => VerboseInformationNotificationFactory.Singleton.Value;
 
         public override IInformationNotification CreateNotification(
             string payload,

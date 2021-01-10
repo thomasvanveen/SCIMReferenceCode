@@ -10,6 +10,7 @@ namespace Microsoft.SCIM
     using System.Threading;
     using System.Threading.Tasks;
     using System.Web.Http;
+
     using Newtonsoft.Json;
 
     public sealed class SampleProvider : ProviderBase, ISampleProvider
@@ -65,14 +66,14 @@ namespace Microsoft.SCIM
 
         public SampleProvider()
         {
-            this.sampleElectronicMailAddressHome =
+            sampleElectronicMailAddressHome =
                 new ElectronicMailAddress
                 {
                     ItemType = ElectronicMailAddress.Home,
                     Value = SampleProvider.ElectronicMailAddressHome
                 };
 
-            this.sampleElectronicMailAddressWork =
+            sampleElectronicMailAddressWork =
                 new ElectronicMailAddress
                 {
                     ItemType = ElectronicMailAddressWork,
@@ -80,20 +81,20 @@ namespace Microsoft.SCIM
                     Value = SampleProvider.ElectronicMailAddressWork
                 };
 
-            this.sampleElectronicMailAddresses =
+            sampleElectronicMailAddresses =
                 new ElectronicMailAddress[]
                     {
-                        this.sampleElectronicMailAddressHome,
-                        this.sampleElectronicMailAddressWork
+                        sampleElectronicMailAddressHome,
+                        sampleElectronicMailAddressWork
                     };
 
-            this.sampleManager =
+            sampleManager =
                 new Manager()
                 {
                     Value = SampleProvider.ManagerIdentifier,
                 };
 
-            this.sampleName =
+            sampleName =
                 new Name()
                 {
                     FamilyName = SampleProvider.NameFamily,
@@ -103,24 +104,24 @@ namespace Microsoft.SCIM
                     HonorificSuffix = SampleProvider.NameHonorificSuffix
                 };
 
-            this.sampleOperationValue =
+            sampleOperationValue =
                 new OperationValue()
                 {
                     Value = SampleProvider.IdentifierUser
                 };
 
-            this.sampleOperation = this.ConstructOperation();
+            sampleOperation = ConstructOperation();
 
-            this.samplePatch = this.ConstructPatch();
+            samplePatch = ConstructPatch();
 
-            this.sampleUser =
+            sampleUser =
                 new Core2EnterpriseUser()
                 {
                     Active = true,
-                    ElectronicMailAddresses = this.sampleElectronicMailAddresses,
+                    ElectronicMailAddresses = sampleElectronicMailAddresses,
                     ExternalIdentifier = SampleProvider.IdentifierExternal,
                     Identifier = SampleProvider.IdentifierUser,
-                    Name = this.sampleName,
+                    Name = sampleName,
                     UserName = SampleProvider.NameUser
                 };
 
@@ -131,13 +132,13 @@ namespace Microsoft.SCIM
                     Department = SampleProvider.ExtensionAttributeEnterpriseUserDepartment,
                     Division = SampleProvider.ExtensionAttributeEnterpriseUserDivision,
                     EmployeeNumber = SampleProvider.ExtensionAttributeEnterpriseUserEmployeeNumber,
-                    Manager = this.sampleManager,
+                    Manager = sampleManager,
                     Organization = SampleProvider.ExtensionAttributeEnterpriseUserOrganization
                 };
 
-            this.SampleUser.EnterpriseExtension = enterpriseExtensionAttributeEnterpriseUser2;
+            SampleUser.EnterpriseExtension = enterpriseExtensionAttributeEnterpriseUser2;
 
-            this.sampleGroup =
+            sampleGroup =
                 new Core2Group()
                 {
                     DisplayName = SampleProvider.GroupName,
@@ -150,43 +151,19 @@ namespace Microsoft.SCIM
             {
                 JsonDeserializingFactory<Schematized> result =
                     LazyInitializer.EnsureInitialized<JsonDeserializingFactory<Schematized>>(
-                        ref this.jsonDeserializingFactory,
-                        this.InitializeJsonDeserializingFactory);
+                        ref jsonDeserializingFactory,
+                        InitializeJsonDeserializingFactory);
                 return result;
             }
         }
 
-        public Core2Group SampleGroup
-        {
-            get
-            {
-                return this.sampleGroup;
-            }
-        }
+        public Core2Group SampleGroup => sampleGroup;
 
-        public PatchRequest2 SamplePatch
-        {
-            get
-            {
-                return this.samplePatch;
-            }
-        }
+        public PatchRequest2 SamplePatch => samplePatch;
 
-        public Core2EnterpriseUser SampleResource
-        {
-            get
-            {
-                return this.SampleUser;
-            }
-        }
+        public Core2EnterpriseUser SampleResource => SampleUser;
 
-        public Core2EnterpriseUser SampleUser
-        {
-            get
-            {
-                return this.sampleUser;
-            }
-        }
+        public Core2EnterpriseUser SampleUser => sampleUser;
 
         public override Task<Resource> CreateAsync(Resource resource, string correlationIdentifier)
         {
@@ -210,14 +187,14 @@ namespace Microsoft.SCIM
                     Name = OperationName.Add,
                     Path = path
                 };
-            result.Value = JsonConvert.SerializeObject(this.sampleOperationValue);
+            result.Value = JsonConvert.SerializeObject(sampleOperationValue);
             return result;
         }
 
         private PatchRequest2 ConstructPatch()
         {
             PatchRequest2 result = new PatchRequest2();
-            result.AddOperation(this.sampleOperation);
+            result.AddOperation(sampleOperation);
             return result;
         }
 
@@ -281,10 +258,10 @@ namespace Microsoft.SCIM
             JsonDeserializingFactory<Schematized> result =
                 new SchematizedJsonDeserializingFactory()
                 {
-                    Extensions = this.Extensions,
-                    GroupDeserializationBehavior = this.GroupDeserializationBehavior,
-                    PatchRequest2DeserializationBehavior = this.PatchRequestDeserializationBehavior,
-                    UserDeserializationBehavior = this.UserDeserializationBehavior
+                    Extensions = Extensions,
+                    GroupDeserializationBehavior = GroupDeserializationBehavior,
+                    PatchRequest2DeserializationBehavior = PatchRequestDeserializationBehavior,
+                    UserDeserializationBehavior = UserDeserializationBehavior
                 };
             return result;
         }
@@ -306,7 +283,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
             }
 
-            IReadOnlyCollection<Resource> resources = await this.QueryAsync(request).ConfigureAwait(false);
+            IReadOnlyCollection<Resource> resources = await QueryAsync(request).ConfigureAwait(false);
             QueryResponseBase result = new QueryResponse(resources);
             if (null == request.Payload.PaginationParameters)
             {
@@ -348,12 +325,12 @@ namespace Microsoft.SCIM
             }
             else if (string.Equals(parameters.SchemaIdentifier, SchemaIdentifiers.Core2EnterpriseUser, StringComparison.OrdinalIgnoreCase))
             {
-                Resource[] result = this.QueryUsers(parameters, filter);
+                Resource[] result = QueryUsers(parameters, filter);
                 return result;
             }
             else if (string.Equals(parameters.SchemaIdentifier, SchemaIdentifiers.Core2Group, StringComparison.OrdinalIgnoreCase))
             {
-                Resource[] result = this.QueryGroups(parameters, filter);
+                Resource[] result = QueryGroups(parameters, filter);
                 return result;
             }
             else
@@ -369,7 +346,7 @@ namespace Microsoft.SCIM
 
         public override Task<Resource[]> QueryAsync(IQueryParameters parameters, string correlationIdentifier)
         {
-            Resource[] resources = this.Query(parameters);
+            Resource[] resources = Query(parameters);
             Task<Resource[]> result = Task.FromResult(resources);
             return result;
         }
@@ -427,7 +404,7 @@ namespace Microsoft.SCIM
             }
             else
             {
-                results = this.sampleGroup.ToCollection().ToArray();
+                results = sampleGroup.ToCollection().ToArray();
             }
 
             return results;
@@ -579,14 +556,14 @@ namespace Microsoft.SCIM
             if
             (
                    !string.Equals(filter.ComparisonValue, SampleProvider.IdentifierExternal, StringComparison.OrdinalIgnoreCase)
-                && !string.Equals(filter.ComparisonValue, this.SampleUser.UserName, StringComparison.OrdinalIgnoreCase)
+                && !string.Equals(filter.ComparisonValue, SampleUser.UserName, StringComparison.OrdinalIgnoreCase)
             )
             {
                 results = Enumerable.Empty<Resource>().ToArray();
             }
             else
             {
-                results = this.SampleUser.ToCollection().ToArray();
+                results = SampleUser.ToCollection().ToArray();
             }
 
             return results;
@@ -642,7 +619,7 @@ namespace Microsoft.SCIM
                         StringComparison.OrdinalIgnoreCase)
             )
             {
-                resource = this.SampleUser;
+                resource = SampleUser;
             }
 
             Task<Resource> result = Task.FromResult(resource);

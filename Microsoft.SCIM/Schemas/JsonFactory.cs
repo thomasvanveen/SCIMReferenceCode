@@ -6,6 +6,7 @@ namespace Microsoft.SCIM
 {
     using System;
     using System.Collections.Generic;
+
     using Newtonsoft.Json;
 
     public abstract class JsonFactory
@@ -20,13 +21,7 @@ namespace Microsoft.SCIM
                 () =>
                     JsonFactory.InitializeFactory());
 
-        public static JsonFactory Instance
-        {
-            get
-            {
-                return JsonFactory.Singleton.Value;
-            }
-        }
+        public static JsonFactory Instance => JsonFactory.Singleton.Value;
 
         public abstract Dictionary<string, object> Create(string json);
 
@@ -35,7 +30,7 @@ namespace Microsoft.SCIM
             Dictionary<string, object> result =
                 acceptLargeObjects ?
                     JsonFactory.LargeObjectFactory.Value.Create(json) :
-                    this.Create(json);
+                    Create(json);
             return result;
         }
 
@@ -46,7 +41,7 @@ namespace Microsoft.SCIM
             string result =
                 acceptLargeObjects ?
                     JsonFactory.LargeObjectFactory.Value.Create(json) :
-                    this.Create(json);
+                    Create(json);
             return result;
         }
 
@@ -57,7 +52,7 @@ namespace Microsoft.SCIM
             string result =
                 acceptLargeObjects ?
                     JsonFactory.LargeObjectFactory.Value.Create(json) :
-                    this.Create(json);
+                    Create(json);
             return result;
         }
 
@@ -68,7 +63,7 @@ namespace Microsoft.SCIM
             string result =
                 acceptLargeObjects ?
                     JsonFactory.LargeObjectFactory.Value.Create(json) :
-                    this.Create(json);
+                    Create(json);
             return result;
         }
 
@@ -79,7 +74,7 @@ namespace Microsoft.SCIM
             string result =
                 acceptLargeObjects ?
                     JsonFactory.LargeObjectFactory.Value.Create(json) :
-                    this.Create(json);
+                    Create(json);
             return result;
         }
 

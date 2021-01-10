@@ -25,9 +25,9 @@ namespace Microsoft.SCIM
 
         public ResourceQuery()
         {
-            this.Filters = Array.Empty<Filter>();
-            this.Attributes = Array.Empty<string>();
-            this.ExcludedAttributes = Array.Empty<string>();
+            Filters = Array.Empty<Filter>();
+            Attributes = Array.Empty<string>();
+            ExcludedAttributes = Array.Empty<string>();
         }
 
         public ResourceQuery(
@@ -35,9 +35,9 @@ namespace Microsoft.SCIM
             IReadOnlyCollection<string> attributes,
             IReadOnlyCollection<string> excludedAttributes)
         {
-            this.Filters = filters ?? throw new ArgumentNullException(nameof(filters));
-            this.Attributes = attributes ?? throw new ArgumentNullException(nameof(attributes));
-            this.ExcludedAttributes = excludedAttributes ?? throw new ArgumentNullException(nameof(excludedAttributes));
+            Filters = filters ?? throw new ArgumentNullException(nameof(filters));
+            Attributes = attributes ?? throw new ArgumentNullException(nameof(attributes));
+            ExcludedAttributes = excludedAttributes ?? throw new ArgumentNullException(nameof(excludedAttributes));
         }
 
         public ResourceQuery(Uri resource)
@@ -59,7 +59,7 @@ namespace Microsoft.SCIM
                         string attributeExpression = keyedValues[key];
                         if (!string.IsNullOrWhiteSpace(attributeExpression))
                         {
-                            this.Attributes = ResourceQuery.ParseAttributes(attributeExpression);
+                            Attributes = ResourceQuery.ParseAttributes(attributeExpression);
                         }
                     }
 
@@ -69,7 +69,7 @@ namespace Microsoft.SCIM
                             new Action<IPaginationParameters, int>(
                                 (IPaginationParameters pagination, int paginationValue) =>
                                     pagination.Count = paginationValue);
-                        this.ApplyPaginationParameter(keyedValues[key], action);
+                        ApplyPaginationParameter(keyedValues[key], action);
                     }
 
                     if (string.Equals(key, QueryKeys.ExcludedAttributes, StringComparison.OrdinalIgnoreCase))
@@ -77,7 +77,7 @@ namespace Microsoft.SCIM
                         string attributeExpression = keyedValues[key];
                         if (!string.IsNullOrWhiteSpace(attributeExpression))
                         {
-                            this.ExcludedAttributes = ResourceQuery.ParseAttributes(attributeExpression);
+                            ExcludedAttributes = ResourceQuery.ParseAttributes(attributeExpression);
                         }
                     }
 
@@ -86,7 +86,7 @@ namespace Microsoft.SCIM
                         string filterExpression = keyedValues[key];
                         if (!string.IsNullOrWhiteSpace(filterExpression))
                         {
-                            this.Filters = ResourceQuery.ParseFilters(filterExpression);
+                            Filters = ResourceQuery.ParseFilters(filterExpression);
                         }
                     }
 
@@ -96,24 +96,24 @@ namespace Microsoft.SCIM
                             new Action<IPaginationParameters, int>(
                                 (IPaginationParameters pagination, int paginationValue) =>
                                     pagination.StartIndex = paginationValue);
-                        this.ApplyPaginationParameter(keyedValues[key], action);
+                        ApplyPaginationParameter(keyedValues[key], action);
                     }
                 }
             }
 
-            if (null == this.Filters)
+            if (null == Filters)
             {
-                this.Filters = Array.Empty<Filter>();
+                Filters = Array.Empty<Filter>();
             }
 
-            if (null == this.Attributes)
+            if (null == Attributes)
             {
-                this.Attributes = Array.Empty<string>();
+                Attributes = Array.Empty<string>();
             }
 
-            if (null == this.ExcludedAttributes)
+            if (null == ExcludedAttributes)
             {
-                this.ExcludedAttributes = Array.Empty<string>();
+                ExcludedAttributes = Array.Empty<string>();
             }
         }
 
@@ -156,11 +156,11 @@ namespace Microsoft.SCIM
             }
 
             int parsedValue = int.Parse(value, CultureInfo.InvariantCulture);
-            if (null == this.PaginationParameters)
+            if (null == PaginationParameters)
             {
-                this.PaginationParameters = new PaginationParameters();
+                PaginationParameters = new PaginationParameters();
             }
-            action(this.PaginationParameters, parsedValue);
+            action(PaginationParameters, parsedValue);
         }
 
         private static IReadOnlyCollection<string> ParseAttributes(string attributeExpression)

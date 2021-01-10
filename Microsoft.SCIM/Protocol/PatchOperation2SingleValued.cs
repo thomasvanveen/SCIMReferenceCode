@@ -19,7 +19,7 @@ namespace Microsoft.SCIM
 
         public PatchOperation2SingleValued()
         {
-            this.OnInitialization();
+            OnInitialization();
         }
 
         public PatchOperation2SingleValued(OperationName operationName, string pathExpression, string value)
@@ -30,26 +30,20 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(value));
             }
 
-            this.valueValue = value;
+            valueValue = value;
         }
 
-        public string Value
-        {
-            get
-            {
-                return this.valueValue;
-            }
-        }
+        public string Value => valueValue;
 
         [OnDeserializing]
         private void OnDeserializing(StreamingContext context)
         {
-            this.OnInitialization();
+            OnInitialization();
         }
 
         private void OnInitialization()
         {
-            this.valueValue = string.Empty;
+            valueValue = string.Empty;
         }
 
         public override string ToString()
@@ -60,7 +54,7 @@ namespace Microsoft.SCIM
                     CultureInfo.InvariantCulture,
                     PatchOperation2SingleValued.Template,
                     operation,
-                    this.valueValue);
+                    valueValue);
             return result;
         }
     }

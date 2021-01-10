@@ -42,14 +42,14 @@ namespace Microsoft.SCIM
             IMonitor monitor,
             JsonDeserializingFactory<Schematized> deserializingFactory)
         {
-            this.Monitor = monitor ?? throw new ArgumentNullException(nameof(monitor));
+            Monitor = monitor ?? throw new ArgumentNullException(nameof(monitor));
 
-            this.SupportedMediaTypes.Add(SchematizedMediaTypeFormatter.MediaTypeHeaderJavaWebToken.Value);
-            this.SupportedMediaTypes.Add(SchematizedMediaTypeFormatter.MediaTypeHeaderJson.Value);
-            this.SupportedMediaTypes.Add(SchematizedMediaTypeFormatter.MediaTypeHeaderProtocol.Value);
-            this.SupportedMediaTypes.Add(SchematizedMediaTypeFormatter.MediaTypeHeaderStream.Value);
+            SupportedMediaTypes.Add(SchematizedMediaTypeFormatter.MediaTypeHeaderJavaWebToken.Value);
+            SupportedMediaTypes.Add(SchematizedMediaTypeFormatter.MediaTypeHeaderJson.Value);
+            SupportedMediaTypes.Add(SchematizedMediaTypeFormatter.MediaTypeHeaderProtocol.Value);
+            SupportedMediaTypes.Add(SchematizedMediaTypeFormatter.MediaTypeHeaderStream.Value);
 
-            this.DeserializingFactory = deserializingFactory ?? throw new ArgumentNullException(nameof(deserializingFactory));
+            DeserializingFactory = deserializingFactory ?? throw new ArgumentNullException(nameof(deserializingFactory));
         }
 
         private JsonDeserializingFactory<Schematized> DeserializingFactory
@@ -146,7 +146,7 @@ namespace Microsoft.SCIM
                     information,
                     null,
                     ServiceNotificationIdentifiers.SchematizedMediaTypeFormatterReadFromStream);
-            this.Monitor.Inform(notification);
+            Monitor.Inform(notification);
 
             if
             (
@@ -162,7 +162,7 @@ namespace Microsoft.SCIM
             Dictionary<string, object> json =
                 JsonFactory.Instance.Create(
                     characters,
-                    this.DeserializingFactory.AcceptLargeObjects);
+                    DeserializingFactory.AcceptLargeObjects);
             if (typeof(IDictionary<string, object>).IsAssignableFrom(type))
             {
                 return json;
@@ -170,7 +170,7 @@ namespace Microsoft.SCIM
 
             try
             {
-                Schematized result = this.DeserializingFactory.Create(json);
+                Schematized result = DeserializingFactory.Create(json);
                 return result;
             }
             catch (ArgumentException)
@@ -205,7 +205,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(readStream));
             }
 
-            Task<object> result = this.ReadFromStream(type, readStream, content);
+            Task<object> result = ReadFromStream(type, readStream, content);
             return result;
         }
 
@@ -218,7 +218,7 @@ namespace Microsoft.SCIM
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            return this.ReadFromStreamAsync(type, readStream, content, formatterLogger);
+            return ReadFromStreamAsync(type, readStream, content, formatterLogger);
         }
 
         private async Task WriteToStream(
@@ -253,13 +253,13 @@ namespace Microsoft.SCIM
                 if (typeof(IDictionary<string, object>).IsAssignableFrom(type))
                 {
                     json = (IDictionary<string, object>)value;
-                    characters = JsonFactory.Instance.Create(json, this.DeserializingFactory.AcceptLargeObjects);
+                    characters = JsonFactory.Instance.Create(json, DeserializingFactory.AcceptLargeObjects);
                 }
                 else if (typeof(Schematized).IsAssignableFrom(type))
                 {
                     Schematized schematized = (Schematized)value;
                     json = schematized.ToJson();
-                    characters = JsonFactory.Instance.Create(json, this.DeserializingFactory.AcceptLargeObjects);
+                    characters = JsonFactory.Instance.Create(json, DeserializingFactory.AcceptLargeObjects);
                 }
                 else
                 {
@@ -275,7 +275,7 @@ namespace Microsoft.SCIM
                     information,
                     null,
                     ServiceNotificationIdentifiers.SchematizedMediaTypeFormatterWroteToStream);
-            this.Monitor.Inform(notification);
+            Monitor.Inform(notification);
             byte[] bytes = SchematizedMediaTypeFormatter.Encoding.GetBytes(characters);
             await writeFunction(bytes).ConfigureAwait(false);
             writeStream.Flush();
@@ -302,7 +302,7 @@ namespace Microsoft.SCIM
                 new Func<byte[], Task>(
                     async (byte[] buffer) =>
                         await writeStream.WriteAsync(buffer, 0, buffer.Length).ConfigureAwait(false));
-            Task result = this.WriteToStream(type, value, writeStream, writeFunction);
+            Task result = WriteToStream(type, value, writeStream, writeFunction);
             return result;
         }
 
@@ -330,7 +330,7 @@ namespace Microsoft.SCIM
                 new Func<byte[], Task>(
                     async (byte[] buffer) =>
                         await writeStream.WriteAsync(buffer, 0, buffer.Length, cancellationToken).ConfigureAwait(false));
-            Task result = this.WriteToStream(type, value, writeStream, writeFunction);
+            Task result = WriteToStream(type, value, writeStream, writeFunction);
             return result;
         }
     }

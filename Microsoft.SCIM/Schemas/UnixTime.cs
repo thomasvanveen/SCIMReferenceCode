@@ -15,7 +15,7 @@ namespace Microsoft.SCIM
 
         public UnixTime(long epochTimestamp)
         {
-            this.EpochTimestamp = epochTimestamp;
+            EpochTimestamp = epochTimestamp;
         }
 
         public UnixTime(int epochTimestamp)
@@ -40,7 +40,7 @@ namespace Microsoft.SCIM
 
         public DateTime ToUniversalTime()
         {
-            DateTime result = UnixTime.Epoch.AddSeconds(this.EpochTimestamp);
+            DateTime result = UnixTime.Epoch.AddSeconds(EpochTimestamp);
             return result;
         }
 
@@ -52,7 +52,7 @@ namespace Microsoft.SCIM
 
         public override string ToString()
         {
-            string result = this.EpochTimestamp.ToString(CultureInfo.InvariantCulture);
+            string result = EpochTimestamp.ToString(CultureInfo.InvariantCulture);
             return result;
         }
     }

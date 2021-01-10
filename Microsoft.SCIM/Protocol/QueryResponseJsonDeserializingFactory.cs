@@ -15,7 +15,7 @@ namespace Microsoft.SCIM
     {
         public QueryResponseJsonDeserializingFactory(JsonDeserializingFactory<Schematized> jsonDeserializingFactory)
         {
-            this.JsonDeserializingFactory =
+            JsonDeserializingFactory =
                 jsonDeserializingFactory ?? throw new ArgumentNullException(nameof(jsonDeserializingFactory));
         }
 
@@ -39,7 +39,7 @@ namespace Microsoft.SCIM
             }
             else
             {
-                IReadOnlyDictionary<string, object> normalizedJson = this.Normalize(json);
+                IReadOnlyDictionary<string, object> normalizedJson = Normalize(json);
                 IReadOnlyDictionary<string, object> metadataJson =
                     normalizedJson
                     .Where(
@@ -64,7 +64,7 @@ namespace Microsoft.SCIM
                     foreach (object element in resourcesArray)
                     {
                         IReadOnlyDictionary<string, object> resourceJson = (IReadOnlyDictionary<string, object>)element;
-                        T resource = (T)this.JsonDeserializingFactory.Create(resourceJson);
+                        T resource = (T)JsonDeserializingFactory.Create(resourceJson);
                         resources.Add(resource);
                     }
                     result.Resources = resources;

@@ -28,42 +28,33 @@ namespace Microsoft.SCIM
 
         public HttpStatusCode Status
         {
-            get
-            {
-                return this.statusCode;
-            }
+            get => statusCode;
 
-            set
-            {
-                this.StatusCodeValue = ((int)value).ToString(CultureInfo.InvariantCulture);
-            }
+            set => StatusCodeValue = ((int)value).ToString(CultureInfo.InvariantCulture);
         }
 
         public string StatusCodeValue
         {
-            get
-            {
-                return this.statusCodeValue;
-            }
+            get => statusCodeValue;
 
             set
             {
-                lock (this.thisLock)
+                lock (thisLock)
                 {
-                    this.statusCode = (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), value);
-                    this.statusCodeValue = value;
-                    char responseClassSignifier = this.statusCodeValue.First();
+                    statusCode = (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), value);
+                    statusCodeValue = value;
+                    char responseClassSignifier = statusCodeValue.First();
                     double responseClassNumber = char.GetNumericValue(responseClassSignifier);
                     int responseClassCode = Convert.ToInt32(responseClassNumber);
-                    this.responseClass = (HttpResponseClass)Enum.ToObject(typeof(HttpResponseClass), responseClassCode);
+                    responseClass = (HttpResponseClass)Enum.ToObject(typeof(HttpResponseClass), responseClassCode);
                 }
             }
         }
 
         public bool IsError()
         {
-            bool result = HttpResponseClass.ClientError == this.responseClass
-                            || HttpResponseClass.ServerError == this.responseClass;
+            bool result = HttpResponseClass.ClientError == responseClass
+                            || HttpResponseClass.ServerError == responseClass;
             return result;
         }
     }

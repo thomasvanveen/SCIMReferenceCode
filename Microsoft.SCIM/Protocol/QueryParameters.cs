@@ -22,7 +22,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(filter));
             }
 
-            this.AlternateFilters = filter.ToCollection();
+            AlternateFilters = filter.ToCollection();
         }
 
         public QueryParameters(
@@ -33,7 +33,7 @@ namespace Microsoft.SCIM
             IReadOnlyCollection<string> excludedAttributePaths)
             : base(schemaIdentifier, path, requestedAttributePaths, excludedAttributePaths)
         {
-            this.AlternateFilters = alternateFilters ?? throw new ArgumentNullException(nameof(alternateFilters));
+            AlternateFilters = alternateFilters ?? throw new ArgumentNullException(nameof(alternateFilters));
         }
 
         public QueryParameters(
@@ -42,7 +42,7 @@ namespace Microsoft.SCIM
             IPaginationParameters paginationParameters)
             : this(schemaIdentifier, path, Array.Empty<IFilter>(), Array.Empty<string>(), Array.Empty<string>())
         {
-            this.PaginationParameters = paginationParameters ?? throw new ArgumentNullException(nameof(paginationParameters));
+            PaginationParameters = paginationParameters ?? throw new ArgumentNullException(nameof(paginationParameters));
         }
 
         [Obsolete("Use QueryParameters(string, string, IFilter, IReadOnlyCollection<string>, IReadOnlyCollection<string>) instead")]
@@ -92,10 +92,10 @@ namespace Microsoft.SCIM
             string result =
                 new Query
                 {
-                    AlternateFilters = this.AlternateFilters,
-                    RequestedAttributePaths = this.RequestedAttributePaths,
-                    ExcludedAttributePaths = this.ExcludedAttributePaths,
-                    PaginationParameters = this.PaginationParameters
+                    AlternateFilters = AlternateFilters,
+                    RequestedAttributePaths = RequestedAttributePaths,
+                    ExcludedAttributePaths = ExcludedAttributePaths,
+                    PaginationParameters = PaginationParameters
                 }.Compose();
             return result;
         }

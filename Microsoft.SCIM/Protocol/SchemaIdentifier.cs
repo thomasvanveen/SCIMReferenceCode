@@ -15,7 +15,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(value));
             }
 
-            this.Value = value;
+            Value = value;
         }
 
         public string Value
@@ -26,9 +26,9 @@ namespace Microsoft.SCIM
 
         public string FindPath()
         {
-            if (!this.TryFindPath(out string result))
+            if (!TryFindPath(out string result))
             {
-                throw new NotSupportedException(this.Value);
+                throw new NotSupportedException(Value);
             }
 
             return result;
@@ -38,7 +38,7 @@ namespace Microsoft.SCIM
         {
             path = null;
 
-            switch (this.Value)
+            switch (Value)
             {
                 case SchemaIdentifiers.Core2EnterpriseUser:
                 case SchemaIdentifiers.Core2User:

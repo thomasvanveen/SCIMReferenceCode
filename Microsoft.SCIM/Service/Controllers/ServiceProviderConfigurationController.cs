@@ -6,6 +6,7 @@ namespace Microsoft.SCIM
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
+
     using Microsoft.AspNetCore.Mvc;
 
     [Route(ServiceConstants.RouteServiceConfiguration)]
@@ -23,7 +24,7 @@ namespace Microsoft.SCIM
 
             try
             {
-                HttpRequestMessage request = this.ConvertRequest();
+                HttpRequestMessage request = ConvertRequest();
                 if (!request.TryGetRequestIdentifier(out correlationIdentifier))
                 {
                     throw new HttpResponseException(HttpStatusCode.InternalServerError);
@@ -40,7 +41,7 @@ namespace Microsoft.SCIM
             }
             catch (ArgumentException argumentException)
             {
-                if (this.TryGetMonitor(out IMonitor monitor))
+                if (TryGetMonitor(out IMonitor monitor))
                 {
                     IExceptionNotification notification =
                         ExceptionNotificationFactory.Instance.CreateNotification(
@@ -54,7 +55,7 @@ namespace Microsoft.SCIM
             }
             catch (NotImplementedException notImplementedException)
             {
-                if (this.TryGetMonitor(out IMonitor monitor))
+                if (TryGetMonitor(out IMonitor monitor))
                 {
                     IExceptionNotification notification =
                         ExceptionNotificationFactory.Instance.CreateNotification(
@@ -68,7 +69,7 @@ namespace Microsoft.SCIM
             }
             catch (NotSupportedException notSupportedException)
             {
-                if (this.TryGetMonitor(out IMonitor monitor))
+                if (TryGetMonitor(out IMonitor monitor))
                 {
                     IExceptionNotification notification =
                         ExceptionNotificationFactory.Instance.CreateNotification(
@@ -82,7 +83,7 @@ namespace Microsoft.SCIM
             }
             catch (Exception exception)
             {
-                if (this.TryGetMonitor(out IMonitor monitor))
+                if (TryGetMonitor(out IMonitor monitor))
                 {
                     IExceptionNotification notification =
                         ExceptionNotificationFactory.Instance.CreateNotification(

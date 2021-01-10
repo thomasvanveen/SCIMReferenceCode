@@ -20,8 +20,8 @@ namespace Microsoft.SCIM
 
         public ErrorResponse()
         {
-            this.Initialize();
-            this.AddSchema(ProtocolSchemaIdentifiers.Version2Error);
+            Initialize();
+            AddSchema(ProtocolSchemaIdentifiers.Version2Error);
         }
 
         [DataMember(Name = ProtocolAttributeNames.Detail)]
@@ -33,40 +33,31 @@ namespace Microsoft.SCIM
 
         public ErrorType ErrorType
         {
-            get
-            {
-                return this.errorType;
-            }
+            get => errorType;
 
             set
             {
-                this.errorType = value;
-                this.errorTypeValue = Enum.GetName(typeof(ErrorType), value);
+                errorType = value;
+                errorTypeValue = Enum.GetName(typeof(ErrorType), value);
             }
         }
 
         public HttpStatusCode Status
         {
-            get
-            {
-                return this.response.Status;
-            }
+            get => response.Status;
 
-            set
-            {
-                this.response.Status = value;
-            }
+            set => response.Status = value;
         }
 
         private void Initialize()
         {
-            this.response = new Response();
+            response = new Response();
         }
 
         [OnDeserializing]
         private void OnDeserializing(StreamingContext context)
         {
-            this.Initialize();
+            Initialize();
         }
     }
 }

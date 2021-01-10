@@ -84,7 +84,7 @@ namespace Microsoft.SCIM
                 relativePath = string.Concat(SystemForCrossDomainIdentityManagementResourceIdentifier.SeparatorSegments, relativePath);
             }
 
-            this.RelativePath = relativePath;
+            RelativePath = relativePath;
         }
 
         public string RelativePath

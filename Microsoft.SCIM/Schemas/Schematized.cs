@@ -21,17 +21,11 @@ namespace Microsoft.SCIM
 
         protected Schematized()
         {
-            this.OnInitialization();
-            this.OnInitialized();
+            OnInitialization();
+            OnInitialized();
         }
 
-        public virtual IReadOnlyCollection<string> Schemas
-        {
-            get
-            {
-                return this.schemasWrapper;
-            }
-        }
+        public virtual IReadOnlyCollection<string> Schemas => schemasWrapper;
 
         public void AddSchema(string schemaIdentifier)
         {
@@ -43,8 +37,8 @@ namespace Microsoft.SCIM
             Func<bool> containsFunction =
                 new Func<bool>(
                     () =>
-                        this
-                        .schemas
+
+                        schemas
                         .Any(
                             (string item) =>
                                 string.Equals(
@@ -55,11 +49,11 @@ namespace Microsoft.SCIM
 
             if (!containsFunction())
             {
-                lock (this.thisLock)
+                lock (thisLock)
                 {
                     if (!containsFunction())
                     {
-                        this.schemas.Add(schemaIdentifier);
+                        schemas.Add(schemaIdentifier);
                     }
                 }
             }
@@ -73,8 +67,8 @@ namespace Microsoft.SCIM
             }
 
             bool result =
-                this
-                .schemas
+
+                schemas
                 .Any(
                     (string item) =>
                         string.Equals(item, scheme, StringComparison.OrdinalIgnoreCase));
@@ -84,43 +78,43 @@ namespace Microsoft.SCIM
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            this.OnInitialized();
+            OnInitialized();
         }
 
         [OnDeserializing]
         private void OnDeserializing(StreamingContext context)
         {
-            this.OnInitialization();
+            OnInitialization();
         }
 
         private void OnInitialization()
         {
-            this.thisLock = new object();
-            this.serializer = new JsonSerializer(this);
-            this.schemas = new List<string>();
+            thisLock = new object();
+            serializer = new JsonSerializer(this);
+            schemas = new List<string>();
         }
 
         private void OnInitialized()
         {
-            this.schemasWrapper = this.schemas.AsReadOnly();
+            schemasWrapper = schemas.AsReadOnly();
         }
 
         public virtual Dictionary<string, object> ToJson()
         {
-            Dictionary<string, object> result = this.serializer.ToJson();
+            Dictionary<string, object> result = serializer.ToJson();
             return result;
         }
 
         public virtual string Serialize()
         {
-            IDictionary<string, object> json = this.ToJson();
+            IDictionary<string, object> json = ToJson();
             string result = JsonFactory.Instance.Create(json, true);
             return result;
         }
 
         public override string ToString()
         {
-            string result = this.Serialize();
+            string result = Serialize();
             return result;
         }
 

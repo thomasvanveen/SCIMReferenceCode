@@ -14,7 +14,7 @@ namespace Microsoft.SCIM
         public TNotification CreateNotification(TPayload payload, Guid correlationIdentifier, long? identifier)
         {
             string correlationIdentifierValue = correlationIdentifier.ToString();
-            TNotification result = this.CreateNotification(payload, correlationIdentifierValue, identifier);
+            TNotification result = CreateNotification(payload, correlationIdentifierValue, identifier);
             return result;
         }
     }

@@ -11,7 +11,7 @@ namespace Microsoft.SCIM
     {
         public Feature(bool supported)
         {
-            this.Supported = supported;
+            Supported = supported;
         }
     }
 }

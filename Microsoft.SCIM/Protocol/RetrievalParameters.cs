@@ -25,11 +25,11 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(path));
             }
 
-            this.SchemaIdentifier = schemaIdentifier;
-            this.Path = path;
-            this.RequestedAttributePaths =
+            SchemaIdentifier = schemaIdentifier;
+            Path = path;
+            RequestedAttributePaths =
                 requestedAttributePaths ?? throw new ArgumentNullException(nameof(requestedAttributePaths));
-            this.ExcludedAttributePaths =
+            ExcludedAttributePaths =
                 excludedAttributePaths ?? throw new ArgumentNullException(nameof(excludedAttributePaths));
         }
 
@@ -45,10 +45,10 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(path));
             }
 
-            this.SchemaIdentifier = schemaIdentifier;
-            this.Path = path;
-            this.RequestedAttributePaths = Array.Empty<string>();
-            this.ExcludedAttributePaths = Array.Empty<string>();
+            SchemaIdentifier = schemaIdentifier;
+            Path = path;
+            RequestedAttributePaths = Array.Empty<string>();
+            ExcludedAttributePaths = Array.Empty<string>();
         }
 
         public IReadOnlyCollection<string> ExcludedAttributePaths
@@ -80,8 +80,8 @@ namespace Microsoft.SCIM
             string result =
                 new Query
                 {
-                    RequestedAttributePaths = this.RequestedAttributePaths,
-                    ExcludedAttributePaths = this.ExcludedAttributePaths
+                    RequestedAttributePaths = RequestedAttributePaths,
+                    ExcludedAttributePaths = ExcludedAttributePaths
                 }.Compose();
             return result;
         }

@@ -8,6 +8,7 @@ namespace Microsoft.SCIM.WebHostSample.Provider
     using System.Net;
     using System.Threading.Tasks;
     using System.Web.Http;
+
     using Microsoft.SCIM;
     using Microsoft.SCIM.WebHostSample.Resources;
 
@@ -17,7 +18,7 @@ namespace Microsoft.SCIM.WebHostSample.Provider
 
         public InMemoryGroupProvider()
         {
-            this.storage = InMemoryStorage.Instance;
+            storage = InMemoryStorage.Instance;
         }
 
         public override Task<Resource> CreateAsync(Resource resource, string correlationIdentifier)
@@ -34,7 +35,7 @@ namespace Microsoft.SCIM.WebHostSample.Provider
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
-            IEnumerable<Core2Group> exisitingGroups = this.storage.Groups.Values;
+            IEnumerable<Core2Group> exisitingGroups = storage.Groups.Values;
             if
             (
                 exisitingGroups.Any(
@@ -47,7 +48,7 @@ namespace Microsoft.SCIM.WebHostSample.Provider
 
             string resourceIdentifier = Guid.NewGuid().ToString();
             resource.Identifier = resourceIdentifier;
-            this.storage.Groups.Add(resourceIdentifier, group);
+            storage.Groups.Add(resourceIdentifier, group);
 
             return Task.FromResult(resource);
         }
@@ -61,9 +62,9 @@ namespace Microsoft.SCIM.WebHostSample.Provider
 
             string identifier = resourceIdentifier.Identifier;
 
-            if (this.storage.Groups.ContainsKey(identifier))
+            if (storage.Groups.ContainsKey(identifier))
             {
-                this.storage.Groups.Remove(identifier);
+                storage.Groups.Remove(identifier);
             }
 
             return Task.CompletedTask;
@@ -96,7 +97,7 @@ namespace Microsoft.SCIM.WebHostSample.Provider
             IEnumerable<Core2Group> buffer = Enumerable.Empty<Core2Group>();
             if (queryFilter == null)
             {
-                buffer = this.storage.Groups.Values;
+                buffer = storage.Groups.Values;
             }
             else
             {
@@ -118,7 +119,7 @@ namespace Microsoft.SCIM.WebHostSample.Provider
                 if (queryFilter.AttributePath.Equals(AttributeNames.DisplayName))
                 {
                     buffer =
-                        this.storage.Groups.Values
+                        storage.Groups.Values
                         .Where(
                             (Core2Group item) =>
                                string.Equals(
@@ -176,7 +177,7 @@ namespace Microsoft.SCIM.WebHostSample.Provider
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
-            IEnumerable<Core2Group> exisitingGroups = this.storage.Groups.Values;
+            IEnumerable<Core2Group> exisitingGroups = storage.Groups.Values;
             if
             (
                 exisitingGroups.Any(
@@ -188,13 +189,13 @@ namespace Microsoft.SCIM.WebHostSample.Provider
                 throw new HttpResponseException(HttpStatusCode.Conflict);
             }
 
-            if (!this.storage.Groups.TryGetValue(group.Identifier, out Core2Group _))
+            if (!storage.Groups.TryGetValue(group.Identifier, out Core2Group _))
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            this.storage.Groups[group.Identifier] = group;
-            Resource result = group as Resource;
+            storage.Groups[group.Identifier] = group;
+            Resource result = group;
             return Task.FromResult(result);
         }
 
@@ -217,11 +218,11 @@ namespace Microsoft.SCIM.WebHostSample.Provider
 
             string identifier = parameters.ResourceIdentifier.Identifier;
 
-            if (this.storage.Groups.ContainsKey(identifier))
+            if (storage.Groups.ContainsKey(identifier))
             {
-                if (this.storage.Groups.TryGetValue(identifier, out Core2Group group))
+                if (storage.Groups.TryGetValue(identifier, out Core2Group group))
                 {
-                    Resource result = group as Resource;
+                    Resource result = group;
                     return Task.FromResult(result);
                 }
             }
@@ -260,7 +261,7 @@ namespace Microsoft.SCIM.WebHostSample.Provider
                 throw new NotSupportedException(unsupportedPatchTypeName);
             }
 
-            if (this.storage.Groups.TryGetValue(patch.ResourceIdentifier.Identifier, out Core2Group group))
+            if (storage.Groups.TryGetValue(patch.ResourceIdentifier.Identifier, out Core2Group group))
             {
                 group.Apply(patchRequest);
             }

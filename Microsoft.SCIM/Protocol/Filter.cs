@@ -61,10 +61,10 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(comparisonValue));
             }
 
-            this.AttributePath = attributePath;
-            this.FilterOperator = filterOperator;
-            this.ComparisonValue = comparisonValue;
-            this.DataType = AttributeDataType.String;
+            AttributePath = attributePath;
+            FilterOperator = filterOperator;
+            ComparisonValue = comparisonValue;
+            DataType = AttributeDataType.String;
         }
 
         public Filter(IFilter other)
@@ -75,11 +75,11 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(other));
             }
 
-            this.DataType = other.DataType;
+            DataType = other.DataType;
 
             if (other.AdditionalFilter != null)
             {
-                this.AdditionalFilter = new Filter(other.AdditionalFilter);
+                AdditionalFilter = new Filter(other.AdditionalFilter);
             }
         }
 
@@ -122,43 +122,31 @@ namespace Microsoft.SCIM
 
         public string ComparisonValue
         {
-            get
-            {
-                return this.comparisonValue;
-            }
+            get => comparisonValue;
 
             private set
             {
-                Filter.Validate(this.DataType, value);
-                this.comparisonValue = value;
-                string encodedValue = this.comparisonValue;
+                Filter.Validate(DataType, value);
+                comparisonValue = value;
+                string encodedValue = comparisonValue;
                 foreach (KeyValuePair<string, string> encoding in Filter.ReservedCharacterEncodingsPerRfc2396.Value)
                 {
                     encodedValue = encodedValue.Replace(encoding.Key, encoding.Value, StringComparison.InvariantCulture);
                 }
-                this.comparisonValueEncoded = encodedValue;
+                comparisonValueEncoded = encodedValue;
             }
         }
 
-        public string ComparisonValueEncoded
-        {
-            get
-            {
-                return this.comparisonValueEncoded;
-            }
-        }
+        public string ComparisonValueEncoded => comparisonValueEncoded;
 
         public AttributeDataType? DataType
         {
-            get
-            {
-                return this.dataType;
-            }
+            get => dataType;
 
             set
             {
-                Filter.Validate(value, this.ComparisonValue);
-                this.dataType = value;
+                Filter.Validate(value, ComparisonValue);
+                dataType = value;
             }
         }
 
@@ -195,7 +183,7 @@ namespace Microsoft.SCIM
         public string Serialize()
         {
             ComparisonOperatorValue operatorValue;
-            switch (this.FilterOperator)
+            switch (FilterOperator)
             {
                 case ComparisonOperator.BitAnd:
                     operatorValue = ComparisonOperatorValue.bitAnd;
@@ -231,25 +219,25 @@ namespace Microsoft.SCIM
                     operatorValue = ComparisonOperatorValue.notMatchesExpression;
                     break;
                 default:
-                    string notSupportedValue = Enum.GetName(typeof(ComparisonOperator), this.FilterOperator);
+                    string notSupportedValue = Enum.GetName(typeof(ComparisonOperator), FilterOperator);
                     throw new NotSupportedException(notSupportedValue);
             }
 
             string rightHandSide;
-            AttributeDataType effectiveDataType = this.DataType ?? AttributeDataType.String;
+            AttributeDataType effectiveDataType = DataType ?? AttributeDataType.String;
             switch (effectiveDataType)
             {
                 case AttributeDataType.Boolean:
                 case AttributeDataType.Decimal:
                 case AttributeDataType.Integer:
-                    rightHandSide = this.ComparisonValue;
+                    rightHandSide = ComparisonValue;
                     break;
                 default:
                     rightHandSide =
                         string.Format(
                             CultureInfo.InvariantCulture,
                             Filter.ComparisonValueTemplate,
-                            this.ComparisonValue);
+                            ComparisonValue);
                     break;
             }
 
@@ -257,13 +245,13 @@ namespace Microsoft.SCIM
                 string.Format(
                     CultureInfo.InvariantCulture,
                     Filter.TemplateComparison,
-                    this.AttributePath,
+                    AttributePath,
                     operatorValue,
                     rightHandSide);
             string result;
-            if (this.AdditionalFilter != null)
+            if (AdditionalFilter != null)
             {
-                string additionalFilter = this.AdditionalFilter.Serialize();
+                string additionalFilter = AdditionalFilter.Serialize();
                 result =
                     string.Format(
                         CultureInfo.InvariantCulture,
@@ -281,7 +269,7 @@ namespace Microsoft.SCIM
 
         public override string ToString()
         {
-            string result = this.Serialize();
+            string result = Serialize();
             return result;
         }
 
@@ -296,10 +284,12 @@ namespace Microsoft.SCIM
             string allFilters = null;
             foreach (IFilter filter in filters)
             {
-                Filter clone = new Filter(filter);
-                clone.ComparisonValue = placeholder;
+                Filter clone = new Filter(filter)
+                {
+                    ComparisonValue = placeholder
+                };
                 string currentFilter = clone.Serialize();
-                string encodedFilter = 
+                string encodedFilter =
                     HttpUtility
                     .UrlEncode(currentFilter)
                     .Replace(placeholder, filter.ComparisonValueEncoded, StringComparison.InvariantCulture);

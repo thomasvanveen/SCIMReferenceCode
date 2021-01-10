@@ -5,6 +5,7 @@
 namespace Microsoft.SCIM
 {
     using System.Collections.Generic;
+
     using Newtonsoft.Json;
 
     public class TrustedJsonFactory : JsonFactory

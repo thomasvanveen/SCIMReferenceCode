@@ -31,21 +31,18 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(pathExpression));
             }
 
-            this.Name = operationName;
-            this.Path = Microsoft.SCIM.Path.Create(pathExpression);
+            Name = operationName;
+            Path = Microsoft.SCIM.Path.Create(pathExpression);
         }
 
         public OperationName Name
         {
-            get
-            {
-                return this.name;
-            }
+            get => name;
 
             set
             {
-                this.name = value;
-                this.operationName = Enum.GetName(typeof(OperationName), value);
+                name = value;
+                operationName = Enum.GetName(typeof(OperationName), value);
             }
         }
 
@@ -53,19 +50,16 @@ namespace Microsoft.SCIM
         [DataMember(Name = ProtocolAttributeNames.Patch2Operation, Order = 0)]
         public string OperationName
         {
-            get
-            {
-                return this.operationName;
-            }
+            get => operationName;
 
             set
             {
-                if (!Enum.TryParse(value, true, out this.name))
+                if (!Enum.TryParse(value, true, out name))
                 {
                     throw new NotSupportedException();
                 }
 
-                this.operationName = value;
+                operationName = value;
             }
         }
 
@@ -73,18 +67,18 @@ namespace Microsoft.SCIM
         {
             get
             {
-                if (null == this.path && !string.IsNullOrWhiteSpace(this.pathExpression))
+                if (null == path && !string.IsNullOrWhiteSpace(pathExpression))
                 {
-                    this.path = Microsoft.SCIM.Path.Create(this.pathExpression);
+                    path = Microsoft.SCIM.Path.Create(pathExpression);
                 }
 
-                return this.path;
+                return path;
             }
 
             set
             {
-                this.pathExpression = value?.ToString();
-                this.path = value;
+                pathExpression = value?.ToString();
+                path = value;
             }
         }
 
@@ -94,8 +88,8 @@ namespace Microsoft.SCIM
                 string.Format(
                     CultureInfo.InvariantCulture,
                     PatchOperation2Base.Template,
-                    this.operationName,
-                    this.pathExpression);
+                    operationName,
+                    pathExpression);
             return result;
         }
     }

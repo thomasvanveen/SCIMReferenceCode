@@ -12,8 +12,8 @@ namespace Microsoft.SCIM
 
         public Patch(IResourceIdentifier resourceIdentifier, PatchRequestBase request)
         {
-            this.ResourceIdentifier = resourceIdentifier ?? throw new ArgumentNullException(nameof(resourceIdentifier));
-            this.PatchRequest = request ?? throw new ArgumentNullException(nameof(request));
+            ResourceIdentifier = resourceIdentifier ?? throw new ArgumentNullException(nameof(resourceIdentifier));
+            PatchRequest = request ?? throw new ArgumentNullException(nameof(request));
         }
 
         public PatchRequestBase PatchRequest

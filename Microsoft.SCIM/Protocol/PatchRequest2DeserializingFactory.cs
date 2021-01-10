@@ -18,7 +18,7 @@ namespace Microsoft.SCIM
         public override TPatchRequest Create(IReadOnlyDictionary<string, object> json)
         {
             Dictionary<string, object> normalized =
-                this.Normalize(json)
+                Normalize(json)
                 .ToDictionary(
                     (KeyValuePair<string, object> item) => item.Key,
                     (KeyValuePair<string, object> item) => item.Value);

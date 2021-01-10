@@ -17,7 +17,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(eventSchemaIdentifier));
             }
 
-            this.EventSchemaIdentifier = eventSchemaIdentifier;
+            EventSchemaIdentifier = eventSchemaIdentifier;
         }
 
         private string EventSchemaIdentifier
@@ -28,9 +28,11 @@ namespace Microsoft.SCIM
 
         public override IEventToken Create(IDictionary<string, object> events)
         {
-            IDictionary<string, object> tokenEvents = new Dictionary<string, object>(1);
-            tokenEvents.Add(this.EventSchemaIdentifier, events);
-            IEventToken result = new EventToken(this.Issuer, this.Header, tokenEvents);
+            IDictionary<string, object> tokenEvents = new Dictionary<string, object>(1)
+            {
+                { EventSchemaIdentifier, events }
+            };
+            IEventToken result = new EventToken(Issuer, Header, tokenEvents);
             return result;
         }
     }

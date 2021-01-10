@@ -15,7 +15,7 @@ namespace Microsoft.SCIM
             RequestExtensions.SegmentSeparator;
         private const string SegmentSeparator = "/";
 
-        private readonly static Lazy<char[]> SegmentSeparators =
+        private static readonly Lazy<char[]> SegmentSeparators =
             new Lazy<char[]>(
                 () =>
                     SegmentSeparator.ToArray());

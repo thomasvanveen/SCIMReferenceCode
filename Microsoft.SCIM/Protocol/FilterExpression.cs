@@ -110,18 +110,20 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(other));
             }
 
-            this.Text = other.Text;
-            this.attributePath = other.attributePath;
-            this.comparisonOperator = other.comparisonOperator;
-            this.filterOperator = other.filterOperator;
-            this.Group = other.Group;
-            this.Level = other.Level;
-            this.logicalOperator = other.logicalOperator;
-            this.value = other.value;
+            Text = other.Text;
+            attributePath = other.attributePath;
+            comparisonOperator = other.comparisonOperator;
+            filterOperator = other.filterOperator;
+            Group = other.Group;
+            Level = other.Level;
+            logicalOperator = other.logicalOperator;
+            value = other.value;
             if (other.next != null)
             {
-                this.next = new FilterExpression(other.next);
-                this.next.Previous = this;
+                next = new FilterExpression(other.next)
+                {
+                    Previous = this
+                };
             }
         }
 
@@ -132,26 +134,26 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(text));
             }
 
-            this.Text = text.Trim();
+            Text = text.Trim();
 
-            this.Level = level;
-            this.Group = group;
+            Level = level;
+            Group = group;
 
-            MatchCollection matches = FilterExpression.Expression.Value.Matches(this.Text);
+            MatchCollection matches = FilterExpression.Expression.Value.Matches(Text);
             foreach (Match match in matches)
             {
                 Group levelUpGroup = match.Groups[FilterExpression.PatternGroupLevelUp];
                 if (levelUpGroup.Success && levelUpGroup.Value.Any())
                 {
-                    this.Level += levelUpGroup.Value.Length;
-                    this.Group += 1;
+                    Level += levelUpGroup.Value.Length;
+                    Group += 1;
                 }
                 Group operatorGroup = match.Groups[FilterExpression.PatternGroupOperator];
                 if (operatorGroup.Success)
                 {
                     Group leftGroup = match.Groups[FilterExpression.PatternGroupLeft];
                     Group rightGroup = match.Groups[FilterExpression.PatternGroupRight];
-                    this.Initialize(leftGroup, operatorGroup, rightGroup);
+                    Initialize(leftGroup, operatorGroup, rightGroup);
                 }
                 else
                 {
@@ -211,10 +213,7 @@ namespace Microsoft.SCIM
 
         private int Group
         {
-            get
-            {
-                return this.groupValue;
-            }
+            get => groupValue;
 
             set
             {
@@ -224,21 +223,18 @@ namespace Microsoft.SCIM
                        string.Format(
                            CultureInfo.InvariantCulture,
                            SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidFilterTemplate,
-                           this.Text);
+                           Text);
 #pragma warning disable CA1303 // Do not pass literals as localized parameters
-                    throw new ArgumentOutOfRangeException(message, nameof(this.Group));
+                    throw new ArgumentOutOfRangeException(message, nameof(Group));
 #pragma warning restore CA1303 // Do not pass literals as localized parameters
                 }
-                this.groupValue = value;
+                groupValue = value;
             }
         }
 
         private int Level
         {
-            get
-            {
-                return this.levelValue;
-            }
+            get => levelValue;
 
             set
             {
@@ -248,64 +244,61 @@ namespace Microsoft.SCIM
                        string.Format(
                            CultureInfo.InvariantCulture,
                            SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidFilterTemplate,
-                           this.Text);
+                           Text);
 #pragma warning disable CA1303 // Do not pass literals as localized parameters
-                    throw new ArgumentOutOfRangeException(message, nameof(this.Level));
+                    throw new ArgumentOutOfRangeException(message, nameof(Level));
 #pragma warning restore CA1303 // Do not pass literals as localized parameters
                 }
-                this.levelValue = value;
+                levelValue = value;
             }
         }
 
         private ComparisonOperatorValue Operator
         {
-            get
-            {
-                return this.comparisonOperator;
-            }
+            get => comparisonOperator;
 
             set
             {
                 switch (value)
                 {
                     case ComparisonOperatorValue.bitAnd:
-                        this.filterOperator = ComparisonOperator.BitAnd;
+                        filterOperator = ComparisonOperator.BitAnd;
                         break;
                     case ComparisonOperatorValue.ew:
-                        this.filterOperator = ComparisonOperator.EndsWith;
+                        filterOperator = ComparisonOperator.EndsWith;
                         break;
                     case ComparisonOperatorValue.eq:
-                        this.filterOperator = ComparisonOperator.Equals;
+                        filterOperator = ComparisonOperator.Equals;
                         break;
                     case ComparisonOperatorValue.ge:
-                        this.filterOperator = ComparisonOperator.EqualOrGreaterThan;
+                        filterOperator = ComparisonOperator.EqualOrGreaterThan;
                         break;
                     case ComparisonOperatorValue.gt:
-                        this.filterOperator = ComparisonOperator.GreaterThan;
+                        filterOperator = ComparisonOperator.GreaterThan;
                         break;
                     case ComparisonOperatorValue.includes:
-                        this.filterOperator = ComparisonOperator.Includes;
+                        filterOperator = ComparisonOperator.Includes;
                         break;
                     case ComparisonOperatorValue.isMemberOf:
-                        this.filterOperator = ComparisonOperator.IsMemberOf;
+                        filterOperator = ComparisonOperator.IsMemberOf;
                         break;
                     case ComparisonOperatorValue.matchesExpression:
-                        this.filterOperator = ComparisonOperator.MatchesExpression;
+                        filterOperator = ComparisonOperator.MatchesExpression;
                         break;
                     case ComparisonOperatorValue.notBitAnd:
-                        this.filterOperator = ComparisonOperator.NotBitAnd;
+                        filterOperator = ComparisonOperator.NotBitAnd;
                         break;
                     case ComparisonOperatorValue.ne:
-                        this.filterOperator = ComparisonOperator.NotEquals;
+                        filterOperator = ComparisonOperator.NotEquals;
                         break;
                     case ComparisonOperatorValue.notMatchesExpression:
-                        this.filterOperator = ComparisonOperator.NotMatchesExpression;
+                        filterOperator = ComparisonOperator.NotMatchesExpression;
                         break;
                     default:
-                        string notSupported = Enum.GetName(typeof(ComparisonOperatorValue), this.Operator);
+                        string notSupported = Enum.GetName(typeof(ComparisonOperatorValue), Operator);
                         throw new NotSupportedException(notSupported);
                 }
-                this.comparisonOperator = value;
+                comparisonOperator = value;
             }
         }
 
@@ -391,12 +384,12 @@ namespace Microsoft.SCIM
         private IReadOnlyCollection<IFilter> Convert()
         {
             List<IFilter> result = new List<IFilter>();
-            IFilter thisFilter = this.ToFilter();
+            IFilter thisFilter = ToFilter();
             result.Add(thisFilter);
-            FilterExpression current = this.next;
+            FilterExpression current = next;
             while (current != null)
             {
-                if (this.Level == current.Level)
+                if (Level == current.Level)
                 {
                     // The current clause has the same level number as the initial clause,
                     // such as
@@ -414,12 +407,12 @@ namespace Microsoft.SCIM
                             result.Add(filter);
                             break;
                         default:
-                            string notSupported = Enum.GetName(typeof(LogicalOperatorValue), this.logicalOperator);
+                            string notSupported = Enum.GetName(typeof(LogicalOperatorValue), logicalOperator);
                             throw new NotSupportedException(notSupported);
                     }
                     current = current.next;
                 }
-                else if (this.Level > current.Level)
+                else if (Level > current.Level)
                 {
                     // The current clause has a lower level number than the initial clause,
                     // such as
@@ -439,7 +432,7 @@ namespace Microsoft.SCIM
                             result.AddRange(superiors);
                             break;
                         default:
-                            string notSupported = Enum.GetName(typeof(LogicalOperatorValue), this.logicalOperator);
+                            string notSupported = Enum.GetName(typeof(LogicalOperatorValue), logicalOperator);
                             throw new NotSupportedException(notSupported);
                     }
                     break;
@@ -481,7 +474,7 @@ namespace Microsoft.SCIM
                     // can be called on a FilterExpression any number of times,
                     // to yield the same output.
                     FilterExpression subordinate = current;
-                    while (current != null && this.Level < current.Level && subordinate.Group == current.Group)
+                    while (current != null && Level < current.Level && subordinate.Group == current.Group)
                     {
                         current = current.next;
                     }
@@ -502,7 +495,7 @@ namespace Microsoft.SCIM
                             result.AddRange(subordinates);
                             break;
                         default:
-                            string notSupported = Enum.GetName(typeof(LogicalOperatorValue), this.logicalOperator);
+                            string notSupported = Enum.GetName(typeof(LogicalOperatorValue), logicalOperator);
                             throw new NotSupportedException(notSupported);
                     }
                 }
@@ -539,11 +532,11 @@ namespace Microsoft.SCIM
                     string.Format(
                         CultureInfo.InvariantCulture,
                         SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidFilterTemplate,
-                        this.Text);
+                        Text);
                 throw new InvalidOperationException(message);
             }
 
-            this.attributePath = left.Value;
+            attributePath = left.Value;
 
             if (!Enum.TryParse<ComparisonOperatorValue>(@operator.Value, out ComparisonOperatorValue comparisonOperatorValue))
             {
@@ -551,10 +544,10 @@ namespace Microsoft.SCIM
                     string.Format(
                         CultureInfo.InvariantCulture,
                         SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidFilterTemplate,
-                        this.Text);
+                        Text);
                 throw new InvalidOperationException(message);
             }
-            this.Operator = comparisonOperatorValue;
+            Operator = comparisonOperatorValue;
 
             if (!FilterExpression.TryParse(right.Value, out string comparisonValue))
             {
@@ -562,10 +555,10 @@ namespace Microsoft.SCIM
                     string.Format(
                         CultureInfo.InvariantCulture,
                         SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidFilterTemplate,
-                        this.Text);
+                        Text);
                 throw new InvalidOperationException(message);
             }
-            this.value = new ComparisonValue(comparisonValue, FilterExpression.Quote == right.Value[0]);
+            value = new ComparisonValue(comparisonValue, FilterExpression.Quote == right.Value[0]);
 
             int indexRemainder = right.Value.IndexOf(comparisonValue, StringComparison.Ordinal) + comparisonValue.Length;
             if (indexRemainder >= right.Value.Length)
@@ -580,13 +573,13 @@ namespace Microsoft.SCIM
             if (indexAnd >= 0 && (indexOr < 0 || indexAnd < indexOr))
             {
                 indexNextFilter = indexAnd + FilterExpression.LogicalOperatorAnd.Value.Length;
-                this.logicalOperator = LogicalOperatorValue.and;
+                logicalOperator = LogicalOperatorValue.and;
                 indexLogicalOperator = indexAnd;
             }
             else if (indexOr >= 0)
             {
                 indexNextFilter = indexOr + FilterExpression.LogicalOperatorOr.Value.Length;
-                this.logicalOperator = LogicalOperatorValue.or;
+                logicalOperator = LogicalOperatorValue.or;
                 indexLogicalOperator = indexOr;
             }
             else
@@ -598,7 +591,7 @@ namespace Microsoft.SCIM
                         string.Format(
                             CultureInfo.InvariantCulture,
                             SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidFilterTemplate,
-                            this.Text);
+                            Text);
                     throw new InvalidOperationException(message);
                 }
                 else
@@ -613,16 +606,18 @@ namespace Microsoft.SCIM
             int nextExpressionGroup;
             if (indexClosingBracket >= 0 && indexClosingBracket < indexLogicalOperator)
             {
-                nextExpressionLevel = this.Level - 1;
-                nextExpressionGroup = this.Group - 1;
+                nextExpressionLevel = Level - 1;
+                nextExpressionGroup = Group - 1;
             }
             else
             {
-                nextExpressionLevel = this.Level;
-                nextExpressionGroup = this.Group;
+                nextExpressionLevel = Level;
+                nextExpressionGroup = Group;
             }
-            this.next = new FilterExpression(nextExpression, nextExpressionGroup, nextExpressionLevel);
-            this.next.Previous = this;
+            next = new FilterExpression(nextExpression, nextExpressionGroup, nextExpressionLevel)
+            {
+                Previous = this
+            };
         }
 
         private static string Initialize<TOperator>()
@@ -653,8 +648,10 @@ namespace Microsoft.SCIM
 
         private IFilter ToFilter()
         {
-            IFilter result = new Filter(this.attributePath, this.filterOperator, this.value.Value);
-            result.DataType = this.value.DataType;
+            IFilter result = new Filter(attributePath, filterOperator, value.Value)
+            {
+                DataType = value.DataType
+            };
             return result;
         }
 
@@ -670,9 +667,9 @@ namespace Microsoft.SCIM
                 string.Format(
                     CultureInfo.InvariantCulture,
                     FilterExpression.Template,
-                    this.attributePath,
-                    this.Operator,
-                    this.value);
+                    attributePath,
+                    Operator,
+                    value);
             return result;
         }
 
@@ -786,28 +783,28 @@ namespace Microsoft.SCIM
                     throw new ArgumentNullException(nameof(value));
                 }
 
-                this.Value = value;
-                this.Quoted = quoted;
+                Value = value;
+                Quoted = quoted;
 
-                if (this.Quoted)
+                if (Quoted)
                 {
-                    this.DataType = AttributeDataType.String;
+                    DataType = AttributeDataType.String;
                 }
-                else if (bool.TryParse(this.Value, out bool _))
+                else if (bool.TryParse(Value, out bool _))
                 {
-                    this.DataType = AttributeDataType.Boolean;
+                    DataType = AttributeDataType.Boolean;
                 }
-                else if (long.TryParse(this.Value, out long _))
+                else if (long.TryParse(Value, out long _))
                 {
-                    this.DataType = AttributeDataType.Integer;
+                    DataType = AttributeDataType.Integer;
                 }
-                else if (double.TryParse(this.Value, out double _))
+                else if (double.TryParse(Value, out double _))
                 {
-                    this.DataType = AttributeDataType.Decimal;
+                    DataType = AttributeDataType.Decimal;
                 }
                 else
                 {
-                    this.DataType = AttributeDataType.String;
+                    DataType = AttributeDataType.String;
                 }
             }
 
@@ -829,9 +826,9 @@ namespace Microsoft.SCIM
             public override string ToString()
             {
                 string result =
-                    this.Quoted ?
-                        string.Format(CultureInfo.InvariantCulture, ComparisonValue.Template, this.Value) :
-                        this.Value;
+                    Quoted ?
+                        string.Format(CultureInfo.InvariantCulture, ComparisonValue.Template, Value) :
+                        Value;
                 return result;
             }
         }

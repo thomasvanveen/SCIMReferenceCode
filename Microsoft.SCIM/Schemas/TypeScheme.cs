@@ -21,17 +21,11 @@ namespace Microsoft.SCIM
 
         public TypeScheme()
         {
-            this.OnInitialization();
-            this.OnInitialized();
+            OnInitialization();
+            OnInitialized();
         }
 
-        public IReadOnlyCollection<AttributeScheme> Attributes
-        {
-            get
-            {
-                return this.attributesWrapper;
-            }
-        }
+        public IReadOnlyCollection<AttributeScheme> Attributes => attributesWrapper;
 
         [DataMember(Name = AttributeNames.Description)]
         public string Description
@@ -64,8 +58,8 @@ namespace Microsoft.SCIM
             Func<bool> containsFunction =
                 new Func<bool>(
                         () =>
-                            this
-                            .attributes
+
+                            attributes
                             .Any(
                                 (AttributeScheme item) =>
                                     string.Equals(item.Name, attribute.Name, StringComparison.OrdinalIgnoreCase)));
@@ -73,11 +67,11 @@ namespace Microsoft.SCIM
 
             if (!containsFunction())
             {
-                lock (this.thisLock)
+                lock (thisLock)
                 {
                     if (!containsFunction())
                     {
-                        this.attributes.Add(attribute);
+                        attributes.Add(attribute);
                     }
                 }
             }
@@ -86,36 +80,36 @@ namespace Microsoft.SCIM
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            this.OnInitialized();
+            OnInitialized();
         }
 
         [OnDeserializing]
         private void OnDeserializing(StreamingContext context)
         {
-            this.OnInitialization();
+            OnInitialization();
         }
 
         private void OnInitialization()
         {
-            this.thisLock = new object();
-            this.serializer = new JsonSerializer(this);
-            this.attributes = new List<AttributeScheme>();
+            thisLock = new object();
+            serializer = new JsonSerializer(this);
+            attributes = new List<AttributeScheme>();
         }
 
         private void OnInitialized()
         {
-            this.attributesWrapper = this.attributes.AsReadOnly();
+            attributesWrapper = attributes.AsReadOnly();
         }
 
         public string Serialize()
         {
-            string result = this.serializer.Serialize();
+            string result = serializer.Serialize();
             return result;
         }
 
         public Dictionary<string, object> ToJson()
         {
-            Dictionary<string, object> result = this.serializer.ToJson();
+            Dictionary<string, object> result = serializer.ToJson();
             return result;
         }
     }

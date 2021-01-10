@@ -15,7 +15,7 @@ namespace Microsoft.SCIM
             HttpResponseMessage message = null;
             try
             {
-                message = this.ProvideMessage(statusCode, content);
+                message = ProvideMessage(statusCode, content);
                 HttpResponseException result = new HttpResponseException(message);
                 result = null;
                 return result;

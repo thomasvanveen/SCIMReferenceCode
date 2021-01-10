@@ -4,6 +4,7 @@ namespace Microsoft.SCIM.WebHostSample.Provider
 {
     using System;
     using System.Threading.Tasks;
+
     using Microsoft.SCIM;
 
     public class InMemoryProvider : ProviderBase
@@ -13,20 +14,20 @@ namespace Microsoft.SCIM.WebHostSample.Provider
 
         public InMemoryProvider()
         {
-            this.groupProvider = new InMemoryGroupProvider();
-            this.userProvider = new InMemoryUserProvider();
+            groupProvider = new InMemoryGroupProvider();
+            userProvider = new InMemoryUserProvider();
         }
 
         public override Task<Resource> CreateAsync(Resource resource, string correlationIdentifier)
         {
             if (resource is Core2EnterpriseUser)
             {
-                return this.userProvider.CreateAsync(resource, correlationIdentifier);
+                return userProvider.CreateAsync(resource, correlationIdentifier);
             }
 
             if (resource is Core2Group)
             {
-                return this.groupProvider.CreateAsync(resource, correlationIdentifier);
+                return groupProvider.CreateAsync(resource, correlationIdentifier);
             }
 
             throw new NotImplementedException();
@@ -36,27 +37,27 @@ namespace Microsoft.SCIM.WebHostSample.Provider
         {
             if (resourceIdentifier.SchemaIdentifier.Equals(SchemaIdentifiers.Core2EnterpriseUser))
             {
-                return this.userProvider.DeleteAsync(resourceIdentifier, correlationIdentifier);
+                return userProvider.DeleteAsync(resourceIdentifier, correlationIdentifier);
             }
 
             if (resourceIdentifier.SchemaIdentifier.Equals(SchemaIdentifiers.Core2Group))
             {
-                return this.groupProvider.DeleteAsync(resourceIdentifier, correlationIdentifier);
+                return groupProvider.DeleteAsync(resourceIdentifier, correlationIdentifier);
             }
 
-            throw new  NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public override Task<Resource[]> QueryAsync(IQueryParameters parameters, string correlationIdentifier)
         {
             if (parameters.SchemaIdentifier.Equals(SchemaIdentifiers.Core2EnterpriseUser))
             {
-                return this.userProvider.QueryAsync(parameters, correlationIdentifier);
+                return userProvider.QueryAsync(parameters, correlationIdentifier);
             }
 
             if (parameters.SchemaIdentifier.Equals(SchemaIdentifiers.Core2Group))
             {
-                return this.groupProvider.QueryAsync(parameters, correlationIdentifier);
+                return groupProvider.QueryAsync(parameters, correlationIdentifier);
             }
 
             throw new NotImplementedException();
@@ -66,12 +67,12 @@ namespace Microsoft.SCIM.WebHostSample.Provider
         {
             if (resource is Core2EnterpriseUser)
             {
-                return this.userProvider.ReplaceAsync(resource, correlationIdentifier);
+                return userProvider.ReplaceAsync(resource, correlationIdentifier);
             }
 
             if (resource is Core2Group)
             {
-                return this.groupProvider.ReplaceAsync(resource, correlationIdentifier);
+                return groupProvider.ReplaceAsync(resource, correlationIdentifier);
             }
 
             throw new NotImplementedException();
@@ -81,12 +82,12 @@ namespace Microsoft.SCIM.WebHostSample.Provider
         {
             if (parameters.SchemaIdentifier.Equals(SchemaIdentifiers.Core2EnterpriseUser))
             {
-                return this.userProvider.RetrieveAsync(parameters, correlationIdentifier);
+                return userProvider.RetrieveAsync(parameters, correlationIdentifier);
             }
 
             if (parameters.SchemaIdentifier.Equals(SchemaIdentifiers.Core2Group))
             {
-                return this.groupProvider.RetrieveAsync(parameters, correlationIdentifier);
+                return groupProvider.RetrieveAsync(parameters, correlationIdentifier);
             }
 
             throw new NotImplementedException();
@@ -111,12 +112,12 @@ namespace Microsoft.SCIM.WebHostSample.Provider
 
             if (patch.ResourceIdentifier.SchemaIdentifier.Equals(SchemaIdentifiers.Core2EnterpriseUser))
             {
-                return this.userProvider.UpdateAsync(patch, correlationIdentifier);
+                return userProvider.UpdateAsync(patch, correlationIdentifier);
             }
 
             if (patch.ResourceIdentifier.SchemaIdentifier.Equals(SchemaIdentifiers.Core2Group))
             {
-                return this.groupProvider.UpdateAsync(patch, correlationIdentifier);
+                return groupProvider.UpdateAsync(patch, correlationIdentifier);
             }
 
             throw new NotImplementedException();

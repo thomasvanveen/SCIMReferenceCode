@@ -28,8 +28,8 @@ namespace Microsoft.SCIM
 
         public Core2ResourceType()
         {
-            this.AddSchema(SchemaIdentifiers.Core2ResourceType);
-            this.Metadata =
+            AddSchema(SchemaIdentifiers.Core2ResourceType);
+            Metadata =
                 new Core2Metadata()
                 {
                     ResourceType = Types.ResourceType
@@ -38,15 +38,12 @@ namespace Microsoft.SCIM
 
         public Uri Endpoint
         {
-            get
-            {
-                return this.endpoint;
-            }
+            get => endpoint;
 
             set
             {
-                this.endpoint = value;
-                this.endpointValue = new SystemForCrossDomainIdentityManagementResourceIdentifier(value).RelativePath;
+                endpoint = value;
+                endpointValue = new SystemForCrossDomainIdentityManagementResourceIdentifier(value).RelativePath;
             }
         }
 
@@ -68,28 +65,28 @@ namespace Microsoft.SCIM
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                this.endpoint = null;
+                endpoint = null;
                 return;
             }
 
-            this.endpoint = new Uri(value, UriKind.Relative);
+            endpoint = new Uri(value, UriKind.Relative);
         }
 
         private void InitializeEndpoint()
         {
-            this.InitializeEndpoint(this.endpointValue);
+            InitializeEndpoint(endpointValue);
         }
 
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            this.InitializeEndpoint();
+            InitializeEndpoint();
         }
 
         [OnSerializing]
         private void OnSerializing(StreamingContext context)
         {
-            this.name = this.Identifier;
+            name = Identifier;
         }
     }
 }

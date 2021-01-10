@@ -9,6 +9,7 @@ namespace Microsoft.SCIM
     using System.Globalization;
     using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
+
     using Microsoft.IdentityModel.Tokens;
 
     // Implements https://tools.ietf.org/html/draft-ietf-secevent-token
@@ -34,17 +35,17 @@ namespace Microsoft.SCIM
                 throw new ArgumentNullException(nameof(issuer));
             }
 
-            this.Issuer = issuer;
-            this.Header = header ?? throw new ArgumentNullException(nameof(header));
+            Issuer = issuer;
+            Header = header ?? throw new ArgumentNullException(nameof(header));
 
-            this.Identifier = Guid.NewGuid().ToString();
-            this.IssuedAt = DateTime.UtcNow;
+            Identifier = Guid.NewGuid().ToString();
+            IssuedAt = DateTime.UtcNow;
         }
 
         public EventToken(string issuer, JwtHeader header, IDictionary<string, object> events)
             : this(issuer, header)
         {
-            this.Events = events ?? throw new ArgumentNullException(nameof(events));
+            Events = events ?? throw new ArgumentNullException(nameof(events));
         }
 
         public EventToken(string issuer, Dictionary<string, object> events)
@@ -60,17 +61,17 @@ namespace Microsoft.SCIM
             }
 
             JwtSecurityToken token = new JwtSecurityToken(serialized);
-            this.Header = token.Header;
+            Header = token.Header;
 
-            this.ParseIdentifier(token.Payload);
-            this.ParseIssuer(token.Payload);
-            this.ParseAudience(token.Payload);
-            this.ParseIssuedAt(token.Payload);
-            this.ParseNotBefore(token.Payload);
-            this.ParseSubject(token.Payload);
-            this.ParseExpiration(token.Payload);
-            this.ParseEvents(token.Payload);
-            this.ParseTransaction(token.Payload);
+            ParseIdentifier(token.Payload);
+            ParseIssuer(token.Payload);
+            ParseAudience(token.Payload);
+            ParseIssuedAt(token.Payload);
+            ParseNotBefore(token.Payload);
+            ParseSubject(token.Payload);
+            ParseExpiration(token.Payload);
+            ParseEvents(token.Payload);
+            ParseTransaction(token.Payload);
         }
 
         public IReadOnlyCollection<string> Audience
@@ -135,8 +136,10 @@ namespace Microsoft.SCIM
 
         private static JwtHeader ComposeDefaultHeader()
         {
-            JwtHeader result = new JwtHeader();
-            result.Add(EventToken.HeaderKeyAlgorithm, EventToken.JwtAlgorithmNone);
+            JwtHeader result = new JwtHeader
+            {
+                { EventToken.HeaderKeyAlgorithm, EventToken.JwtAlgorithmNone }
+            };
             return result;
         }
 
@@ -179,7 +182,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentException(exceptionMessage);
             }
 
-            this.Audience = audience;
+            Audience = audience;
         }
 
         private void ParseEvents(JwtPayload payload)
@@ -210,7 +213,7 @@ namespace Microsoft.SCIM
                         value);
                 throw new ArgumentException(exceptionMessage);
             }
-            this.Events = events;
+            Events = events;
         }
 
         private void ParseExpiration(JwtPayload payload)
@@ -237,8 +240,8 @@ namespace Microsoft.SCIM
                 throw new ArgumentException(exceptionMessage);
             }
 
-            this.Expiration = new UnixTime(expiration).ToUniversalTime();
-            if (this.Expiration > DateTime.UtcNow)
+            Expiration = new UnixTime(expiration).ToUniversalTime();
+            if (Expiration > DateTime.UtcNow)
             {
                 throw new SecurityTokenExpiredException(SystemForCrossDomainIdentityManagementSchemasResources.ExceptionEventTokenExpired);
             }
@@ -272,7 +275,7 @@ namespace Microsoft.SCIM
                         value);
                 throw new ArgumentException(exceptionMessage);
             }
-            this.Identifier = identifier;
+            Identifier = identifier;
         }
 
         private void ParseIssuedAt(JwtPayload payload)
@@ -302,7 +305,7 @@ namespace Microsoft.SCIM
                         EventTokenClaimTypes.IssuedAt);
                 throw new ArgumentException(exceptionMessage);
             }
-            this.IssuedAt = new UnixTime(issuedAt).ToUniversalTime();
+            IssuedAt = new UnixTime(issuedAt).ToUniversalTime();
         }
 
         private void ParseIssuer(JwtPayload payload)
@@ -333,7 +336,7 @@ namespace Microsoft.SCIM
                         value);
                 throw new ArgumentException(exceptionMessage);
             }
-            this.Issuer = issuer;
+            Issuer = issuer;
         }
 
         private void ParseNotBefore(JwtPayload payload)
@@ -360,7 +363,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentException(exceptionMessage);
             }
 
-            this.NotBefore = new UnixTime(notBefore).ToUniversalTime();
+            NotBefore = new UnixTime(notBefore).ToUniversalTime();
         }
 
         private void ParseSubject(JwtPayload payload)
@@ -387,7 +390,7 @@ namespace Microsoft.SCIM
                 throw new ArgumentException(exceptionMessage);
             }
 
-            this.Subject = subject;
+            Subject = subject;
         }
 
         private void ParseTransaction(JwtPayload payload)
@@ -414,51 +417,52 @@ namespace Microsoft.SCIM
                 throw new ArgumentException(exceptionMessage);
             }
 
-            this.Transaction = transaction;
+            Transaction = transaction;
         }
 
         public override string ToString()
         {
-            JwtPayload payload = new JwtPayload();
-
-            payload.Add(EventTokenClaimTypes.Identifier, this.Identifier);
-
-            payload.Add(EventTokenClaimTypes.Issuer, this.Issuer);
-
-            if (this.Audience != null && this.Audience.Any())
+            JwtPayload payload = new JwtPayload
             {
-                string[] audience = this.Audience.ToArray();
+                { EventTokenClaimTypes.Identifier, Identifier },
+
+                { EventTokenClaimTypes.Issuer, Issuer }
+            };
+
+            if (Audience != null && Audience.Any())
+            {
+                string[] audience = Audience.ToArray();
                 payload.Add(EventTokenClaimTypes.Audience, audience);
             }
 
-            long issuedAt = new UnixTime(this.IssuedAt).EpochTimestamp;
+            long issuedAt = new UnixTime(IssuedAt).EpochTimestamp;
             payload.Add(EventTokenClaimTypes.IssuedAt, issuedAt);
 
-            if (this.NotBefore.HasValue)
+            if (NotBefore.HasValue)
             {
-                long notBefore = new UnixTime(this.NotBefore.Value).EpochTimestamp;
+                long notBefore = new UnixTime(NotBefore.Value).EpochTimestamp;
                 payload.Add(EventTokenClaimTypes.NotBefore, notBefore);
             }
 
-            if (!string.IsNullOrWhiteSpace(this.Subject))
+            if (!string.IsNullOrWhiteSpace(Subject))
             {
-                payload.Add(EventTokenClaimTypes.Subject, this.Subject);
+                payload.Add(EventTokenClaimTypes.Subject, Subject);
             }
 
-            if (this.Expiration.HasValue)
+            if (Expiration.HasValue)
             {
-                long expiration = new UnixTime(this.Expiration.Value).EpochTimestamp;
+                long expiration = new UnixTime(Expiration.Value).EpochTimestamp;
                 payload.Add(EventTokenClaimTypes.Expiration, expiration);
             }
 
-            payload.Add(EventTokenClaimTypes.Events, this.Events);
+            payload.Add(EventTokenClaimTypes.Events, Events);
 
-            if (!string.IsNullOrWhiteSpace(this.Transaction))
+            if (!string.IsNullOrWhiteSpace(Transaction))
             {
-                payload.Add(EventTokenClaimTypes.Transaction, this.Transaction);
+                payload.Add(EventTokenClaimTypes.Transaction, Transaction);
             }
 
-            SecurityToken token = new JwtSecurityToken(this.Header, payload);
+            SecurityToken token = new JwtSecurityToken(Header, payload);
             string result = EventToken.TokenSerializer.Value.WriteToken(token);
             return result;
         }

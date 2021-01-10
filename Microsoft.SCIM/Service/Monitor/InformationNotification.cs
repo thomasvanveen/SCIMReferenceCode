@@ -7,7 +7,7 @@ namespace Microsoft.SCIM
         public InformationNotification(string payload, bool verbose)
             : base(payload)
         {
-            this.Verbose = verbose;
+            Verbose = verbose;
         }
 
         public InformationNotification(string payload)
@@ -18,13 +18,13 @@ namespace Microsoft.SCIM
         public InformationNotification(string payload, long identifier)
             : base(payload, identifier)
         {
-            this.Verbose = false;
+            Verbose = false;
         }
 
         public InformationNotification(string payload, bool verbose, long identifier)
             : base(payload, identifier)
         {
-            this.Verbose = verbose;
+            Verbose = verbose;
         }
 
         public InformationNotification(
@@ -33,7 +33,7 @@ namespace Microsoft.SCIM
             string correlationIdentifier)
             : base(payload, correlationIdentifier)
         {
-            this.Verbose = verbose;
+            Verbose = verbose;
         }
 
         public InformationNotification(
@@ -50,7 +50,7 @@ namespace Microsoft.SCIM
             long identifier)
             : base(payload, correlationIdentifier, identifier)
         {
-            this.Verbose = verbose;
+            Verbose = verbose;
         }
 
         public InformationNotification(
