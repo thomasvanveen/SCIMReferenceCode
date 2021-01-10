@@ -8,7 +8,7 @@ namespace Microsoft.SCIM
     using System.Threading.Tasks;
     using System.Web.Http;
 
-    internal class RootProviderAdapter : ProviderAdapterTemplate<Resource>
+    public class RootProviderAdapter : ProviderAdapterTemplate<Resource>
     {
         public RootProviderAdapter(IProvider provider)
             : base(provider)

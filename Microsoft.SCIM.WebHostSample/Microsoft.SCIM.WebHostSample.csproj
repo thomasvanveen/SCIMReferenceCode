@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.SCIM\Microsoft.SCIM.csproj" />
+    <ProjectReference Include="..\Microsoft.SCIM.Controllers\Microsoft.SCIM.Controllers.csproj" />
   </ItemGroup>
 
   <ItemGroup>

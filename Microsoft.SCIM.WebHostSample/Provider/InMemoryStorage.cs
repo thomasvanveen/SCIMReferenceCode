@@ -1,12 +1,10 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+using System.Collections.Generic;
+
 namespace Microsoft.SCIM.WebHostSample.Provider
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Microsoft.SCIM;
-
     public class InMemoryStorage
     {
         internal readonly IDictionary<string, Core2Group> Groups;
@@ -18,10 +16,7 @@ namespace Microsoft.SCIM.WebHostSample.Provider
             Users = new Dictionary<string, Core2EnterpriseUser>();
         }
 
-        private static readonly Lazy<InMemoryStorage> InstanceValue =
-                                new Lazy<InMemoryStorage>(
-                                        () =>
-                                            new InMemoryStorage());
+        private static readonly Lazy<InMemoryStorage> InstanceValue = new Lazy<InMemoryStorage>(() => new InMemoryStorage());
 
         public static InMemoryStorage Instance => InMemoryStorage.InstanceValue.Value;
     }

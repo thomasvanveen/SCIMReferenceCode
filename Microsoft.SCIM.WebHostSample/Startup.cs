@@ -2,43 +2,58 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System.Text;
+using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.SCIM.WebHostSample.Provider;
+
 namespace Microsoft.SCIM.WebHostSample
 {
-    using System.Text;
-    using System.Threading.Tasks;
-
-    using Microsoft.AspNetCore.Authentication.JwtBearer;
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Routing;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
-    using Microsoft.IdentityModel.Tokens;
-    using Microsoft.SCIM.WebHostSample.Provider;
-
     public class Startup
     {
-        private readonly IWebHostEnvironment environment;
-        private readonly IConfiguration configuration;
+        private readonly IConfiguration _configuration;
+        private readonly IMonitor _monitoringBehavior;
+        private readonly IProvider _providerBehavior;
+        private readonly IWebHostEnvironment _environment;
 
-        public IMonitor MonitoringBehavior { get; set; }
-        public IProvider ProviderBehavior { get; set; }
-
-        public Startup(IWebHostEnvironment env, IConfiguration configuration)
+        public Startup(
+            IConfiguration configuration,
+            IWebHostEnvironment environment)
         {
-            environment = env;
-            this.configuration = configuration;
-
-            MonitoringBehavior = new ConsoleMonitor();
-            ProviderBehavior = new InMemoryProvider();
+            _configuration = configuration;
+            _environment = environment;
+            _monitoringBehavior = new ConsoleMonitor();
+            _providerBehavior = new InMemoryProvider();
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        public void Configure(IApplicationBuilder app)
+        {
+            if (_environment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseHsts();
+            app.UseRouting();
+            app.UseHttpsRedirection();
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+            });
+        }
         public void ConfigureServices(IServiceCollection services)
         {
-            if (environment.IsDevelopment())
+            if (_environment.IsDevelopment())
             {
                 // Development environment code
                 // Validation for bearer token for authorization used during testing.
@@ -59,9 +74,9 @@ namespace Microsoft.SCIM.WebHostSample
                             ValidateAudience = false,
                             ValidateLifetime = false,
                             ValidateIssuerSigningKey = false,
-                            ValidIssuer = configuration["Token:TokenIssuer"],
-                            ValidAudience = configuration["Token:TokenAudience"],
-                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Token:IssuerSigningKey"]))
+                            ValidIssuer = _configuration["Token:TokenIssuer"],
+                            ValidAudience = _configuration["Token:TokenAudience"],
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Token:IssuerSigningKey"]))
                         };
                 });
             }
@@ -80,8 +95,8 @@ namespace Microsoft.SCIM.WebHostSample
                 })
                 .AddJwtBearer(options =>
                 {
-                    options.Authority = configuration["Token:TokenIssuer"];
-                    options.Audience = configuration["Token:TokenAudience"];
+                    options.Authority = _configuration["Token:TokenIssuer"];
+                    options.Audience = _configuration["Token:TokenAudience"];
                     options.Events = new JwtBearerEvents
                     {
                         OnTokenValidated = context =>
@@ -96,30 +111,8 @@ namespace Microsoft.SCIM.WebHostSample
             }
 
             services.AddControllers().AddNewtonsoftJson();
-            services.AddSingleton(typeof(IProvider), ProviderBehavior);
-            services.AddSingleton(typeof(IMonitor), MonitoringBehavior);
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
-        {
-            if (environment.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseHsts();
-
-            app.UseRouting();
-            app.UseHttpsRedirection();
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-            app.UseEndpoints(
-                (IEndpointRouteBuilder endpoints) =>
-                {
-                    endpoints.MapDefaultControllerRoute();
-                });
+            services.AddSingleton(typeof(IProvider), _providerBehavior);
+            services.AddSingleton(typeof(IMonitor), _monitoringBehavior);
         }
 
         private Task AuthenticationFailed(AuthenticationFailedContext arg)

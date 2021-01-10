@@ -3,7 +3,7 @@
 namespace Microsoft.SCIM
 {
     // Members are numerically ordered.
-    internal static class ServiceNotificationIdentifiers
+    public static class ServiceNotificationIdentifiers
     {
         public const long BulkRequest2ControllerPostArgumentException = 1;
         public const long BulkRequest2ControllerPostException = 2;

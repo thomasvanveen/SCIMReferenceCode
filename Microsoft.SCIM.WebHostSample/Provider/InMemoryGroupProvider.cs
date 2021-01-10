@@ -1,17 +1,16 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web.Http;
+
+using Microsoft.SCIM.WebHostSample.Resources;
+
 namespace Microsoft.SCIM.WebHostSample.Provider
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.Web.Http;
-
-    using Microsoft.SCIM;
-    using Microsoft.SCIM.WebHostSample.Resources;
-
     public class InMemoryGroupProvider : ProviderBase
     {
         private readonly InMemoryStorage storage;
@@ -252,10 +251,7 @@ namespace Microsoft.SCIM.WebHostSample.Provider
                 throw new ArgumentException(SampleServiceResources.ExceptionInvalidPatch);
             }
 
-            PatchRequest2 patchRequest =
-                patch.PatchRequest as PatchRequest2;
-
-            if (null == patchRequest)
+            if (patch.PatchRequest is not PatchRequest2 patchRequest)
             {
                 string unsupportedPatchTypeName = patch.GetType().FullName;
                 throw new NotSupportedException(unsupportedPatchTypeName);
