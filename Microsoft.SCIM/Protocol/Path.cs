@@ -9,6 +9,8 @@ namespace Microsoft.SCIM
     using System.Globalization;
     using System.Text.RegularExpressions;
 
+    using Microsoft.SCIM.Protocol;
+
     public sealed class Path : IPath
     {
         private const string ArgumentNamePathExpression = "pathExpression";
@@ -95,7 +97,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidPathTemplate,
+                        ProtocolResources.ExceptionInvalidPathTemplate,
                         pathExpression);
                 throw new ArgumentException(exceptionMessage);
             }

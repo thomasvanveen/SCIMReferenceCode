@@ -9,6 +9,8 @@ namespace Microsoft.SCIM
     using System.Linq;
     using System.Runtime.Serialization;
 
+    using Microsoft.SCIM.Schemas;
+
     [DataContract]
     public abstract class ServiceConfigurationBase : Schematized
     {
@@ -85,7 +87,7 @@ namespace Microsoft.SCIM
             if (string.IsNullOrWhiteSpace(authenticationScheme.Name))
             {
                 throw new ArgumentException(
-                    SystemForCrossDomainIdentityManagementSchemasResources.ExceptionUnnamedAuthenticationScheme);
+                    SchemasResources.ExceptionUnnamedAuthenticationScheme);
             }
 
             Func<bool> containsFunction =

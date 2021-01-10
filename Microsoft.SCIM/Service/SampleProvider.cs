@@ -11,6 +11,8 @@ namespace Microsoft.SCIM
     using System.Threading.Tasks;
     using System.Web.Http;
 
+    using Microsoft.SCIM.Service;
+
     using Newtonsoft.Json;
 
     public sealed class SampleProvider : ProviderBase, ISampleProvider
@@ -228,7 +230,7 @@ namespace Microsoft.SCIM
 
             if (string.IsNullOrWhiteSpace(containerIdentifier.Identifier))
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidIdentifier);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidIdentifier);
             }
 
             if (!string.Equals(memberAttributePath, AttributeNames.Members, StringComparison.Ordinal))
@@ -236,14 +238,14 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementServiceResources.ExceptionFilterAttributePathNotSupportedTemplate,
+                        ServiceResources.ExceptionFilterAttributePathNotSupportedTemplate,
                         memberAttributePath);
                 throw new NotSupportedException(exceptionMessage);
             }
 
             if (!string.Equals(SchemaIdentifiers.Core2Group, containerIdentifier.SchemaIdentifier, StringComparison.Ordinal))
             {
-                throw new NotSupportedException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionFilterNotSupported);
+                throw new NotSupportedException(ServiceResources.ExceptionFilterNotSupported);
             }
 
             bool result =
@@ -275,12 +277,12 @@ namespace Microsoft.SCIM
 
             if (null == request.Payload)
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidRequest);
             }
 
             if (string.IsNullOrWhiteSpace(request.CorrelationIdentifier))
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidRequest);
             }
 
             IReadOnlyCollection<Resource> resources = await QueryAsync(request).ConfigureAwait(false);
@@ -304,7 +306,7 @@ namespace Microsoft.SCIM
 
             if (parameters.AlternateFilters.Count != 1)
             {
-                throw new NotSupportedException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionFilterCount);
+                throw new NotSupportedException(ServiceResources.ExceptionFilterCount);
             }
 
             if (parameters.PaginationParameters != null)
@@ -312,7 +314,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                         string.Format(
                             CultureInfo.InvariantCulture,
-                            SystemForCrossDomainIdentityManagementServiceResources.ExceptionPaginationIsNotSupportedTemplate,
+                            ServiceResources.ExceptionPaginationIsNotSupportedTemplate,
                             parameters.SchemaIdentifier);
                 throw new NotSupportedException(exceptionMessage);
             }
@@ -338,7 +340,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                         string.Format(
                             CultureInfo.InvariantCulture,
-                            SystemForCrossDomainIdentityManagementServiceResources.ExceptionFilterAttributePathNotSupportedTemplate,
+                            ServiceResources.ExceptionFilterAttributePathNotSupportedTemplate,
                             filter.AttributePath);
                 throw new NotSupportedException(exceptionMessage);
             }
@@ -371,7 +373,7 @@ namespace Microsoft.SCIM
                 || !parameters.ExcludedAttributePaths.Single().Equals(AttributeNames.Members, StringComparison.Ordinal)
             )
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionQueryNotSupported);
+                throw new ArgumentException(ServiceResources.ExceptionQueryNotSupported);
             }
 
             if (
@@ -382,7 +384,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementServiceResources.ExceptionFilterAttributePathNotSupportedTemplate,
+                        ServiceResources.ExceptionFilterAttributePathNotSupportedTemplate,
                         filter.AttributePath);
                 throw new NotSupportedException(exceptionMessage);
             }
@@ -392,7 +394,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementServiceResources.ExceptionFilterOperatorNotSupportedTemplate,
+                        ServiceResources.ExceptionFilterOperatorNotSupportedTemplate,
                         filter.FilterOperator);
                 throw new NotSupportedException(exceptionMessage);
             }
@@ -424,40 +426,40 @@ namespace Microsoft.SCIM
 
             if (null == filter.AdditionalFilter)
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionQueryNotSupported);
+                throw new ArgumentException(ServiceResources.ExceptionQueryNotSupported);
             }
 
             Resource[] results = null;
 
             if (parameters.ExcludedAttributePaths != null && parameters.ExcludedAttributePaths.Any())
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionQueryNotSupported);
+                throw new ArgumentException(ServiceResources.ExceptionQueryNotSupported);
             }
 
             if (!string.Equals(parameters.SchemaIdentifier, SchemaIdentifiers.Core2Group, StringComparison.Ordinal))
             {
-                throw new NotSupportedException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionQueryNotSupported);
+                throw new NotSupportedException(ServiceResources.ExceptionQueryNotSupported);
             }
 
             if (null == parameters.RequestedAttributePaths || !parameters.RequestedAttributePaths.Any())
             {
-                throw new NotSupportedException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionQueryNotSupported);
+                throw new NotSupportedException(ServiceResources.ExceptionQueryNotSupported);
             }
 
             if (filter.AdditionalFilter.AdditionalFilter != null)
             {
-                throw new NotSupportedException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionQueryNotSupported);
+                throw new NotSupportedException(ServiceResources.ExceptionQueryNotSupported);
             }
 
             string selectedAttribute = parameters.RequestedAttributePaths.SingleOrDefault();
             if (string.IsNullOrWhiteSpace(selectedAttribute))
             {
-                throw new NotSupportedException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionQueryNotSupported);
+                throw new NotSupportedException(ServiceResources.ExceptionQueryNotSupported);
             }
 
             if (!string.Equals(selectedAttribute, AttributeNames.Identifier, StringComparison.OrdinalIgnoreCase))
             {
-                throw new NotSupportedException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionQueryNotSupported);
+                throw new NotSupportedException(ServiceResources.ExceptionQueryNotSupported);
             }
 
             IReadOnlyCollection<IFilter> filters =
@@ -474,7 +476,7 @@ namespace Microsoft.SCIM
                         item.AttributePath.Equals(AttributeNames.Identifier, StringComparison.OrdinalIgnoreCase));
             if (null == filterIdentifier)
             {
-                throw new NotSupportedException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionQueryNotSupported);
+                throw new NotSupportedException(ServiceResources.ExceptionQueryNotSupported);
             }
 
             IFilter filterMembers =
@@ -484,7 +486,7 @@ namespace Microsoft.SCIM
                         item.AttributePath.Equals(AttributeNames.Members, StringComparison.OrdinalIgnoreCase));
             if (null == filterMembers)
             {
-                throw new NotSupportedException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionQueryNotSupported);
+                throw new NotSupportedException(ServiceResources.ExceptionQueryNotSupported);
             }
 
             IResourceIdentifier containerIdentifier =
@@ -525,7 +527,7 @@ namespace Microsoft.SCIM
 
             if (parameters.ExcludedAttributePaths != null && parameters.ExcludedAttributePaths.Any())
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionQueryNotSupported);
+                throw new ArgumentException(ServiceResources.ExceptionQueryNotSupported);
             }
 
             if
@@ -537,7 +539,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementServiceResources.ExceptionFilterAttributePathNotSupportedTemplate,
+                        ServiceResources.ExceptionFilterAttributePathNotSupportedTemplate,
                         filter.AttributePath);
                 throw new NotSupportedException(exceptionMessage);
             }
@@ -547,7 +549,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementServiceResources.ExceptionFilterOperatorNotSupportedTemplate,
+                        ServiceResources.ExceptionFilterOperatorNotSupportedTemplate,
                         filter.FilterOperator);
                 throw new NotSupportedException(exceptionMessage);
             }
@@ -578,7 +580,7 @@ namespace Microsoft.SCIM
 
             if (null == resource.Identifier)
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidResource);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidResource);
             }
 
             if
@@ -603,7 +605,7 @@ namespace Microsoft.SCIM
 
             if (null == parameters.ResourceIdentifier)
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidParameters);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidParameters);
             }
 
             Resource resource = null;

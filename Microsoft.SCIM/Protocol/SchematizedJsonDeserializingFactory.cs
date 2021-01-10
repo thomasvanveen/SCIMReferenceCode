@@ -10,6 +10,8 @@ namespace Microsoft.SCIM
     using System.Linq;
     using System.Threading;
 
+    using Microsoft.SCIM.Protocol;
+
     public sealed class SchematizedJsonDeserializingFactory : SchematizedJsonDeserializingFactoryBase
     {
         private ISchematizedJsonDeserializingFactory<PatchRequest2> patchSerializer;
@@ -67,7 +69,7 @@ namespace Microsoft.SCIM
 
             if (schemaIdentifiers.Count != 1)
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidResource);
+                throw new ArgumentException(ProtocolResources.ExceptionInvalidResource);
             }
 
             Resource result = new Core2GroupJsonDeserializingFactory().Create(json);
@@ -92,7 +94,7 @@ namespace Microsoft.SCIM
             }
 
             throw new InvalidOperationException(
-                SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidRequest);
+                ProtocolResources.ExceptionInvalidRequest);
         }
 
         private Resource CreateUser(
@@ -132,7 +134,7 @@ namespace Microsoft.SCIM
             {
                 if (schemaIdentifiers.Count != 1)
                 {
-                    throw new ArgumentException(SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidResource);
+                    throw new ArgumentException(ProtocolResources.ExceptionInvalidResource);
                 }
 
                 Resource result = new Core2UserJsonDeserializingFactory().Create(json);
@@ -150,7 +152,7 @@ namespace Microsoft.SCIM
             IReadOnlyDictionary<string, object> normalizedJson = Normalize(json);
             if (!normalizedJson.TryGetValue(AttributeNames.Schemas, out object value))
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementProtocolResources.ExceptionUnidentifiableSchema);
+                throw new ArgumentException(ProtocolResources.ExceptionUnidentifiableSchema);
             }
 
             IReadOnlyCollection<string> schemaIdentifiers;
@@ -162,7 +164,7 @@ namespace Microsoft.SCIM
                     break;
                 default:
                     throw new ArgumentException(
-                        SystemForCrossDomainIdentityManagementProtocolResources.ExceptionUnidentifiableSchema);
+                        ProtocolResources.ExceptionUnidentifiableSchema);
             }
 
 #pragma warning disable IDE0018 // Inline variable declaration

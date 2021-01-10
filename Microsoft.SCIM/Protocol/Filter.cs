@@ -10,6 +10,8 @@ namespace Microsoft.SCIM
     using System.Linq;
     using System.Web;
 
+    using Microsoft.SCIM.Protocol;
+
     public sealed class Filter : IFilter
     {
         private const string ComparisonValueTemplate = "\"{0}\"";
@@ -369,21 +371,21 @@ namespace Microsoft.SCIM
                     if (!bool.TryParse(value, out bool _))
                     {
                         throw new InvalidOperationException(
-                            SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidValue);
+                            ProtocolResources.ExceptionInvalidValue);
                     }
                     break;
                 case AttributeDataType.Decimal:
                     if (!double.TryParse(value, out double _))
                     {
                         throw new InvalidOperationException(
-                            SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidValue);
+                            ProtocolResources.ExceptionInvalidValue);
                     }
                     break;
                 case AttributeDataType.Integer:
                     if (!long.TryParse(value, out long _))
                     {
                         throw new InvalidOperationException(
-                            SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidValue);
+                            ProtocolResources.ExceptionInvalidValue);
                     }
                     break;
                 case AttributeDataType.Binary:

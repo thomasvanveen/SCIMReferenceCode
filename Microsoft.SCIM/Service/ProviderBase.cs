@@ -7,6 +7,8 @@ namespace Microsoft.SCIM
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.SCIM.Service;
+
     public abstract class ProviderBase : IProvider
     {
         private static readonly Lazy<BulkRequestsFeature> BulkFeatureSupport =
@@ -74,12 +76,12 @@ namespace Microsoft.SCIM
 
             if (null == request.Payload)
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidRequest);
             }
 
             if (string.IsNullOrWhiteSpace(request.CorrelationIdentifier))
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidRequest);
             }
 
             Resource result = await CreateAsync(request.Payload, request.CorrelationIdentifier).ConfigureAwait(false);
@@ -97,12 +99,12 @@ namespace Microsoft.SCIM
 
             if (null == request.Payload)
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidRequest);
             }
 
             if (string.IsNullOrWhiteSpace(request.CorrelationIdentifier))
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidRequest);
             }
 
             await DeleteAsync(request.Payload, request.CorrelationIdentifier).ConfigureAwait(false);
@@ -138,12 +140,12 @@ namespace Microsoft.SCIM
 
             if (null == request.Payload)
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidRequest);
             }
 
             if (string.IsNullOrWhiteSpace(request.CorrelationIdentifier))
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidRequest);
             }
 
             Resource[] result = await QueryAsync(request.Payload, request.CorrelationIdentifier).ConfigureAwait(false);
@@ -164,12 +166,12 @@ namespace Microsoft.SCIM
 
             if (null == request.Payload)
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidRequest);
             }
 
             if (string.IsNullOrWhiteSpace(request.CorrelationIdentifier))
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidRequest);
             }
 
             Resource result = await ReplaceAsync(request.Payload, request.CorrelationIdentifier).ConfigureAwait(false);
@@ -187,12 +189,12 @@ namespace Microsoft.SCIM
 
             if (null == request.Payload)
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidRequest);
             }
 
             if (string.IsNullOrWhiteSpace(request.CorrelationIdentifier))
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidRequest);
             }
 
             Resource result = await RetrieveAsync(request.Payload, request.CorrelationIdentifier).ConfigureAwait(false);
@@ -210,12 +212,12 @@ namespace Microsoft.SCIM
 
             if (null == request.Payload)
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidRequest);
             }
 
             if (string.IsNullOrWhiteSpace(request.CorrelationIdentifier))
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidRequest);
             }
 
             await UpdateAsync(request.Payload, request.CorrelationIdentifier).ConfigureAwait(false);

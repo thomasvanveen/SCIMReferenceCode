@@ -9,6 +9,8 @@ namespace Microsoft.SCIM
     using System.Globalization;
     using System.Runtime.Serialization;
 
+    using Microsoft.SCIM.Protocol;
+
     [DataContract]
     public sealed class PatchOperation2 : PatchOperation2Base
     {
@@ -91,7 +93,7 @@ namespace Microsoft.SCIM
                     valuesWrapper = valueList.AsReadOnly();
                     break;
                 default:
-                    throw new NotSupportedException(SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidValue);
+                    throw new NotSupportedException(ProtocolResources.ExceptionInvalidValue);
             }
         }
 

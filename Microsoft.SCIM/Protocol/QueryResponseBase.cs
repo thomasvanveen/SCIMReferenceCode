@@ -9,6 +9,8 @@ namespace Microsoft.SCIM
     using System.Linq;
     using System.Runtime.Serialization;
 
+    using Microsoft.SCIM.Protocol;
+
     [DataContract]
     public abstract class QueryResponseBase : Schematized
     {
@@ -57,7 +59,7 @@ namespace Microsoft.SCIM
             {
                 if (null == value)
                 {
-                    throw new InvalidOperationException(SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidValue);
+                    throw new InvalidOperationException(ProtocolResources.ExceptionInvalidValue);
                 }
 
                 resources = value.ToArray();
@@ -133,7 +135,7 @@ namespace Microsoft.SCIM
             {
                 if (null == value)
                 {
-                    throw new InvalidOperationException(SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidValue);
+                    throw new InvalidOperationException(ProtocolResources.ExceptionInvalidValue);
                 }
                 resources = value.ToArray();
             }

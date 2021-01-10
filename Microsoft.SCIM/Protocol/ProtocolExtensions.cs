@@ -16,6 +16,8 @@ namespace Microsoft.SCIM
     using System.Threading.Tasks;
     using System.Web;
 
+    using Microsoft.SCIM.Protocol;
+
     using Newtonsoft.Json;
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "None")]
@@ -643,7 +645,7 @@ namespace Microsoft.SCIM
 
             if (string.IsNullOrWhiteSpace(resource.Identifier))
             {
-                throw new InvalidOperationException(SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidResource);
+                throw new InvalidOperationException(ProtocolResources.ExceptionInvalidResource);
             }
 
             Uri foundation = resource.GetResourceIdentifier(baseResourceIdentifier);
@@ -872,7 +874,7 @@ namespace Microsoft.SCIM
 
             if (string.IsNullOrWhiteSpace(resource.Identifier))
             {
-                throw new InvalidOperationException(SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidResource);
+                throw new InvalidOperationException(ProtocolResources.ExceptionInvalidResource);
             }
 
             if (resource.TryGetIdentifier(baseResourceIdentifier, out Uri result))
@@ -899,7 +901,7 @@ namespace Microsoft.SCIM
 
             if (!schemaIdentifiers.Any())
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementProtocolResources.ExceptionUnidentifiableSchema);
+                throw new ArgumentException(ProtocolResources.ExceptionUnidentifiableSchema);
             }
 
             foreach (string schema in schemaIdentifiers)
@@ -938,7 +940,7 @@ namespace Microsoft.SCIM
 
             if (null == schematized.Schemas)
             {
-                throw new InvalidOperationException(SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidResource);
+                throw new InvalidOperationException(ProtocolResources.ExceptionInvalidResource);
             }
 
             Uri result;

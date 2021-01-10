@@ -11,6 +11,7 @@ namespace Microsoft.SCIM
     using System.Linq;
 
     using Microsoft.IdentityModel.Tokens;
+    using Microsoft.SCIM.Schemas;
 
     // Implements https://tools.ietf.org/html/draft-ietf-secevent-token
     public class EventToken : IEventToken
@@ -161,7 +162,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                 string.Format(
                     CultureInfo.InvariantCulture,
-                    SystemForCrossDomainIdentityManagementSchemasResources.ExceptionEventTokenInvalidClaimValueTemplate,
+                    SchemasResources.ExceptionEventTokenInvalidClaimValueTemplate,
                     EventTokenClaimTypes.Audience,
                     value);
                 throw new ArgumentException(exceptionMessage);
@@ -176,7 +177,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                 string.Format(
                     CultureInfo.InvariantCulture,
-                    SystemForCrossDomainIdentityManagementSchemasResources.ExceptionEventTokenInvalidClaimValueTemplate,
+                    SchemasResources.ExceptionEventTokenInvalidClaimValueTemplate,
                     EventTokenClaimTypes.Audience,
                     value);
                 throw new ArgumentException(exceptionMessage);
@@ -197,7 +198,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementSchemasResources.ExceptionEventTokenMissingClaimTemplate,
+                        SchemasResources.ExceptionEventTokenMissingClaimTemplate,
                         EventTokenClaimTypes.Events);
                 throw new ArgumentException(exceptionMessage);
             }
@@ -208,7 +209,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementSchemasResources.ExceptionEventTokenInvalidClaimValueTemplate,
+                        SchemasResources.ExceptionEventTokenInvalidClaimValueTemplate,
                         EventTokenClaimTypes.Events,
                         value);
                 throw new ArgumentException(exceptionMessage);
@@ -234,7 +235,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementSchemasResources.ExceptionEventTokenInvalidClaimValueTemplate,
+                        SchemasResources.ExceptionEventTokenInvalidClaimValueTemplate,
                         EventTokenClaimTypes.Expiration,
                         value);
                 throw new ArgumentException(exceptionMessage);
@@ -243,7 +244,7 @@ namespace Microsoft.SCIM
             Expiration = new UnixTime(expiration).ToUniversalTime();
             if (Expiration > DateTime.UtcNow)
             {
-                throw new SecurityTokenExpiredException(SystemForCrossDomainIdentityManagementSchemasResources.ExceptionEventTokenExpired);
+                throw new SecurityTokenExpiredException(SchemasResources.ExceptionEventTokenExpired);
             }
         }
 
@@ -259,7 +260,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementSchemasResources.ExceptionEventTokenMissingClaimTemplate,
+                        SchemasResources.ExceptionEventTokenMissingClaimTemplate,
                         EventTokenClaimTypes.Identifier);
                 throw new ArgumentException(exceptionMessage);
             }
@@ -270,7 +271,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementSchemasResources.ExceptionEventTokenInvalidClaimValueTemplate,
+                        SchemasResources.ExceptionEventTokenInvalidClaimValueTemplate,
                         EventTokenClaimTypes.Identifier,
                         value);
                 throw new ArgumentException(exceptionMessage);
@@ -290,7 +291,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementSchemasResources.ExceptionEventTokenMissingClaimTemplate,
+                        SchemasResources.ExceptionEventTokenMissingClaimTemplate,
                         EventTokenClaimTypes.IssuedAt);
                 throw new ArgumentException(exceptionMessage);
             }
@@ -301,7 +302,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementSchemasResources.ExceptionEventTokenMissingClaimTemplate,
+                        SchemasResources.ExceptionEventTokenMissingClaimTemplate,
                         EventTokenClaimTypes.IssuedAt);
                 throw new ArgumentException(exceptionMessage);
             }
@@ -320,7 +321,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementSchemasResources.ExceptionEventTokenMissingClaimTemplate,
+                        SchemasResources.ExceptionEventTokenMissingClaimTemplate,
                         EventTokenClaimTypes.Issuer);
                 throw new ArgumentException(exceptionMessage);
             }
@@ -331,7 +332,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementSchemasResources.ExceptionEventTokenInvalidClaimValueTemplate,
+                        SchemasResources.ExceptionEventTokenInvalidClaimValueTemplate,
                         EventTokenClaimTypes.Issuer,
                         value);
                 throw new ArgumentException(exceptionMessage);
@@ -357,7 +358,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementSchemasResources.ExceptionEventTokenInvalidClaimValueTemplate,
+                        SchemasResources.ExceptionEventTokenInvalidClaimValueTemplate,
                         EventTokenClaimTypes.NotBefore,
                         value);
                 throw new ArgumentException(exceptionMessage);
@@ -384,7 +385,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementSchemasResources.ExceptionEventTokenInvalidClaimValueTemplate,
+                        SchemasResources.ExceptionEventTokenInvalidClaimValueTemplate,
                         EventTokenClaimTypes.Subject,
                         value);
                 throw new ArgumentException(exceptionMessage);
@@ -411,7 +412,7 @@ namespace Microsoft.SCIM
                 string exceptionMessage =
                 string.Format(
                     CultureInfo.InvariantCulture,
-                    SystemForCrossDomainIdentityManagementSchemasResources.ExceptionEventTokenInvalidClaimValueTemplate,
+                    SchemasResources.ExceptionEventTokenInvalidClaimValueTemplate,
                     EventTokenClaimTypes.Transaction,
                     value);
                 throw new ArgumentException(exceptionMessage);

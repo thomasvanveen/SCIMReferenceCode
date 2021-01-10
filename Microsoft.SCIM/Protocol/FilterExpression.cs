@@ -11,6 +11,8 @@ namespace Microsoft.SCIM
     using System.Text;
     using System.Text.RegularExpressions;
 
+    using Microsoft.SCIM.Protocol;
+
     // Parses filter expressions into a doubly-linked list.
     // A collection of IFilter objects can be obtained from the fully-parsed expression.
     //
@@ -222,7 +224,7 @@ namespace Microsoft.SCIM
                     string message =
                        string.Format(
                            CultureInfo.InvariantCulture,
-                           SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidFilterTemplate,
+                           ProtocolResources.ExceptionInvalidFilterTemplate,
                            Text);
 #pragma warning disable CA1303 // Do not pass literals as localized parameters
                     throw new ArgumentOutOfRangeException(message, nameof(Group));
@@ -243,7 +245,7 @@ namespace Microsoft.SCIM
                     string message =
                        string.Format(
                            CultureInfo.InvariantCulture,
-                           SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidFilterTemplate,
+                           ProtocolResources.ExceptionInvalidFilterTemplate,
                            Text);
 #pragma warning disable CA1303 // Do not pass literals as localized parameters
                     throw new ArgumentOutOfRangeException(message, nameof(Level));
@@ -531,7 +533,7 @@ namespace Microsoft.SCIM
                 string message =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidFilterTemplate,
+                        ProtocolResources.ExceptionInvalidFilterTemplate,
                         Text);
                 throw new InvalidOperationException(message);
             }
@@ -543,7 +545,7 @@ namespace Microsoft.SCIM
                 string message =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidFilterTemplate,
+                        ProtocolResources.ExceptionInvalidFilterTemplate,
                         Text);
                 throw new InvalidOperationException(message);
             }
@@ -554,7 +556,7 @@ namespace Microsoft.SCIM
                 string message =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidFilterTemplate,
+                        ProtocolResources.ExceptionInvalidFilterTemplate,
                         Text);
                 throw new InvalidOperationException(message);
             }
@@ -590,7 +592,7 @@ namespace Microsoft.SCIM
                     string message =
                         string.Format(
                             CultureInfo.InvariantCulture,
-                            SystemForCrossDomainIdentityManagementProtocolResources.ExceptionInvalidFilterTemplate,
+                            ProtocolResources.ExceptionInvalidFilterTemplate,
                             Text);
                     throw new InvalidOperationException(message);
                 }

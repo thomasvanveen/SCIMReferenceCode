@@ -6,6 +6,8 @@ namespace Microsoft.SCIM
     using System.Globalization;
     using System.Threading;
 
+    using Microsoft.SCIM.Service;
+
     public sealed class ConsoleMonitor : IMonitor
     {
         private const string PrefixTemplate = "{0}{1}<{2}>";
@@ -27,7 +29,7 @@ namespace Microsoft.SCIM
                     ConsoleMonitor.CorrelationIdentifierDefault.Value : notification.CorrelationIdentifier;
             string effectiveMessageIdentifier =
                 notification.Identifier.HasValue ?
-                    string.Empty : string.Format(CultureInfo.InvariantCulture, SystemForCrossDomainIdentityManagementServiceResources.MonitorCorrelationIdentifierPrefixTemplate, notification.Identifier);
+                    string.Empty : string.Format(CultureInfo.InvariantCulture, ServiceResources.MonitorCorrelationIdentifierPrefixTemplate, notification.Identifier);
             string result =
                 string.Format(
                     CultureInfo.InvariantCulture,
@@ -47,7 +49,7 @@ namespace Microsoft.SCIM
 
             string prefix = ConsoleMonitor.ComposePrefix<string>(notification);
             Console.WriteLine(
-                SystemForCrossDomainIdentityManagementServiceResources.MonitorOutputInformationTemplate,
+                ServiceResources.MonitorOutputInformationTemplate,
                 prefix,
                 notification.Message,
                 notification.Verbose);
@@ -62,7 +64,7 @@ namespace Microsoft.SCIM
 
             string prefix = ConsoleMonitor.ComposePrefix<Exception>(notification);
             Console.WriteLine(
-                SystemForCrossDomainIdentityManagementServiceResources.MonitorOutputExceptionTemplate,
+                ServiceResources.MonitorOutputExceptionTemplate,
                 prefix,
                 notification.Message,
                 notification.Critical);
@@ -77,7 +79,7 @@ namespace Microsoft.SCIM
 
             string prefix = ConsoleMonitor.ComposePrefix<Exception>(notification);
             Console.WriteLine(
-                SystemForCrossDomainIdentityManagementServiceResources.MonitorOutputTemplate,
+                ServiceResources.MonitorOutputTemplate,
                 prefix,
                 notification.Message);
         }
@@ -91,7 +93,7 @@ namespace Microsoft.SCIM
 
             string prefix = ConsoleMonitor.ComposePrefix<string>(notification);
             Console.WriteLine(
-                SystemForCrossDomainIdentityManagementServiceResources.MonitorOutputTemplate,
+                ServiceResources.MonitorOutputTemplate,
                 prefix,
                 notification.Message);
         }

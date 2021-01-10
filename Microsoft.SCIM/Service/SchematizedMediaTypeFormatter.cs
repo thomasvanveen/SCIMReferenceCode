@@ -14,6 +14,8 @@ namespace Microsoft.SCIM
     using System.Threading.Tasks;
     using System.Web.Http;
 
+    using Microsoft.SCIM.Service;
+
     public sealed class SchematizedMediaTypeFormatter : MediaTypeFormatter
     {
         private static readonly Encoding Encoding = Encoding.UTF8;
@@ -140,7 +142,7 @@ namespace Microsoft.SCIM
             }
 
             string characters = await SchematizedMediaTypeFormatter.ReadFromStream(readStream).ConfigureAwait(false);
-            string information = string.Concat(SystemForCrossDomainIdentityManagementServiceResources.InformationRead, characters);
+            string information = string.Concat(ServiceResources.InformationRead, characters);
             IInformationNotification notification =
                 InformationNotificationFactory.Instance.CreateNotification(
                     information,
@@ -268,7 +270,7 @@ namespace Microsoft.SCIM
             }
             string information =
                 string.Concat(
-                    SystemForCrossDomainIdentityManagementServiceResources.InformationWrote,
+                    ServiceResources.InformationWrote,
                     characters);
             IInformationNotification notification =
                 InformationNotificationFactory.Instance.CreateNotification(

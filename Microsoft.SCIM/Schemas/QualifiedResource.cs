@@ -9,6 +9,8 @@ namespace Microsoft.SCIM
     using System.Linq;
     using System.Runtime.Serialization;
 
+    using Microsoft.SCIM.Schemas;
+
     [DataContract]
     public abstract class QualifiedResource : Resource
     {
@@ -35,7 +37,7 @@ namespace Microsoft.SCIM
                 string errorMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementSchemasResources.ExceptionMultipleQualifiedResourceTypeIdentifiersTemplate,
+                        SchemasResources.ExceptionMultipleQualifiedResourceTypeIdentifiersTemplate,
                         typeName);
                 throw new InvalidOperationException(errorMessage);
             }
@@ -63,7 +65,7 @@ namespace Microsoft.SCIM
                 string errorMessage =
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        SystemForCrossDomainIdentityManagementSchemasResources.ExceptionMultipleQualifiedResourceTypeIdentifiersTemplate,
+                        SchemasResources.ExceptionMultipleQualifiedResourceTypeIdentifiersTemplate,
                         typeName);
                 throw new InvalidOperationException(errorMessage);
             }

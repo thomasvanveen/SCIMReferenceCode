@@ -9,6 +9,8 @@ namespace Microsoft.SCIM
     using System.Globalization;
     using System.Linq;
 
+    using Microsoft.SCIM.Schemas;
+
     public sealed class SystemForCrossDomainIdentityManagementResourceIdentifier :
         ISystemForCrossDomainIdentityManagementResourceIdentifier
     {
@@ -55,7 +57,7 @@ namespace Microsoft.SCIM
                     string exceptionMessage =
                         string.Format(
                             CultureInfo.InvariantCulture,
-                            SystemForCrossDomainIdentityManagementSchemasResources.ExceptionInvalidIdentifierTemplate,
+                            SchemasResources.ExceptionInvalidIdentifierTemplate,
                             path);
                     throw new ArgumentException(exceptionMessage);
                 }

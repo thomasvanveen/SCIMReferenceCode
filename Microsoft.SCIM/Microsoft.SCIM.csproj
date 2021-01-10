@@ -15,37 +15,37 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="SystemForCrossDomainIdentityManagementServiceResources.Designer.cs">
+    <Compile Update="Service\ServiceResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>SystemForCrossDomainIdentityManagementServiceResources.resx</DependentUpon>
+      <DependentUpon>ServiceResources.resx</DependentUpon>
     </Compile>
-    <Compile Update="SystemForCrossDomainIdentityManagementProtocolResources.Designer.cs">
+    <Compile Update="Protocol\ProtocolResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>SystemForCrossDomainIdentityManagementProtocolResources.resx</DependentUpon>
+      <DependentUpon>ProtocolResources.resx</DependentUpon>
     </Compile>
-    <Compile Update="SystemForCrossDomainIdentityManagementSchemasResources.Designer.cs">
+    <Compile Update="Schemas\SchemasResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>SystemForCrossDomainIdentityManagementSchemasResources.resx</DependentUpon>
+      <DependentUpon>SchemasResources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="SystemForCrossDomainIdentityManagementServiceResources.resx">
+    <EmbeddedResource Update="Service\ServiceResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SystemForCrossDomainIdentityManagementServiceResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>ServiceResources.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Update="SystemForCrossDomainIdentityManagementProtocolResources.resx">
+    <EmbeddedResource Update="Protocol\ProtocolResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SystemForCrossDomainIdentityManagementProtocolResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>ProtocolResources.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Update="SystemForCrossDomainIdentityManagementSchemasResources.resx">
+    <EmbeddedResource Update="Schemas\SchemasResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SystemForCrossDomainIdentityManagementSchemasResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>SchemasResources.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

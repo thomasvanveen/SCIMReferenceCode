@@ -9,6 +9,8 @@ namespace Microsoft.SCIM
     using System.Collections.ObjectModel;
     using System.Linq;
 
+    using Microsoft.SCIM.Schemas;
+
     public abstract class SingularEventToken : EventTokenDecorator
     {
         protected SingularEventToken(IEventToken innerToken)
@@ -16,7 +18,7 @@ namespace Microsoft.SCIM
         {
             if (InnerToken.Events.Count != 1)
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementSchemasResources.ExceptionSingleEventExpected);
+                throw new ArgumentException(SchemasResources.ExceptionSingleEventExpected);
             }
 
             KeyValuePair<string, object> singleEvent = InnerToken.Events.Single();

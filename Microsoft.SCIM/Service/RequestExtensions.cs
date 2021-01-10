@@ -7,6 +7,8 @@ namespace Microsoft.SCIM
     using System.Linq;
     using System.Net.Http;
 
+    using Microsoft.SCIM.Service;
+
     public static class RequestExtensions
     {
         private const string SegmentInterface =
@@ -25,7 +27,7 @@ namespace Microsoft.SCIM
         {
             if (null == request.RequestUri)
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidRequest);
             }
 
             string lastSegment =
@@ -48,7 +50,7 @@ namespace Microsoft.SCIM
 
             if (indexInterface < 0)
             {
-                throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
+                throw new ArgumentException(ServiceResources.ExceptionInvalidRequest);
             }
 
             string baseResource = resourceIdentifier.Substring(0, indexInterface);

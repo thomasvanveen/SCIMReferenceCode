@@ -7,6 +7,8 @@ namespace Microsoft.SCIM
     using System;
     using System.Globalization;
 
+    using Microsoft.SCIM.Protocol;
+
     public sealed class ResourceIdentifier : IResourceIdentifier
     {
         public ResourceIdentifier()
@@ -80,7 +82,7 @@ namespace Microsoft.SCIM
             string result =
                 string.Format(
                     CultureInfo.InvariantCulture,
-                    SystemForCrossDomainIdentityManagementProtocolResources.ResourceIdentifierTemplate,
+                    ProtocolResources.ResourceIdentifierTemplate,
                     SchemaIdentifier,
                     Identifier);
             return result;
