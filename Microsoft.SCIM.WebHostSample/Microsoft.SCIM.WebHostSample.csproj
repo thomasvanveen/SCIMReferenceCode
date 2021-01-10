@@ -22,4 +22,19 @@
     <ProjectReference Include="..\Microsoft.SCIM\Microsoft.SCIM.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Resources\SampleServiceResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SampleServiceResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\SampleServiceResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SampleServiceResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
