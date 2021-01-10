@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.SCIM.Controllers"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.SCIM.Providers.InMemoryProvider", "C:\Users\ThomasvanVeen\source\repos\Microsoft.SCIM.Providers.InMemoryProvider\Microsoft.SCIM.Providers.InMemoryProvider.csproj", "{57315BB9-EC3A-44A7-B0FB-AC0F13929233}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.SCIM.Abstractions", "C:\Users\ThomasvanVeen\source\repos\Microsoft.SCIM.Abstractions\Microsoft.SCIM.Abstractions.csproj", "{1CE39039-CF50-48BB-8D2C-960F631FA4C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{57315BB9-EC3A-44A7-B0FB-AC0F13929233}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57315BB9-EC3A-44A7-B0FB-AC0F13929233}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57315BB9-EC3A-44A7-B0FB-AC0F13929233}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CE39039-CF50-48BB-8D2C-960F631FA4C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CE39039-CF50-48BB-8D2C-960F631FA4C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CE39039-CF50-48BB-8D2C-960F631FA4C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CE39039-CF50-48BB-8D2C-960F631FA4C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
