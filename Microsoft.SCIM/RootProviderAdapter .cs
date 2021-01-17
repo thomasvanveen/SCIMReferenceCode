@@ -1,13 +1,11 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
+
 namespace Microsoft.SCIM
 {
-    using System.Collections.Generic;
-    using System.Net;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-    using System.Web.Http;
-
     public class RootProviderAdapter : ProviderAdapterTemplate<Resource>
     {
         public RootProviderAdapter(IProvider provider)
@@ -22,6 +20,7 @@ namespace Microsoft.SCIM
             Resource resource,
             string correlationIdentifier)
         {
+#if DEBUG
             Resource user = new User
             {
                 ExternalIdentifier = resource.ExternalIdentifier,
@@ -30,11 +29,15 @@ namespace Microsoft.SCIM
             };
 
             return Task.FromResult(user);
+#else
+            throw new HttpResponseException(HttpStatusCode.NotImplemented);
+#endif
         }
 
         public override IResourceIdentifier CreateResourceIdentifier(
             string identifier)
         {
+#if DEBUG
             var resourceIdentifier = new ResourceIdentifier
             {
                 Identifier = identifier,
@@ -42,6 +45,9 @@ namespace Microsoft.SCIM
             };
 
             return resourceIdentifier;
+#else
+            throw new HttpResponseException(HttpStatusCode.NotImplemented);
+#endif
         }
 
         public override Task Delete(
@@ -49,7 +55,11 @@ namespace Microsoft.SCIM
             string identifier,
             string correlationIdentifier)
         {
+#if DEBUG
+            return Task.CompletedTask;
+#else
             throw new HttpResponseException(HttpStatusCode.NotImplemented);
+#endif
         }
 
         public override Task<Resource> Replace(
@@ -57,7 +67,11 @@ namespace Microsoft.SCIM
             Resource resource, string
             correlationIdentifier)
         {
+#if DEBUG
             return Task.FromResult(resource);
+#else
+            throw new HttpResponseException(HttpStatusCode.NotImplemented);
+#endif
         }
 
         public override Task<Resource> Retrieve(
@@ -67,6 +81,7 @@ namespace Microsoft.SCIM
             IReadOnlyCollection<string> excludedAttributePaths,
             string correlationIdentifier)
         {
+#if DEBUG
             Resource user = new User
             {
                 ExternalIdentifier = null,
@@ -75,6 +90,9 @@ namespace Microsoft.SCIM
             };
 
             return Task.FromResult(user);
+#else
+            throw new HttpResponseException(HttpStatusCode.NotImplemented);
+#endif
         }
 
         public override Task Update(
@@ -83,7 +101,11 @@ namespace Microsoft.SCIM
             PatchRequestBase patchRequest,
             string correlationIdentifier)
         {
+#if DEBUG
             return Task.CompletedTask;
+#else
+            throw new HttpResponseException(HttpStatusCode.NotImplemented);
+#endif
         }
     }
 }
