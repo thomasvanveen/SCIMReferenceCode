@@ -17,6 +17,7 @@ namespace Microsoft.SCIM.Controllers
         {
         }
 
+        [HttpGet]
         protected override IProviderAdapter<Core2Group> AdaptProvider(IProvider provider)
         {
             if (null == provider)

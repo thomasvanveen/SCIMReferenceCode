@@ -1,25 +1,25 @@
-// Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
+//// Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
-using System;
+//using System;
 
-namespace Microsoft.SCIM.Controllers
-{
-    public sealed class RootController : ControllerTemplate<Resource>
-    {
-        public RootController(IProvider provider, IMonitor monitor)
-            : base(provider, monitor)
-        {
-        }
+//namespace Microsoft.SCIM.Controllers
+//{
+//    public sealed class RootController : ControllerTemplate<Resource>
+//    {
+//        public RootController(IProvider provider, IMonitor monitor)
+//            : base(provider, monitor)
+//        {
+//        }
 
-        protected override IProviderAdapter<Resource> AdaptProvider(IProvider provider)
-        {
-            if (null == provider)
-            {
-                throw new ArgumentNullException(nameof(provider));
-            }
+//        protected override IProviderAdapter<Resource> AdaptProvider(IProvider provider)
+//        {
+//            if (null == provider)
+//            {
+//                throw new ArgumentNullException(nameof(provider));
+//            }
 
-            IProviderAdapter<Resource> result = new RootProviderAdapter(provider);
-            return result;
-        }
-    }
-}
+//            IProviderAdapter<Resource> result = new RootProviderAdapter(provider);
+//            return result;
+//        }
+//    }
+//}

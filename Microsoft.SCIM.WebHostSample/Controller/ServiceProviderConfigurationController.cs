@@ -18,6 +18,7 @@ namespace Microsoft.SCIM.Controllers
         {
         }
 
+        [HttpGet]
         public ServiceConfigurationBase Get()
         {
             string correlationIdentifier = null;

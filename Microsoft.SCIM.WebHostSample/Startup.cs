@@ -33,9 +33,9 @@ namespace Microsoft.SCIM.WebHostSample
             _providerBehavior = new ScimInMemoryProvider();
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (_environment.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -48,7 +48,19 @@ namespace Microsoft.SCIM.WebHostSample
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapDefaultControllerRoute();
+            });
+
+            app.UseSwagger(c =>
+            {
+                c.SerializeAsV2 = false;
+            });
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SCIM 2.0");
+                c.RoutePrefix = string.Empty;
             });
         }
         public void ConfigureServices(IServiceCollection services)
@@ -110,9 +122,11 @@ namespace Microsoft.SCIM.WebHostSample
                 });
             }
 
-            services.AddControllers().AddNewtonsoftJson();
             services.AddSingleton(typeof(IProvider), _providerBehavior);
             services.AddSingleton(typeof(IMonitor), _monitoringBehavior);
+
+            services.AddControllers().AddNewtonsoftJson();
+            services.AddSwaggerGen();
         }
 
         private Task AuthenticationFailed(AuthenticationFailedContext arg)
